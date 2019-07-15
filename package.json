@@ -1,0 +1,73 @@
+{
+  "name": "test-api",
+  "version": "42.3.0",
+  "main": "build/src/main.js",
+  "files": [
+    "build/src",
+    "!~"
+  ],
+  "bin": {
+    "test-api": "build/src/bin/main.js"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "gulp check --full"
+    }
+  },
+  "description": "Automated client requests",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "homepage": "https://git.io/fjXPC",
+  "repository": "ehmicky/test-api",
+  "bugs": {
+    "url": "https://github.com/ehmicky/test-api/issues"
+  },
+  "author": "ehmicky <ehmicky@gmail.com> (https://github.com/ehmicky)",
+  "directories": {
+    "doc": "docs",
+    "test": "test",
+    "lib": "src"
+  },
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "chalk": "^2.4.2",
+    "cli-truncate": "^2.0.0",
+    "core-js": "^3.1.4",
+    "cross-fetch": "^3.0.4",
+    "deepmerge": "^4.0.0",
+    "emphasize": "^2.1.0",
+    "faker": "^4.1.0",
+    "fast-glob": "^3.0.4",
+    "is-mergeable-object": "^1.1.1",
+    "js-yaml": "^3.13.1",
+    "json-schema-faker": "0.5.0-rc15",
+    "lodash": "^4.17.14",
+    "methods": "^1.1.2",
+    "moize": "^5.4.4",
+    "node-notifier": "^5.4.0",
+    "openapi-schema-to-json-schema": "^2.2.0",
+    "ora": "^3.4.0",
+    "path-to-regexp": "^3.0.0",
+    "read-pkg-up": "^6.0.0",
+    "statuses": "^1.5.0",
+    "strip-ansi": "^5.2.0",
+    "swagger-parser": "^8.0.0",
+    "type-is": "^1.6.18",
+    "underscore.string": "^3.3.5",
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "ava": "^2.2.0",
+    "execa": "^2.0.3",
+    "get-bin-path": "^1.0.2",
+    "gulp": "^4.0.2",
+    "gulp-shared-tasks": "^0.30.23",
+    "husky": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=8.12.0"
+  }
+}

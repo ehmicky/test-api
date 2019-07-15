@@ -1,0 +1,30 @@
+language: node_js
+node_js: '12'
+dist: xenial
+# When pushing a tagged commit, Travis adds two builds: one with the tag, one
+# without. We only want to build the one with the tag, because it's the one
+# that runs the deployment stage
+if: '!(commit_message =~ /^Release/ && tag is blank)'
+jobs:
+  include:
+    # Test on Windows/Mac/Linux using latest Node.js.
+    # Also test on Linux with older Node.js versions.
+    # We do not run each possible combination to make CI faster.
+    - os: windows
+    - os: osx
+    - node_js: '8.12.0'
+    - node_js: '12'
+    # Deployment must happen after tests for the whole matrix have been
+    # performed, so we use `jobs.include` with a different `stage`.
+    - stage: Deploy
+      if: type != pull_request && tag is not blank
+      script: gulp publish
+      # NPM_TOKEN environment variable
+      env:
+        secure: 'KwzLubYFKUmrUR5BM/gCCjMxW7slC2lH3pPzNYMUxyqbxf1wW37BcAwCYUJmOAPglz84kKEYuKPTvuriOdXTG2znmz4B0OA27++eVihFmZIB2MHYQdsEh97aY47v3d0xPF8UiAwK7YlZJAWHN9VxbR8VprU/DDnzQjTx1EGfLgHdmxYQik8A567DGxD+JL0+PqEyvkZVg6i9D6Vc8Vo3rDJGsce93A5E6CWvUjKKXJPCFHtFRFl2VNs+7QGJ4bM+KR7H3CLppLtrQ6rBk7mrz6ZxslW4w6OFnGEUohAV3Zi7WJgaj+1TuqE7D1eBp6mUbkicSNQNl0WgsLpSu1u0uzQ5nD3sM1BmeFknk52QoIDMdRIjJgACvkdONJLV5SJ+WG9FhNDBwIJi/3iWPb6naWz7jndu+SMZ4MhT533VxObrgbSv5FSwW8Um/f2miDR465eDmJGd/C0oBF+AMbf+LLGYRKHQHR1ZyUlslp9kKf/JhI52EJN35GpS6nINlNhtGmmr0XxPD4d8uENJlO3tL8RlxWRUCn7bPhFReeu64zEBgJRPqN1rNogT5BgCglpLfamZC2B9qSayqF8Zq7R1xfunSBr1kgzHZWaek3ro2Xx/P7cixoxwXKlaOzDLOMPCk1MJqdfTXCtVYQcLO2E5zpH4w7Y2/CjL3mN72gHAlpg='
+notifications:
+  webhooks:
+    - https://www.travisbuddy.com?only=failed,errored&insertMode=update
+  email: false
+# We do not use `cache: npm` because downloading and uploading the cache
+# actually takes more time than it saves during `npm ci`.
