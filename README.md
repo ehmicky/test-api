@@ -26,30 +26,30 @@ repository is not stable yet.
   [templating system](#template-variables)
 - **Flexible**. Core functionalities can be extended with plugins.
 
-# Installation
+# Install
 
-```shell
-$ npm install -D test-api
+```
+npm install -D test-api
 ```
 
-# Usage (shell)
+# Usage (CLI)
 
-```shell
-$ test-api
+```
+test-api
 ```
 
 If a task failed, exit code will be `1`.
 
 Options are passed as CLI flags.
 
-```shell
-$ test-api --merge.spec.definition openapi_schema.yml
+```
+test-api --merge.spec.definition openapi_schema.yml
 ```
 
 Tasks are passed as positional argument.
 
-```shell
-$ test-api **/*.tasks.yml
+```
+test-api **/*.tasks.yml
 ```
 
 # Usage (Node.js)
@@ -326,8 +326,8 @@ OpenAPI schemas can use the following extensions:
 
 To specify properties shared by all tasks, use the `merge` option:
 
-```shell
-$ test-api --merge.spec.definition ../openapi_document.yml
+```
+test-api --merge.spec.definition ../openapi_document.yml
 ```
 
 To specify properties shared by a few tasks, create a task with a `merge`
@@ -433,8 +433,8 @@ By default all tasks are run in parallel at the same time.
 
 To only run a few tasks use the `only` option.
 
-```shell
-$ test-api --only 'taskNameRegularExpression/.*'
+```
+test-api --only 'taskNameRegularExpression/.*'
 ```
 
 Or the `only` task property.
@@ -457,21 +457,21 @@ The following reporters are available:
 
 Specify the `--report.REPORTER` option to select which reporter to use
 
-```shell
-$ test-api --report.notify --report.pretty
+```
+test-api --report.notify --report.pretty
 ```
 
 Use the `--report.REPORTER.output` to redirect the output of a reporter to a
 file:
 
-```shell
-$ test-api --report.pretty.output path/to/file.txt
+```
+test-api --report.pretty.output path/to/file.txt
 ```
 
 Use the `--report.REPORTER.level` to modify the verbosity:
 
-```shell
-$ test-api --report.pretty.level info
+```
+test-api --report.pretty.level info
 ```
 
 The available levels are:
