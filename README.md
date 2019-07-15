@@ -6,8 +6,8 @@
 
 Automatic API testing.
 
-**Unstable**: please do not use this at the moment, this repository is not
-stable yet.
+**This is a Work In Progress**: please do not use this at the moment, this
+repository is not stable yet.
 
 # Features
 
