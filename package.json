@@ -17,7 +17,7 @@
       "pre-push": "gulp check --full"
     }
   },
-  "description": "Automated client requests",
+  "description": "Automated API testing",
   "keywords": [],
   "license": "Apache-2.0",
   "homepage": "https://git.io/fjXPC",

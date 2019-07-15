@@ -4,7 +4,10 @@
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
 
-Automatic API integration testing.
+Automatic API testing.
+
+**Unstable**: please do not use this at the moment, this repository is not
+stable yet.
 
 # Features
 
