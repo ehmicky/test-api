@@ -1,4 +1,4 @@
-import { uniq, difference } from 'lodash'
+import { difference } from 'lodash'
 
 import { getModule } from '../modules.js'
 
@@ -19,7 +19,7 @@ const normalizePlugins = function({ plugins }) {
   // Specifing core plugins is a noop
   const pluginsA = difference(plugins, CORE_PLUGINS)
 
-  const pluginsB = uniq(pluginsA)
+  const pluginsB = [...new Set(pluginsA)]
 
   const pluginsC = [...CORE_PLUGINS, ...DEFAULT_PLUGINS, ...pluginsB]
   return pluginsC

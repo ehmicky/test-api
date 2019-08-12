@@ -1,4 +1,4 @@
-import { difference, uniq } from 'lodash'
+import { difference } from 'lodash'
 
 import { VALID_STATUSES_MAP } from './valid.js'
 
@@ -6,7 +6,7 @@ import { VALID_STATUSES_MAP } from './valid.js'
 // case-insensitively
 export const parseRanges = function({ statuses }) {
   const statusesA = statuses.flatMap(parseRange)
-  const statusesB = uniq(statusesA)
+  const statusesB = [...new Set(statusesA)]
   return statusesB
 }
 

@@ -1,4 +1,4 @@
-import { difference, uniq } from 'lodash'
+import { difference } from 'lodash'
 
 import { TestApiError } from '../../../../errors/error.js'
 import { sortArray } from '../../../../utils/sort.js'
@@ -16,7 +16,7 @@ export const parseStatus = function({ status, property }) {
   // `validate.status` can a space-delimited list of statuses
   const statuses = statusA.split(/\s+/u)
 
-  const statusesA = uniq(statuses)
+  const statusesA = [...new Set(statuses)]
 
   const statusesB = parseRanges({ statuses: statusesA })
 
