@@ -57,7 +57,7 @@
     "swagger-parser": "^8.0.1",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
-    "yargs": "^13.3.0"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "ava": "^2.3.0",
