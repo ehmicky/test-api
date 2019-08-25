@@ -27,7 +27,7 @@ const parseUrl = function({ url }) {
   return tokensA
 }
 
-// `path-to-regex` considers `:PORT` to be a URL variable, which is incorrect.
+// `path-to-regexp` considers `:PORT` to be a URL variable, which is incorrect.
 // We fix this by serializing tokens back to a plain string.
 // Not if `:NUMBER*` nor `:NUMBER+`
 const handlePort = function(token) {
@@ -48,7 +48,7 @@ const isPort = function({ name, optional, repeat }) {
 
 const PORT_REGEXP = /^\d+$/u
 
-// `path-to-regex` already validates required parameters, but we do first to
+// `path-to-regexp` already validates required parameters, but we do first to
 // provide a better error message
 const validateRequiredParams = function({ tokens, urlParams }) {
   tokens.forEach(token => validateRequiredParam({ token, urlParams }))
