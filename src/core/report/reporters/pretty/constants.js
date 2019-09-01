@@ -2,8 +2,8 @@ import { gray, red, green } from '../../utils/colors.js'
 import { HORIZONTAL_LINE } from '../../utils/line.js'
 
 export const MARKS = {
-  // Pause symbol
-  skip: '\u23F8',
+  // Back arrow symbol
+  skip: '\u21B5',
   // Check symbol
   pass: '\u2714',
   // Cross symbol
