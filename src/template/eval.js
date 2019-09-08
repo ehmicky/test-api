@@ -28,7 +28,12 @@ import { templateHandler } from './error.js'
 
 // Evaluate template
 // eslint-disable-next-line max-params
-export const evalTemplate = function(data, vars = {}, opts = {}, stack) {
+export const evalTemplate = function(
+  data,
+  vars = {},
+  opts = {},
+  stack = undefined,
+) {
   const recursive = recursiveEval.bind(null, vars, opts)
   const optsA = { ...opts, vars, stack, recursive }
 
