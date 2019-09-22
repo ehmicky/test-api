@@ -19,7 +19,7 @@ const getUserAgent = async function({ userAgent }) {
   }
 
   const {
-    package: { name, version, homepage },
+    packageJson: { name, version, homepage },
   } = await currentPackage
   return `${name}/${version} (${homepage})`
 }
