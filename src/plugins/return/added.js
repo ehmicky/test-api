@@ -2,11 +2,16 @@ import filterObj from 'filter-obj'
 
 // Retrieve the properties from `task.PLUGIN.*` that have been added by this
 // plugin, i.e. not in `originalTask.*`
+// eslint-disable-next-line max-statements, complexity
 export const getAddedProps = function({
   task,
   plugin: { name, config: { task: taskConfig } = {} },
 }) {
   const taskValue = task[name]
+
+  if (taskValue === undefined) {
+    return
+  }
 
   // If there is no `plugin.config.task`, return `task.*` as is
   if (taskConfig === undefined) {
