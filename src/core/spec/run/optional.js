@@ -1,5 +1,6 @@
-import { mapValues, omitBy } from 'lodash'
+import { mapValues } from 'lodash'
 import omit from 'omit.js'
+import filterObj from 'filter-obj'
 
 // Spec parameters are only generated if either:
 //  - they are required
@@ -14,8 +15,9 @@ export const removeOptionals = function({ params, call }) {
 
 // Spec parameters are marked as required by using `optional: false` (default)
 const removeTopLevel = function({ params, call }) {
-  const paramsA = omitBy(params, (param, key) =>
-    isSkippedOptional({ param, key, call }),
+  const paramsA = filterObj(
+    params,
+    (key, param) => !isSkippedOptional({ param, key, call }),
   )
   const paramsB = mapValues(paramsA, removeOptionalProp)
   return paramsB
@@ -46,10 +48,9 @@ const removeNonRequired = function({
     return schema
   }
 
-  const propertiesA = omitBy(
+  const propertiesA = filterObj(
     properties,
-    (property, name) =>
-      !required.includes(name) && definedProps[name] === undefined,
+    name => required.includes(name) || definedProps[name] !== undefined,
   )
 
   const propertiesB = mapValues(propertiesA, (property, name) =>

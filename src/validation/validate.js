@@ -1,7 +1,8 @@
 /* eslint-disable-line max-lines */
 import Ajv from 'ajv'
 import moize from 'moize'
-import { get, omitBy } from 'lodash'
+import { get } from 'lodash'
+import filterObj from 'filter-obj'
 import { capitalize } from 'underscore.string'
 
 import { jsonPointerToParts } from '../utils/json_pointer.js'
@@ -68,7 +69,7 @@ const getError = function({
     valuePath,
     schemaPath,
   }
-  const errorB = omitBy(errorA, valueB => valueB === undefined)
+  const errorB = filterObj(errorA, isDefined)
   return errorB
 }
 
@@ -145,6 +146,10 @@ const concatProp = function(prop, path) {
   }
 
   return `${prop}.${path}`
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }
 
 // Compilation is automatically memoized by `ajv` but not validation

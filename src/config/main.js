@@ -1,4 +1,4 @@
-import { omitBy } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { TestApiError } from '../errors/error.js'
 import { getPath } from '../utils/path.js'
@@ -13,7 +13,7 @@ export const loadConfig = function({ config }) {
   const configA = parseInput(config, throwParseError)
 
   // Apply default values
-  const configB = omitBy(configA, value => value === undefined)
+  const configB = filterObj(configA, isDefined)
   const configC = { ...DEFAULT_CONFIG, ...configB }
 
   return configC
@@ -24,6 +24,10 @@ export const loadConfig = function({ config }) {
 const throwParseError = function({ message, value, path }) {
   const property = getPath(['config', ...path])
   throw new TestApiError(`Configuration ${message}`, { value, property })
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }
 
 const DEFAULT_CONFIG = {

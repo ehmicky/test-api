@@ -1,4 +1,5 @@
-import { pickBy, omitBy, mapKeys, mapValues } from 'lodash'
+import { mapKeys, mapValues } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { BugError, TestApiError } from '../../../errors/error.js'
 import { numberToCardinal } from '../../../utils/cardinal.js'
@@ -14,13 +15,13 @@ export const wrapTemplateVars = function({ vars, plugin }) {
     wrapTemplateVar({ value: vars[name], name, schema, plugin }),
   )
 
-  const varsB = omitBy(varsA, value => value === undefined)
+  const varsB = filterObj(varsA, isDefined)
   return { ...vars, ...varsB }
 }
 
 // Return `plugin.config['template.*']`
 const getTemplateConfig = function({ plugin: { config } }) {
-  const templateConfig = pickBy(config, (value, key) =>
+  const templateConfig = filterObj(config, key =>
     key.startsWith(TEMPLATE_CONFIG_PREFIX),
   )
   const templateConfigA = mapKeys(templateConfig, (value, key) =>
@@ -97,4 +98,8 @@ const checkVarUndefined = function({
   }
 
   throw new TestApiError(`${message} must be defined`)
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }

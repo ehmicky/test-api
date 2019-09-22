@@ -1,4 +1,5 @@
-import { mapValues, omitBy } from 'lodash'
+import { mapValues } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { stringifyFlat } from '../../../../utils/flat.js'
 import { keyToLocation } from '../../../../utils/location.js'
@@ -24,7 +25,7 @@ export const serialize = async function({ call }) {
 
   const request = addFetchRequestHeaders({ call: callA })
 
-  const requestA = omitBy(request, value => value === undefined)
+  const requestA = filterObj(request, isDefined)
 
   const rawRequest = mapValues(requestA, stringifyParam)
 
@@ -55,6 +56,10 @@ const normalizeTimeout = function({
 }
 
 const DEFAULT_TIMEOUT = 1e6
+
+const isDefined = function(key, value) {
+  return value !== undefined
+}
 
 const stringifyParam = function(value, key, call) {
   const { location } = keyToLocation({ key })

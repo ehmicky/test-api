@@ -1,4 +1,4 @@
-import { pick, omitBy } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { checkSchema } from '../../../validation/check.js'
 import { isSilent } from '../level/silent.js'
@@ -41,15 +41,19 @@ const getOptions = function({
   config: { report = {}, report: { [name]: options = {} } = {} },
 }) {
   // Can use `config.report.level|output` to set those for any reporter
-  const globalOptions = pick(report, Object.keys(COMMON_OPTIONS_SCHEMA))
+  const globalOptions = filterObj(report, Object.keys(COMMON_OPTIONS_SCHEMA))
 
   // Can use `true`, to make it CLI options-friendly
   if (options === true) {
     return globalOptions
   }
 
-  const optionsA = omitBy(options, value => value === undefined)
+  const optionsA = filterObj(options, isDefined)
   return { ...globalOptions, ...optionsA }
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }
 
 // Validate `config.report.REPORTER.*` against `reporter.config`

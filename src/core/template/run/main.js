@@ -1,5 +1,5 @@
-import { pick } from 'lodash'
 import omit from 'omit.js'
+import filterObj from 'filter-obj'
 
 import { promiseThen } from '../../../utils/promise.js'
 import { evalTemplate } from '../../../template/eval.js'
@@ -26,7 +26,7 @@ import { templateHandler } from './error.js'
 export const run = function(task, context) {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
-  const noEvalProps = pick(task, NO_EVAL_PROPS)
+  const noEvalProps = filterObj(task, NO_EVAL_PROPS)
   const taskA = omit(task, NO_EVAL_PROPS)
 
   const taskB = evalTaskTemplate({ task: taskA, vars, pluginsVarsMap })

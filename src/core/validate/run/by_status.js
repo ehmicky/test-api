@@ -1,4 +1,4 @@
-import { pickBy, omitBy } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { merge } from '../../../utils/merge.js'
 import { getPath } from '../../../utils/path.js'
@@ -8,8 +8,8 @@ import { STATUS_REGEXP, parseStatus } from './status/parse.js'
 // `validate.STATUS.*` is like `validate.*` but as map according to status code.
 // STATUS can use ranges and comma-separated lists like `validate.status`
 export const addByStatus = function({ validate, response }) {
-  const byStatus = pickBy(validate, isByStatus)
-  const validateA = omitBy(validate, isByStatus)
+  const byStatus = filterObj(validate, isByStatus)
+  const validateA = filterObj(validate, name => !isByStatus(name))
 
   const byStatusA = Object.entries(byStatus)
     .filter(([status]) => matchesResponse({ status, response }))
@@ -23,7 +23,7 @@ export const addByStatus = function({ validate, response }) {
   return merge(...byStatusA, validateA)
 }
 
-const isByStatus = function(value, name) {
+const isByStatus = function(name) {
   return STATUS_REGEXP.test(name)
 }
 

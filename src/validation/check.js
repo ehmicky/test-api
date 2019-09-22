@@ -1,4 +1,4 @@
-import { omitBy } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { TestApiError, BugError } from '../errors/error.js'
 import { crawl } from '../utils/crawl.js'
@@ -44,7 +44,11 @@ const removeUndefinedProp = function(value) {
     return value
   }
 
-  return omitBy(value, valueA => valueA === undefined)
+  return filterObj(value, isDefined)
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }
 
 const getErrorProps = function({

@@ -1,4 +1,4 @@
-import { omitBy } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { isObject } from '../../utils/types.js'
 
@@ -31,8 +31,7 @@ export const getTaskReturn = function({
   }
 
   // Do not clutter with plugins that have nothing to return
-  const taskB = omitBy(taskA, value => value === undefined)
-
+  const taskB = filterObj(taskA, isDefined)
   return taskB
 }
 
@@ -72,4 +71,8 @@ const getReturnValue = function({
   }
 
   return { ...addedProps, ...originalValue }
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }

@@ -1,5 +1,5 @@
-import { omitBy } from 'lodash'
 import omit from 'omit.js'
+import filterObj from 'filter-obj'
 
 import { merge } from '../../../utils/merge.js'
 import { isObject } from '../../../utils/types.js'
@@ -97,5 +97,9 @@ const isDefinedTitle = function(title) {
 
 // Do not print properties that are not present
 const removeEmptyProps = function(object) {
-  return omitBy(object, value => value === undefined)
+  return filterObj(object, isDefined)
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }

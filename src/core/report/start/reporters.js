@@ -1,4 +1,5 @@
-import { difference, omitBy } from 'lodash'
+import { difference } from 'lodash'
+import filterObj from 'filter-obj'
 
 import { getModule } from '../../../modules.js'
 
@@ -15,7 +16,7 @@ export const getReporters = function({ config }) {
 
 // Reporters are specified by using their name in `config.report.REPORTER`
 const getNames = function({ config: { report = {} } }) {
-  const reportA = omitBy(report, value => value === undefined)
+  const reportA = filterObj(report, isDefined)
   const names = Object.keys(reportA)
   const namesA = difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
 
@@ -25,6 +26,10 @@ const getNames = function({ config: { report = {} } }) {
   }
 
   return namesA
+}
+
+const isDefined = function(key, value) {
+  return value !== undefined
 }
 
 const DEFAULT_REPORTERS = ['pretty']

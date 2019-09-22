@@ -40,6 +40,7 @@
     "emphasize": "^2.1.0",
     "faker": "^4.1.0",
     "fast-glob": "^3.0.4",
+    "filter-obj": "^2.0.0",
     "got": "^9.6.0",
     "is-mergeable-object": "^1.1.1",
     "js-yaml": "^3.13.1",
