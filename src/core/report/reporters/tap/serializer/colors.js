@@ -1,4 +1,5 @@
-import { constructor as Chalk } from 'chalk'
+import Chalk from 'chalk'
+import { stdout as supportsColor } from 'supports-color'
 import { get, mapValues } from 'lodash'
 
 import { isObject } from '../../../../../utils/types.js'
@@ -8,18 +9,18 @@ import { isObject } from '../../../../../utils/types.js'
 // `opts.colors: object` can be used to theme
 // By default, it guesses (e.g. no colors if output is redirected)
 export const getColors = function({ colors }) {
-  const opts = getChalkOpts({ colors })
-  const chalk = new Chalk(opts)
+  const level = getLevel(colors)
+  const chalk = new Chalk.Instance({ level })
   const theme = getTheme({ chalk, colors })
   return theme
 }
 
-const getChalkOpts = function({ colors }) {
-  if (colors === false) {
-    return { enabled: false }
+const getLevel = function(colors) {
+  if (!colors) {
+    return 0
   }
 
-  return {}
+  return Math.max(supportsColor.level, 1)
 }
 
 const getTheme = function({ chalk, colors }) {
