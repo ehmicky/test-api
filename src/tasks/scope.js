@@ -1,6 +1,6 @@
 import { basename } from 'path'
 
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { TestApiError } from '../errors/error.js'
 
@@ -26,7 +26,7 @@ const getScope = function(path) {
 // Plugins that must target other tasks should target their `task.key`
 export const addKey = function({ scope, name, ...task }) {
   // Make sure it is not overridden by user
-  const taskA = omit(task, 'key')
+  const taskA = omit(task, ['key'])
 
   if (scope === undefined) {
     return { key: name, name, ...taskA }

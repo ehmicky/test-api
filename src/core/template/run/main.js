@@ -1,4 +1,5 @@
-import { pick, omit } from 'lodash'
+import { pick } from 'lodash'
+import omit from 'omit.js'
 
 import { promiseThen } from '../../../utils/promise.js'
 import { evalTemplate } from '../../../template/eval.js'
@@ -64,6 +65,6 @@ const returnTask = function({ task, noEvalProps }) {
   const taskA = { ...task, ...noEvalProps }
 
   // No nested `originalTask` in final return value
-  const taskB = omit(taskA, 'originalTask')
+  const taskB = omit(taskA, ['originalTask'])
   return { ...taskB, originalTask: taskB }
 }

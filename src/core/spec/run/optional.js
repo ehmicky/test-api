@@ -1,4 +1,5 @@
-import { mapValues, omit, omitBy } from 'lodash'
+import { mapValues, omitBy } from 'lodash'
+import omit from 'omit.js'
 
 // Spec parameters are only generated if either:
 //  - they are required
@@ -26,7 +27,7 @@ const isSkippedOptional = function({ param: { optional }, key, call }) {
 
 // Remove `optional` now that it's been used (it is not valid JSON schema)
 const removeOptionalProp = function(param) {
-  return omit(param, 'optional')
+  return omit(param, ['optional'])
 }
 
 // Spec nested properties are marked as required by using JSON schema `required`

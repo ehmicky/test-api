@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { TestApiError } from '../../errors/error.js'
 import { testRegExp } from '../../utils/regexp.js'

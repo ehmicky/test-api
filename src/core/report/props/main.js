@@ -1,4 +1,5 @@
-import { omit, omitBy } from 'lodash'
+import { omitBy } from 'lodash'
+import omit from 'omit.js'
 
 import { merge } from '../../../utils/merge.js'
 import { isObject } from '../../../utils/types.js'
@@ -35,7 +36,7 @@ const callReportFuncs = function({
 
   // Separate `title` from the rest as it is handled differently
   const titles = reportResult.map(({ title }) => title).filter(isDefinedTitle)
-  const reportProps = reportResult.map(props => omit(props, 'title'))
+  const reportProps = reportResult.map(props => omit(props, ['title']))
 
   return { titles, reportProps }
 }

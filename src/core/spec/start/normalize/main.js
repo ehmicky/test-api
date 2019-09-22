@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { getParams } from './params/main.js'
 import { normalizeResponses } from './response.js'
@@ -17,7 +17,7 @@ const getOperations = function({ spec, spec: { paths } }) {
 
 // Iterate over each HTTP method
 const getOperationsByPath = function({ spec, path, pathDef }) {
-  const pathDefA = omit(pathDef, 'parameters')
+  const pathDefA = omit(pathDef, ['parameters'])
 
   return Object.entries(pathDefA).map(([method, operation]) =>
     getOperation({ spec, path, pathDef, operation, method }),

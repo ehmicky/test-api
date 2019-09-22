@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { TestApiError } from '../../errors/error.js'
 
@@ -20,7 +20,7 @@ const validateTaskSyntax = function(task) {
     return
   }
 
-  const taskA = omit(task, 'key')
+  const taskA = omit(task, ['key'])
   const taskB = JSON.stringify(taskA, null, 2)
   throw new TestApiError(
     `${syntaxTest.message} in the following task:\n${taskB}`,

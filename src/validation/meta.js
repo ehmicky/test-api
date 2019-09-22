@@ -1,5 +1,5 @@
 import JSON_SCHEMA_SCHEMA from 'ajv/lib/refs/json-schema-draft-04.json'
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { checkSchema } from './check.js'
 

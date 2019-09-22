@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { getPath } from '../utils/path.js'
 

@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { isObject } from '../../../utils/types.js'
 
@@ -27,7 +27,7 @@ const reduceTaskData = function({ task, originalTask, name, taskData }) {
 }
 
 const keepNone = function({ task, name }) {
-  return omit(task, name)
+  return omit(task, [name])
 }
 
 const keepAdded = function({ task, originalTask, name }) {
@@ -36,13 +36,13 @@ const keepAdded = function({ task, originalTask, name }) {
   }
 
   if (!areObjects({ task, originalTask, name })) {
-    return omit(task, name)
+    return omit(task, [name])
   }
 
   const taskValue = removeOriginalTaskKeys({ task, originalTask, name })
 
   if (Object.keys(taskValue).length === 0) {
-    return omit(task, name)
+    return omit(task, [name])
   }
 
   return { ...task, [name]: taskValue }

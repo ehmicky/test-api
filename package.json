@@ -48,6 +48,7 @@
     "methods": "^1.1.2",
     "moize": "^5.4.4",
     "node-notifier": "^5.4.3",
+    "omit.js": "^1.0.2",
     "openapi-schema-to-json-schema": "^2.2.0",
     "ora": "^4.0.1",
     "path-to-regexp": "^3.1.0",

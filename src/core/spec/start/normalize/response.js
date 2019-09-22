@@ -1,4 +1,5 @@
-import { mapValues, mapKeys, omit } from 'lodash'
+import { mapValues, mapKeys } from 'lodash'
+import omit from 'omit.js'
 
 import { normalizeSchema } from './json_schema.js'
 import { getNegotiationsResponse } from './content_negotiation.js'
@@ -40,7 +41,7 @@ const getResponseHeaders = function({
 
 const getResponseHeader = function(value) {
   // We do not support `header` `collectionFormat`
-  const schema = omit(value, 'collectionFormat')
+  const schema = omit(value, ['collectionFormat'])
 
   const schemaA = normalizeSchema({ schema })
   return schemaA

@@ -1,5 +1,5 @@
 import openapiToJsonSchema from 'openapi-schema-to-json-schema'
-import { omit } from 'lodash'
+import omit from 'omit.js'
 
 import { crawl } from '../../../../utils/crawl.js'
 
@@ -13,7 +13,7 @@ export const normalizeSchema = function({ schema }) {
   const schemaB = openapiToJsonSchema(schemaA)
 
   // `ajv` complains about it
-  const schemaC = omit(schemaB, '$schema')
+  const schemaC = omit(schemaB, ['$schema'])
 
   return schemaC
 }
