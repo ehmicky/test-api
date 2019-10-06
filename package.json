@@ -36,7 +36,7 @@
     "chalk": "^3.0.0-beta.1",
     "cli-truncate": "^2.0.0",
     "core-js": "^3.2.1",
-    "deepmerge": "^4.0.0",
+    "deepmerge": "^4.1.0",
     "emphasize": "^2.1.0",
     "faker": "^4.1.0",
     "fast-glob": "^3.0.4",
