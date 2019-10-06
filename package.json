@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "chalk": "^3.0.0-beta.1",
+    "chalk": "^3.0.0-beta.2",
     "cli-truncate": "^2.0.0",
     "core-js": "^3.2.1",
     "deepmerge": "^4.1.0",
