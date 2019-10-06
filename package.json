@@ -60,7 +60,7 @@
     "swagger-parser": "^8.0.1",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
-    "yargs": "^14.0.0"
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^0.30.46",
