@@ -57,7 +57,7 @@
     "statuses": "^1.5.0",
     "strip-ansi": "^5.2.0",
     "supports-color": "^7.1.0",
-    "swagger-parser": "^8.0.1",
+    "swagger-parser": "^8.0.2",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "yargs": "^14.2.0"
