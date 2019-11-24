@@ -60,6 +60,7 @@
     "swagger-parser": "^8.0.2",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
+    "update-notifier": "^3.0.1",
     "yargs": "^15.0.2"
   },
   "devDependencies": {
