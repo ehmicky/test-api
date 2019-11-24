@@ -1,7 +1,7 @@
 import { removePrefixes } from '../../../../utils/prefix.js'
 
 // Add `query` request parameters to the request URL
-export const addQueryParams = function({ url, rawRequest }) {
+export const addQueryParams = function(url, rawRequest) {
   const query = removePrefixes(rawRequest, 'query')
   const queryA = Object.entries(query)
 

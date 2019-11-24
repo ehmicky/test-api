@@ -3,7 +3,7 @@ import { URL } from 'url'
 import { TestApiError } from '../../../../errors/error.js'
 
 // Escape, normalize and validate the request URL
-export const normalizeUrl = function({ url: originalUrl }) {
+export const normalizeUrl = function(originalUrl) {
   const url = escapeUrl(originalUrl)
 
   try {
