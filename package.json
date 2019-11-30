@@ -1,6 +1,5 @@
 {
   "name": "test-api",
-
   "version": "42.3.0",
   "main": "build/src/main.js",
   "files": [
