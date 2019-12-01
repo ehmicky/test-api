@@ -57,7 +57,7 @@
     "statuses": "^1.5.0",
     "strip-ansi": "^6.0.0",
     "supports-color": "^7.1.0",
-    "swagger-parser": "^8.0.2",
+    "swagger-parser": "^8.0.3",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "update-notifier": "^3.0.1",
