@@ -1,5 +1,3 @@
-import { URL } from 'url'
-
 import { TestApiError } from '../../../../errors/error.js'
 
 // Escape, normalize and validate the request URL
