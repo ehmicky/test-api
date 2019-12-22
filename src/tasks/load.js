@@ -1,5 +1,4 @@
-import { readFile } from 'fs'
-import { promisify } from 'util'
+import { promises } from 'fs'
 
 import fastGlob from 'fast-glob'
 import { load as loadYaml, JSON_SCHEMA } from 'js-yaml'
@@ -10,8 +9,6 @@ import { TestApiError } from '../errors/error.js'
 import { validateFileTasks } from './validate/file.js'
 import { validateInlineTasks } from './validate/inline.js'
 import { addScopes, addKey, validateScopes } from './scope.js'
-
-const pReadFile = promisify(readFile)
 
 // Load tasks.
 // Tasks are specified as an array of objects instead of a map of objects
@@ -62,7 +59,7 @@ const loadTaskFile = async function({ path }) {
 
 const readTaskFile = async function(path) {
   try {
-    return await pReadFile(path)
+    return await promises.readFile(path)
   } catch (error) {
     throw new TestApiError(
       `Could not load task file '${path}': ${error.message}`,
