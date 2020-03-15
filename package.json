@@ -32,6 +32,7 @@
     "lib": "src"
   },
   "dependencies": {
+    "@apidevtools/swagger-parser": "^9.0.1",
     "ajv": "^6.12.0",
     "chalk": "^3.0.0",
     "cli-truncate": "^2.1.0",
@@ -57,7 +58,6 @@
     "statuses": "^1.5.0",
     "strip-ansi": "^6.0.0",
     "supports-color": "^7.1.0",
-    "swagger-parser": "^8.0.4",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "update-notifier": "^4.1.0",
