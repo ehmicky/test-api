@@ -1,4 +1,4 @@
-[![Travis](https://img.shields.io/badge/cross-platform-4cc61e.svg?logo=travis)](https://travis-ci.org/ehmicky/test-api)
+[![Build](https://github.com/ehmicky/test-api/workflows/Build/badge.svg)](https://github.com/ehmicky/test-api/actions)
 [![Node](https://img.shields.io/node/v/test-api.svg?logo=node.js)](https://www.npmjs.com/package/test-api)
 [![Gitter](https://img.shields.io/gitter/room/ehmicky/test-api.svg?logo=gitter)](https://gitter.im/ehmicky/test-api)
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
