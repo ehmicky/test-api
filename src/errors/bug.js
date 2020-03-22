@@ -1,7 +1,7 @@
 import { BugError } from './error.js'
 
 // Any error not using `TestApiError` is a bug
-export const handleBugs = function({ error }) {
+export const handleBugs = function ({ error }) {
   const bugError = findBugError({ error })
 
   if (bugError === undefined) {
@@ -13,7 +13,7 @@ export const handleBugs = function({ error }) {
   return new BugError(message, { module: bugError.module, bug: true })
 }
 
-const findBugError = function({ error, error: { errors = [error] } }) {
+const findBugError = function ({ error, error: { errors = [error] } }) {
   const errorA = errors.find(getBugError)
 
   if (errorA === undefined) {
@@ -24,7 +24,7 @@ const findBugError = function({ error, error: { errors = [error] } }) {
   return getBugError(errorA)
 }
 
-const getBugError = function(error) {
+const getBugError = function (error) {
   if (isBugError(error)) {
     return error
   }
@@ -37,11 +37,11 @@ const getBugError = function(error) {
   }
 }
 
-export const isBugError = function({ name }) {
+export const isBugError = function ({ name }) {
   return name !== 'TestApiError'
 }
 
-const getBugMessage = function({
+const getBugMessage = function ({
   bugError,
   bugError: { message, stack = message },
 }) {
@@ -53,7 +53,7 @@ Please report an issue on the '${repositoryName}' code repository and paste the 
 ${stack}`
 }
 
-const getRepositoryName = function({ bugError }) {
+const getRepositoryName = function ({ bugError }) {
   if (module === undefined) {
     return DEFAULT_REPOSITORY
   }

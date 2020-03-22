@@ -6,7 +6,7 @@ import { checkIsSchema } from '../../../../validation/meta.js'
 import { addCustomFormats } from './format.js'
 
 // Generate random value based on a single JSON schema
-export const randomHelper = function(schema) {
+export const randomHelper = function (schema) {
   // Validate random parameters are valid JSON schema v4
   // We cannot use later versions because json-schema-faker does not support
   // them
@@ -22,7 +22,7 @@ export const randomHelper = function(schema) {
 
 // Json-schema-faker does not work properly with array schema that do not have
 // an `items.type` property
-const fixArray = function({ schema, schema: { type, items = {} } }) {
+const fixArray = function ({ schema, schema: { type, items = {} } }) {
   if (type !== 'array' || items.type !== undefined) {
     return schema
   }
@@ -31,7 +31,7 @@ const fixArray = function({ schema, schema: { type, items = {} } }) {
 }
 
 // Specifies `json-schema-faker` options
-const addFakerOptions = function() {
+const addFakerOptions = function () {
   jsonSchemaFaker.option({
     // JSON format v4 allow custom formats
     failOnInvalidFormat: false,
@@ -47,7 +47,7 @@ addFakerOptions()
 // If `task.random.*.x-separator: string` defined, used it to concatenate an
 // array into a string
 // This is used to make OpenAPI `collectionFormat` work
-const addSeparators = function({
+const addSeparators = function ({
   value,
   schema: { 'x-separator': separator },
 }) {

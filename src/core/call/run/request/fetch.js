@@ -5,7 +5,7 @@ import { TestApiError } from '../../../../errors/error.js'
 
 import { getAgent } from './agent.js'
 
-export const fireRequest = async function({
+export const fireRequest = async function ({
   rawRequest,
   rawRequest: { method, url, body, timeout, https },
 }) {

@@ -3,7 +3,7 @@ import omit from 'omit.js'
 import { TestApiError } from '../../errors/error.js'
 
 // Validate syntax of task files
-export const validateTasksSyntax = function({ tasks }) {
+export const validateTasksSyntax = function ({ tasks }) {
   if (tasks.length === 0) {
     throw new TestApiError('No tasks were found')
   }
@@ -13,7 +13,7 @@ export const validateTasksSyntax = function({ tasks }) {
   validateDuplicateKeys({ tasks })
 }
 
-const validateTaskSyntax = function(task) {
+const validateTaskSyntax = function (task) {
   const syntaxTest = SYNTAX_TESTS.find(({ test }) => test(task))
 
   if (syntaxTest === undefined) {
@@ -55,11 +55,11 @@ const SYNTAX_TESTS = [
 ]
 
 // `task.key` must be unique
-const validateDuplicateKeys = function({ tasks }) {
+const validateDuplicateKeys = function ({ tasks }) {
   tasks.forEach(validateDuplicateKey)
 }
 
-const validateDuplicateKey = function({ key, scope, name }, index, tasks) {
+const validateDuplicateKey = function ({ key, scope, name }, index, tasks) {
   const tasksA = tasks.slice(index + 1)
   const isDuplicate = tasksA.some(({ key: keyA }) => key === keyA)
 

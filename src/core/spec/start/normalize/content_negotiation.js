@@ -1,7 +1,7 @@
 import { filterFormDataMimes } from './form_data.js'
 
 // Get OpenAPI `consumes` and `produces` properties as request headers
-export const getNegotiationsParams = function({ spec, operation, params }) {
+export const getNegotiationsParams = function ({ spec, operation, params }) {
   const contentType = getContentTypeParam({ spec, operation, params })
   const accept = getAcceptParam({ spec, operation })
   return { ...contentType, ...accept }
@@ -9,7 +9,7 @@ export const getNegotiationsParams = function({ spec, operation, params }) {
 
 // Get `consumes` and `produces` OpenAPI properties as header parameters instead
 // A random request Content-Type will be picked
-const getContentTypeParam = function({ spec, operation, params }) {
+const getContentTypeParam = function ({ spec, operation, params }) {
   const consumes = getConsumes({ spec, operation })
 
   if (consumes === undefined) {
@@ -22,7 +22,7 @@ const getContentTypeParam = function({ spec, operation, params }) {
 }
 
 // But the Accept header is always the same
-const getAcceptParam = function({ spec, operation }) {
+const getAcceptParam = function ({ spec, operation }) {
   const produces = getProduces({ operation, spec })
 
   if (produces === undefined) {
@@ -35,7 +35,7 @@ const getAcceptParam = function({ spec, operation }) {
 }
 
 // Get OpenAPI `produces` property as a `Content-Type` response header
-export const getNegotiationsResponse = function({ spec, operation }) {
+export const getNegotiationsResponse = function ({ spec, operation }) {
   const produces = getProduces({ spec, operation })
 
   if (produces === undefined) {
@@ -45,14 +45,14 @@ export const getNegotiationsResponse = function({ spec, operation }) {
   return { 'content-type': { type: 'string', enum: produces } }
 }
 
-const getConsumes = function({
+const getConsumes = function ({
   spec: { consumes: specConsumes },
   operation: { consumes = specConsumes },
 }) {
   return consumes
 }
 
-const getProduces = function({
+const getProduces = function ({
   spec: { produces: specProduces },
   operation: { produces = specProduces },
 }) {

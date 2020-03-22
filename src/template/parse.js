@@ -5,7 +5,7 @@ import { isObject } from '../utils/types.js'
 //  - `$$name` into `{ type: 'value', name: '$$name' }`
 //  - `{ $$name: arg }` into `{ type: 'function', name: '$$name', arg }`
 //  - `$$name $$nameB` into `{ type: 'concat', tokens }`
-export const parseTemplate = function(data) {
+export const parseTemplate = function (data) {
   if (typeof data === 'string') {
     return parseTemplateString(data)
   }
@@ -21,7 +21,7 @@ export const parseTemplate = function(data) {
   return { type: 'function', name, arg }
 }
 
-const getTemplateName = function(data) {
+const getTemplateName = function (data) {
   // No templating
   if (!isObject(data)) {
     return
@@ -45,7 +45,7 @@ const getTemplateName = function(data) {
   return name
 }
 
-const parseTemplateString = function(data) {
+const parseTemplateString = function (data) {
   const tokens = searchRegExp(TEMPLATE_REGEXP_GLOBAL, data)
 
   // No matches
@@ -64,19 +64,19 @@ const parseTemplateString = function(data) {
   return { type: 'concat', tokens: tokensA }
 }
 
-const parseToken = function(name) {
+const parseToken = function (name) {
   const type = TEMPLATE_REGEXP.test(name) ? 'value' : 'raw'
   return { type, name }
 }
 
 // Check whether `data` is `$$name` or `{ $$name: arg }`
-export const isTemplate = function(data) {
+export const isTemplate = function (data) {
   const template = parseTemplate(data)
   return template !== undefined && !isEscape({ template })
 }
 
 // Check if it is `$$name` (but not `$$$name`)
-export const isTemplateName = function({ name }) {
+export const isTemplateName = function ({ name }) {
   return TEMPLATE_NAME_REGEXP.test(name) && !isEscapeName({ name })
 }
 
@@ -84,7 +84,7 @@ export const isTemplateName = function({ name }) {
 // add an extra `$`, i.e. `{ $$$name: arg }` becomes `{ $$name: arg }`
 // and `$$$name` becomes `$$name`
 // This works with multiple `$` as well
-export const parseEscape = function({
+export const parseEscape = function ({
   template,
   template: { type, name, arg },
 }) {
@@ -101,15 +101,15 @@ export const parseEscape = function({
   return nameA
 }
 
-const isEscape = function({ template: { type, name, tokens } }) {
+const isEscape = function ({ template: { type, name, tokens } }) {
   if (type === 'concat') {
-    return tokens.some(template => isEscape({ template }))
+    return tokens.some((template) => isEscape({ template }))
   }
 
   return isEscapeName({ name })
 }
 
-const isEscapeName = function({ name }) {
+const isEscapeName = function ({ name }) {
   return name.startsWith(`${TEMPLATE_ESCAPE}${TEMPLATE_PREFIX}`)
 }
 

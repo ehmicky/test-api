@@ -6,7 +6,7 @@ import { BugError } from '../errors/error.js'
 
 // If a value in `task.*` could not be serialized, we add it as `task.error`
 // so it gets properly reported (as opposed to throwing an error)
-export const addSerializeFail = function({ task, error, plugins }) {
+export const addSerializeFail = function ({ task, error, plugins }) {
   if (error === undefined) {
     return task
   }
@@ -17,7 +17,7 @@ export const addSerializeFail = function({ task, error, plugins }) {
   return { ...task, error: errorB }
 }
 
-const getSerializeFail = function({
+const getSerializeFail = function ({
   error: { message, value, path },
   plugins,
 }) {
@@ -37,7 +37,7 @@ const getSerializeFail = function({
 
 // Try to guess `error.module` from where the value was in task.*
 // This is not error-proof since plugins can modify input of other plugins.
-const guessModule = function({ path: [name], plugins }) {
+const guessModule = function ({ path: [name], plugins }) {
   const plugin = plugins.find(({ name: nameA }) => nameA === name)
 
   if (plugin === undefined) {

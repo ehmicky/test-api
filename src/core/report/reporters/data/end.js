@@ -3,7 +3,7 @@ import { stopSpinner } from '../../utils/spinner.js'
 import { isSilentTask } from '../../level/silent.js'
 
 // JSON reporter
-export const end = function(tasks, { options, options: { spinner } }) {
+export const end = function (tasks, { options, options: { spinner } }) {
   stopSpinner(spinner)
 
   const tasksA = getTasks({ tasks, options })
@@ -11,9 +11,9 @@ export const end = function(tasks, { options, options: { spinner } }) {
   return `${tasksB}\n`
 }
 
-const getTasks = function({ tasks, options }) {
+const getTasks = function ({ tasks, options }) {
   const summary = getSummary({ tasks })
-  const tasksA = tasks.filter(task => !isSilentTask({ task, options }))
+  const tasksA = tasks.filter((task) => !isSilentTask({ task, options }))
 
   return { summary, tasks: tasksA }
 }

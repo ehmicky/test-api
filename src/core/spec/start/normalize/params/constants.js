@@ -2,7 +2,7 @@ import { TestApiError } from '../../../../../errors/error.js'
 
 // Operation's method, server and path as a `task.call.method|server|path`
 // parameter
-export const getConstants = function({ spec, operation, method, path }) {
+export const getConstants = function ({ spec, operation, method, path }) {
   const serverParam = getServerParam({ spec, operation })
   const methodParam = getMethodParam({ method })
   const pathParam = getPathParam({ path })
@@ -11,7 +11,7 @@ export const getConstants = function({ spec, operation, method, path }) {
 }
 
 // Retrieve `task.call.server`
-const getServerParam = function({
+const getServerParam = function ({
   spec: { schemes: specSchemes = DEFAULT_SCHEMES, host: hostname, basePath },
   operation: { schemes = specSchemes },
 }) {
@@ -20,19 +20,19 @@ const getServerParam = function({
     return
   }
 
-  const servers = schemes.map(scheme => `${scheme}://${hostname}${basePath}`)
+  const servers = schemes.map((scheme) => `${scheme}://${hostname}${basePath}`)
   return { server: { type: 'string', enum: servers } }
 }
 
 const DEFAULT_SCHEMES = ['http']
 
 // Retrieve `task.call.method`
-const getMethodParam = function({ method }) {
+const getMethodParam = function ({ method }) {
   return { method: { type: 'string', enum: [method] } }
 }
 
 // Retrieve `task.call.path`
-const getPathParam = function({ path }) {
+const getPathParam = function ({ path }) {
   const pathA = getExpressPath({ path })
   return { path: { type: 'string', enum: [pathA] } }
 }
@@ -40,7 +40,7 @@ const getPathParam = function({ path }) {
 // Transform an OpenAPI path `/path/{variable}` into an Express-style path
 // `/path/:variable`
 // Note that according to OpenAPI spec, path variables are always required.
-const getExpressPath = function({ path }) {
+const getExpressPath = function ({ path }) {
   return path.replace(URL_PARAM_REGEXP, (match, name) =>
     getExpressVariable({ name, path }),
   )
@@ -51,7 +51,7 @@ const getExpressPath = function({ path }) {
 // which characters are allowed in `url` request parameter names
 const URL_PARAM_REGEXP = /\{([^}]+)\}/gu
 
-const getExpressVariable = function({ name, path }) {
+const getExpressVariable = function ({ name, path }) {
   if (VALID_EXPRESS_PATH_NAME.test(name)) {
     return `:${name}`
   }

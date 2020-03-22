@@ -1,7 +1,7 @@
 // When using a `formData` parameter, make sure the `Content-Type` request
 // header includes `urlencoded` or `multipart/form-data`
 // When using a `body` parameter, do the opposite.
-export const filterFormDataMimes = function({ mimes, params }) {
+export const filterFormDataMimes = function ({ mimes, params }) {
   if (hasFormDataParams({ params })) {
     return keepFormDataMimes({ mimes })
   }
@@ -9,11 +9,11 @@ export const filterFormDataMimes = function({ mimes, params }) {
   return removeFormDataMimes({ mimes })
 }
 
-const hasFormDataParams = function({ params }) {
+const hasFormDataParams = function ({ params }) {
   return Object.keys(params).some(isFormData)
 }
 
-const keepFormDataMimes = function({ mimes }) {
+const keepFormDataMimes = function ({ mimes }) {
   const mimesA = mimes.filter(isFormDataMime)
 
   // This means the spec `consumes` property does not allow `formData` MIMEs,
@@ -26,8 +26,8 @@ const keepFormDataMimes = function({ mimes }) {
   return mimesA
 }
 
-const removeFormDataMimes = function({ mimes }) {
-  const mimesA = mimes.filter(mime => !isFormDataMime(mime))
+const removeFormDataMimes = function ({ mimes }) {
+  const mimesA = mimes.filter((mime) => !isFormDataMime(mime))
 
   // This means the spec `consumes` property only allow `formData` MIMEs
   // (not `body`), but some `body` parameters are still used.
@@ -39,8 +39,8 @@ const removeFormDataMimes = function({ mimes }) {
   return mimesA
 }
 
-const isFormDataMime = function(mime) {
-  return FORM_DATA_MIMES.some(formDataMime => mime.startsWith(formDataMime))
+const isFormDataMime = function (mime) {
+  return FORM_DATA_MIMES.some((formDataMime) => mime.startsWith(formDataMime))
 }
 
 const FORM_DATA_MIMES = [
@@ -48,11 +48,11 @@ const FORM_DATA_MIMES = [
   'multipart/form-data',
 ]
 
-export const isFormData = function(key) {
+export const isFormData = function (key) {
   return FORM_DATA_REGEXP.test(key)
 }
 
-export const removeFormDataPrefix = function(key) {
+export const removeFormDataPrefix = function (key) {
   return key.replace(FORM_DATA_REGEXP, '')
 }
 

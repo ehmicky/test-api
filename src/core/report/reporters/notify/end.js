@@ -4,7 +4,7 @@ import { getSummary } from '../../utils/summary.js'
 import { isSilentType } from '../../level/silent.js'
 
 // Show notification at end of run
-export const end = function(tasks, { options }) {
+export const end = function (tasks, { options }) {
   const opts = getOpts({ tasks, options })
 
   if (opts === undefined) {
@@ -14,7 +14,7 @@ export const end = function(tasks, { options }) {
   notifier.notify(opts)
 }
 
-const getOpts = function({ tasks, options }) {
+const getOpts = function ({ tasks, options }) {
   const { ok, total, pass, fail, skip } = getSummary({ tasks })
 
   const { resultType, ...opts } = OPTS[ok]
@@ -30,15 +30,15 @@ const getOpts = function({ tasks, options }) {
   return { ...opts, message: messageA }
 }
 
-const getPassMessage = function({ total, pass }) {
+const getPassMessage = function ({ total, pass }) {
   return `${pass} of ${total} tasks passed.`
 }
 
-const getFailMessage = function({ total, fail }) {
+const getFailMessage = function ({ total, fail }) {
   return `${fail} of ${total} tasks failed.`
 }
 
-const addSkipMessage = function({ message, skip, options }) {
+const addSkipMessage = function ({ message, skip, options }) {
   if (skip === 0 || isSilentType({ resultType: 'skip', options })) {
     return message
   }

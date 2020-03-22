@@ -5,7 +5,7 @@ import moize from 'moize'
 import { TestApiError } from '../../../../errors/error.js'
 
 // Allow passing HTTPS options, e.g. for self-signed certificates, etc.
-const getAgent = function({ https = {}, url }) {
+const getAgent = function ({ https = {}, url }) {
   if (!url.startsWith(HTTPS_PROTOCOL) || Object.keys(https).length === 0) {
     return
   }

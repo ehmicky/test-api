@@ -28,7 +28,7 @@ import { templateHandler } from './error.js'
 
 // Evaluate template
 // eslint-disable-next-line max-params
-export const evalTemplate = function(
+export const evalTemplate = function (
   data,
   vars = {},
   opts = {},
@@ -42,12 +42,12 @@ export const evalTemplate = function(
 
 // Recursive calls, done automatically when evaluating `$$name`
 // eslint-disable-next-line max-params
-const recursiveEval = function(vars, opts, stack, data) {
+const recursiveEval = function (vars, opts, stack, data) {
   return evalTemplate(data, vars, opts, stack)
 }
 
 // Evaluate templates in an object or part of an object
-const evalNode = function(opts, data, path) {
+const evalNode = function (opts, data, path) {
   const template = parseTemplate(data)
 
   // There are no template markers
@@ -66,8 +66,8 @@ const evalNode = function(opts, data, path) {
 
 // Evaluate `$$name` when it's inside a string.
 // Its result will be transtyped to string and concatenated.
-const evalConcat = function({ template: { tokens }, opts, path }) {
-  const maybePromises = tokens.map(token =>
+const evalConcat = function ({ template: { tokens }, opts, path }) {
+  const maybePromises = tokens.map((token) =>
     evalConcatToken({ token, opts, path }),
   )
   // There can be several `$$name` inside a string, in which case they are
@@ -75,7 +75,12 @@ const evalConcat = function({ template: { tokens }, opts, path }) {
   return promiseAllThen(maybePromises, concatTokens)
 }
 
-const evalConcatToken = function({ token, token: { type, name }, opts, path }) {
+const evalConcatToken = function ({
+  token,
+  token: { type, name },
+  opts,
+  path,
+}) {
   // Parts between `$$name` have `type: 'raw'`
   if (type === 'raw') {
     return name
@@ -88,11 +93,11 @@ const evalConcatToken = function({ token, token: { type, name }, opts, path }) {
 // They will be implicitely transtyped to `String`. We do not use
 // `JSON.stringify()` because we want to be format-agnostic.
 // `undefined` values will be omitted.
-const concatTokens = function(tokens) {
+const concatTokens = function (tokens) {
   return tokens.join('')
 }
 
-const evalSingle = function({ template, opts }) {
+const evalSingle = function ({ template, opts }) {
   const unescapedData = parseEscape({ template })
 
   // There was something that looked like a template but was an escaped data
@@ -115,15 +120,15 @@ const evalSingle = function({ template, opts }) {
   return evalSingleData({ template, opts: optsA, data, propPath })
 }
 
-const evalSingleData = function({ template, opts, data, propPath }) {
+const evalSingleData = function ({ template, opts, data, propPath }) {
   // `$$name` can be an async function, fired right away
   try {
-    const retVal = promiseThen(data, dataA =>
+    const retVal = promiseThen(data, (dataA) =>
       getNestedProp({ data: dataA, template, opts, propPath }),
     )
     // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
-      ? retVal.catch(error => templateHandler(error, { template }))
+      ? retVal.catch((error) => templateHandler(error, { template }))
       : retVal
   } catch (error) {
     templateHandler(error, { template })
@@ -131,7 +136,7 @@ const evalSingleData = function({ template, opts, data, propPath }) {
 }
 
 // Retrieve template's top-level value
-const getTopLevelProp = function({
+const getTopLevelProp = function ({
   template,
   template: { name },
   opts: { vars },
@@ -148,7 +153,7 @@ const getTopLevelProp = function({
 // `$$name` and `{ $$name: arg }` can both use dot notations.
 // The top-level value is first evaluated (including recursively parsing its
 // templates) then the rest of the property path is applied.
-const parseName = function({ name }) {
+const parseName = function ({ name }) {
   const index = name.search(BRACKETS_REGEXP)
 
   if (index === -1) {
@@ -167,7 +172,7 @@ const parseName = function({ name }) {
 const BRACKETS_REGEXP = /[.[]/u
 
 // Brackets are kept but not dots (because of how `_.get()` works)
-const getDelimIndex = function({ name, index }) {
+const getDelimIndex = function ({ name, index }) {
   if (name[index] === '[') {
     return index
   }
@@ -178,7 +183,7 @@ const getDelimIndex = function({ name, index }) {
 // If `$$name` (but not `{ $$name: arg }`) is a function, it is evaluated right
 // away with no arguments
 // It can be an async function.
-const evalFunction = function({ data, template, propPath }) {
+const evalFunction = function ({ data, template, propPath }) {
   if (!shouldFireFunction({ data, template, propPath })) {
     return data
   }
@@ -186,7 +191,7 @@ const evalFunction = function({ data, template, propPath }) {
   return data()
 }
 
-const shouldFireFunction = function({ data, template: { type }, propPath }) {
+const shouldFireFunction = function ({ data, template: { type }, propPath }) {
   return (
     typeof data === 'function' &&
     // Do not fire when the function is also used as an object.
@@ -200,7 +205,7 @@ const shouldFireFunction = function({ data, template: { type }, propPath }) {
 }
 
 // Retrieve template's nested value (i.e. property path)
-const getNestedProp = function({
+const getNestedProp = function ({
   data,
   template,
   opts: { recursive },
@@ -217,12 +222,12 @@ const getNestedProp = function({
   //    `{ $$identity: $$$name }` -> `$$name`
   const dataA = recursive(data)
 
-  return promiseThen(dataA, dataB =>
+  return promiseThen(dataA, (dataB) =>
     evalNestedProp({ data: dataB, template, propPath }),
   )
 }
 
-const evalNestedProp = function({ data, template: { type, arg }, propPath }) {
+const evalNestedProp = function ({ data, template: { type, arg }, propPath }) {
   const dataA = getProp({ data, propPath })
 
   // Including `undefined`
@@ -240,7 +245,7 @@ const evalNestedProp = function({ data, template: { type, arg }, propPath }) {
   return dataA(...args)
 }
 
-const getProp = function({ data, propPath }) {
+const getProp = function ({ data, propPath }) {
   if (propPath === undefined) {
     return data
   }

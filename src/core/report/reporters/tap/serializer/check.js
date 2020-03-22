@@ -1,7 +1,7 @@
 import { isObject } from '../../../../../utils/types.js'
 
 // Check input arguments
-export const checkArgument = function(value, type) {
+export const checkArgument = function (value, type) {
   const isValid = TYPES[type](value)
 
   if (isValid) {
@@ -12,11 +12,11 @@ export const checkArgument = function(value, type) {
 }
 
 const TYPES = {
-  string: value => typeof value === 'string',
+  string: (value) => typeof value === 'string',
 
   integer: Number.isInteger,
 
-  boolean: value => typeof value === 'boolean',
+  boolean: (value) => typeof value === 'boolean',
 
   object: isObject,
 }

@@ -10,7 +10,7 @@ import {
 } from './common.js'
 
 // Applied on tasks output, i.e. what is reported and returned
-export const serializeOutput = function({ task, plugins }) {
+export const serializeOutput = function ({ task, plugins }) {
   // We use a `state` object because `crawl` utility does not allow returning
   // both the crawled object and extra information
   const state = {}
@@ -29,7 +29,7 @@ export const serializeOutput = function({ task, plugins }) {
 }
 
 // eslint-disable-next-line complexity, max-statements
-const serializeOutputValue = function({ value, path, state }) {
+const serializeOutputValue = function ({ value, path, state }) {
   if (value === undefined) {
     return UNDEFINED
   }
@@ -57,7 +57,7 @@ const serializeOutputValue = function({ value, path, state }) {
   state.error = { message, value, path }
 }
 
-const serializeFunction = function({ name }) {
+const serializeFunction = function ({ name }) {
   const nameA = name || DEFAULT_FUNC_NAME
   return `function ${nameA}()`
 }

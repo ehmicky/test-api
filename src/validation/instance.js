@@ -1,7 +1,7 @@
 import Ajv from 'ajv'
 
 // Retrieve `ajv` instance
-const getInstance = function() {
+const getInstance = function () {
   return new Ajv(AJV_OPTS)
 }
 

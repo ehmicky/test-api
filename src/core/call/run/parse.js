@@ -5,7 +5,7 @@ import { TestApiError } from '../../../errors/error.js'
 import { findBodyHandler } from '../body.js'
 
 // Parse response
-export const parse = function({
+export const parse = function ({
   call,
   call: { rawResponse: { status, body, ...headers } = {} } = {},
 }) {
@@ -21,11 +21,11 @@ export const parse = function({
 }
 
 // Parses a response's headers
-const parseHeaders = function({ headers }) {
+const parseHeaders = function ({ headers }) {
   return mapValues(headers, parseHeader)
 }
 
-const parseHeader = function(header) {
+const parseHeader = function (header) {
   const headerA = header.trim()
   // Headers that look like numbers, booleans or `null` will never be parsed as
   // a string, but as those types instead
@@ -34,7 +34,7 @@ const parseHeader = function(header) {
 }
 
 // Parses a response's body according to its `Content-Type`
-const parseBody = function({ body, headers }) {
+const parseBody = function ({ body, headers }) {
   const bodyA = trimBody({ body })
 
   if (bodyA === undefined) {
@@ -61,7 +61,7 @@ const parseBody = function({ body, headers }) {
   }
 }
 
-const trimBody = function({ body }) {
+const trimBody = function ({ body }) {
   const bodyA = body.trim()
 
   // Convert body to `undefined` when empty

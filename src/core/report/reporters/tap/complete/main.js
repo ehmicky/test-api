@@ -6,7 +6,7 @@ import { assert as serializerAssert } from '../serializer/main.js'
 import { getErrorProps } from './error_props.js'
 
 // Add TAP output for each task, as a single assert
-export const complete = function(
+export const complete = function (
   task,
   { options: { tap }, silent, ...context },
 ) {
@@ -20,7 +20,7 @@ export const complete = function(
   return message
 }
 
-const getAssert = function({ task, task: { key }, context }) {
+const getAssert = function ({ task, task: { key }, context }) {
   const { titles, reportProps } = getReportProps({ task, context })
 
   const resultType = getResultType(task)
@@ -33,9 +33,9 @@ const getAssert = function({ task, task: { key }, context }) {
   return { ok, name, directive, error: errorProps }
 }
 
-const getName = function({ key, titles }) {
+const getName = function ({ key, titles }) {
   return [key, ...titles]
-    .map(string => string.trim())
-    .filter(string => string !== '')
+    .map((string) => string.trim())
+    .filter((string) => string !== '')
     .join(SEPARATOR)
 }

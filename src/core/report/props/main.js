@@ -7,7 +7,7 @@ import { isObject } from '../../../utils/types.js'
 import { addCoreReportProps } from './core.js'
 
 // Get plugin-specific properties printed on reporting
-export const getReportProps = function({ task, context }) {
+export const getReportProps = function ({ task, context }) {
   const { titles, reportProps } = callReportFuncs({ task, context })
 
   const reportPropsA = addCoreReportProps({ reportProps, task })
@@ -23,26 +23,26 @@ export const getReportProps = function({ task, context }) {
 }
 
 // Find and call all `plugin.report()`
-const callReportFuncs = function({
+const callReportFuncs = function ({
   task,
   context,
   context: { _plugins: plugins },
 }) {
   // Reporting order will follow core plugins order, then user `config.plugins`
   // order
-  const reportResult = plugins.map(plugin =>
+  const reportResult = plugins.map((plugin) =>
     callReportFunc({ plugin, context, task }),
   )
 
   // Separate `title` from the rest as it is handled differently
   const titles = reportResult.map(({ title }) => title).filter(isDefinedTitle)
-  const reportProps = reportResult.map(props => omit(props, ['title']))
+  const reportProps = reportResult.map((props) => omit(props, ['title']))
 
   return { titles, reportProps }
 }
 
 // Call `plugin.report()`
-const callReportFunc = function({ plugin: { report, name }, context, task }) {
+const callReportFunc = function ({ plugin: { report, name }, context, task }) {
   const taskValue = task[name]
 
   // If no `plugin.report()`, reports task as is
@@ -66,7 +66,7 @@ const callReportFunc = function({ plugin: { report, name }, context, task }) {
   return { title, [name]: reportProps }
 }
 
-const getReportValue = function({ report, context, taskValue }) {
+const getReportValue = function ({ report, context, taskValue }) {
   const contextA = omit(context, OMITTED_CONTEXT_PROPS)
   const reportValue = report(taskValue, contextA)
   return reportValue
@@ -74,7 +74,7 @@ const getReportValue = function({ report, context, taskValue }) {
 
 const OMITTED_CONTEXT_PROPS = ['options', 'silent']
 
-const mergeReportValue = function({
+const mergeReportValue = function ({
   reportValue: { title, ...reportProps },
   taskValue,
 }) {
@@ -87,19 +87,19 @@ const mergeReportValue = function({
   return { title, reportProps: reportPropsB }
 }
 
-const hasNoReportProps = function({ reportProps, taskValue }) {
+const hasNoReportProps = function ({ reportProps, taskValue }) {
   return Object.keys(reportProps).length === 0 && taskValue === undefined
 }
 
-const isDefinedTitle = function(title) {
+const isDefinedTitle = function (title) {
   return title !== undefined && title.trim() !== ''
 }
 
 // Do not print properties that are not present
-const removeEmptyProps = function(object) {
+const removeEmptyProps = function (object) {
   return filterObj(object, isDefined)
 }
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }

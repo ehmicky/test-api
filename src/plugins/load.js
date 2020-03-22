@@ -8,14 +8,14 @@ import { verifyConfig } from './verify.js'
 
 // Retrieve `config.plugins` then `require()` all the plugins
 // Also validate their configuration
-export const loadPlugins = function({ config, config: { plugins } }) {
+export const loadPlugins = function ({ config, config: { plugins } }) {
   const pluginsA = normalizePlugins({ plugins })
 
-  const pluginsB = pluginsA.map(name => loadPlugin({ name, config }))
+  const pluginsB = pluginsA.map((name) => loadPlugin({ name, config }))
   return pluginsB
 }
 
-const normalizePlugins = function({ plugins }) {
+const normalizePlugins = function ({ plugins }) {
   // Specifing core plugins is a noop
   const pluginsA = difference(plugins, CORE_PLUGINS)
 
@@ -40,7 +40,7 @@ const CORE_PLUGINS = [
 // TODO: use a separate bundled package instead
 const DEFAULT_PLUGINS = ['spec', 'call', 'validate']
 
-const loadPlugin = function({ name, config }) {
+const loadPlugin = function ({ name, config }) {
   const plugin = getModule(name, MODULE_OPTS)
 
   validateJsonSchemas({ plugin })

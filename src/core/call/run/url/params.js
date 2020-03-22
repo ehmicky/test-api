@@ -9,7 +9,7 @@ import { TestApiError } from '../../../../errors/error.js'
 // Uses same syntax as Express paths, e.g. `:NAME`, `:NAME*`, `:NAME+`
 // or `(RegExp)`
 // The library calls `encodeURIComponent()` on each URL variable
-export const addUrlParams = function(url, rawRequest) {
+export const addUrlParams = function (url, rawRequest) {
   const urlParams = removePrefixes(rawRequest, 'url')
 
   const tokens = parseUrl(url)
@@ -18,7 +18,7 @@ export const addUrlParams = function(url, rawRequest) {
 }
 
 // Parse URL `:NAME` variables tokens
-const parseUrl = function(url) {
+const parseUrl = function (url) {
   const urlA = url.replace(URL_COLON_REGEXP, '\\$&')
   const tokens = parse(urlA)
   return tokens
@@ -32,11 +32,11 @@ const URL_COLON_REGEXP = /:(\d|\/)/gu
 // We run `tokensToFunction` on each `token` instead of once on all of them
 // so the error handler knows which `token` failed without parsing the
 // error message
-const serializeUrl = function(tokens, urlParams) {
-  return tokens.map(token => serializeToken(token, urlParams)).join('')
+const serializeUrl = function (tokens, urlParams) {
+  return tokens.map((token) => serializeToken(token, urlParams)).join('')
 }
 
-const serializeToken = function(token, urlParams) {
+const serializeToken = function (token, urlParams) {
   try {
     return tokensToFunction([token])(urlParams, { encode: encodeURIComponent })
   } catch (error) {
@@ -44,7 +44,7 @@ const serializeToken = function(token, urlParams) {
   }
 }
 
-const throwError = function(message, { name }) {
+const throwError = function (message, { name }) {
   const property = getPath(['task', 'call', `url.${name}`])
   throw new TestApiError(`The URL parameter '${name}' ${message}`, { property })
 }

@@ -2,7 +2,7 @@ import { TestApiError, BugError } from './errors/error.js'
 import { checkSchema } from './validation/check.js'
 
 // A module is either a plugin or a reporter
-export const getModule = function(name, info) {
+export const getModule = function (name, info) {
   // Can pass the module object directly
   if (typeof name !== 'string') {
     return name
@@ -18,7 +18,7 @@ export const getModule = function(name, info) {
 // Load module
 // TODO: `require(`${modulePrefix}${name}`)` instead
 // Can only done once we moved core plugins/reporters to separate repositories
-const loadModule = function({ name, info, info: { corePath } }) {
+const loadModule = function ({ name, info, info: { corePath } }) {
   try {
     // TODO: replace with `import()` once it is supported by default by ESLint
     // eslint-disable-next-line import/no-dynamic-require, global-require
@@ -29,7 +29,7 @@ const loadModule = function({ name, info, info: { corePath } }) {
   }
 }
 
-const loadModuleHandler = function(
+const loadModuleHandler = function (
   { code, message },
   { name, info, info: { title } },
 ) {
@@ -46,7 +46,7 @@ const loadModuleHandler = function(
 // This will also be triggered when loading a plugin that tries to `require()`
 // a non-existing file. Unfortunately we cannot distinguish without parsing
 // `error.message` which is brittle.
-const checkModuleNotFound = function({
+const checkModuleNotFound = function ({
   code,
   name,
   info,
@@ -64,7 +64,7 @@ const checkModuleNotFound = function({
 }
 
 // Validate export value
-const validateModule = function({
+const validateModule = function ({
   moduleObj,
   moduleObj: { name },
   info,
@@ -85,7 +85,7 @@ const validateModule = function({
 // We restrict module names to make sure they can appear in dot notations
 // in `error.property` without escaping.
 // And also to make sure they are simple to read and write.
-const addNameSchema = function({ schema, schema: { properties } }) {
+const addNameSchema = function ({ schema, schema: { properties } }) {
   return { ...schema, properties: { ...properties, name: NAME_SCHEMA } }
 }
 
@@ -95,7 +95,7 @@ const NAME_SCHEMA = {
 }
 
 // Retrieve error.* properties
-const getProps = function({
+const getProps = function ({
   info: { props: getErrorProps, title },
   name,
   addModule = true,
@@ -110,7 +110,7 @@ const getProps = function({
   return { ...props, ...propsA }
 }
 
-const getModuleProp = function({ title, name, addModule }) {
+const getModuleProp = function ({ title, name, addModule }) {
   if (!addModule) {
     return
   }

@@ -7,15 +7,15 @@ import { COMMON_OPTIONS_SCHEMA } from './common_options_schema.js'
 import { REPORTER_SCHEMA } from './reporter_schema.js'
 
 // Get `startData.report.reporters`
-export const getReporters = function({ config }) {
+export const getReporters = function ({ config }) {
   const names = getNames({ config })
 
-  const reporters = names.map(name => getModule(name, MODULE_OPTS))
+  const reporters = names.map((name) => getModule(name, MODULE_OPTS))
   return reporters
 }
 
 // Reporters are specified by using their name in `config.report.REPORTER`
-const getNames = function({ config: { report = {} } }) {
+const getNames = function ({ config: { report = {} } }) {
   const reportA = filterObj(report, isDefined)
   const names = Object.keys(reportA)
   const namesA = difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
@@ -28,7 +28,7 @@ const getNames = function({ config: { report = {} } }) {
   return namesA
 }
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }
 

@@ -6,7 +6,7 @@ import { parseFlat } from '../../../utils/flat.js'
 
 // `$$env.envVarName` template function
 // Replaced by `process.env.envVarName`
-const getEnv = function() {
+const getEnv = function () {
   // Allow environment variables to be integers, booleans, etc.
   return mapValues(env, parseFlat)
 }

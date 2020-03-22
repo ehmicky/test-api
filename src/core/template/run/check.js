@@ -8,7 +8,7 @@ import { checkSchema } from '../../../validation/check.js'
 
 // Wrap template helper functions with JSON schema validation from
 // `plugin.config['template.*']`
-export const wrapTemplateVars = function({ vars, plugin }) {
+export const wrapTemplateVars = function ({ vars, plugin }) {
   const templateConfig = getTemplateConfig({ plugin })
 
   const varsA = mapValues(templateConfig, (schema, name) =>
@@ -20,8 +20,8 @@ export const wrapTemplateVars = function({ vars, plugin }) {
 }
 
 // Return `plugin.config['template.*']`
-const getTemplateConfig = function({ plugin: { config } }) {
-  const templateConfig = filterObj(config, key =>
+const getTemplateConfig = function ({ plugin: { config } }) {
+  const templateConfig = filterObj(config, (key) =>
     key.startsWith(TEMPLATE_CONFIG_PREFIX),
   )
   const templateConfigA = mapKeys(templateConfig, (value, key) =>
@@ -33,7 +33,7 @@ const getTemplateConfig = function({ plugin: { config } }) {
 const TEMPLATE_CONFIG_PREFIX = 'template.'
 
 // Wrap the template helper function
-const wrapTemplateVar = function({ value, name, schema, plugin }) {
+const wrapTemplateVar = function ({ value, name, schema, plugin }) {
   // Some template values might be optionally generated, so we ignore
   // `undefined`
   if (value === undefined) {
@@ -49,7 +49,7 @@ const wrapTemplateVar = function({ value, name, schema, plugin }) {
 }
 
 // Make sure it is a function before wrapping it
-const validateTemplateConfig = function({ value, name, schemaProp, plugin }) {
+const validateTemplateConfig = function ({ value, name, schemaProp, plugin }) {
   if (typeof value === 'function') {
     return
   }
@@ -61,7 +61,7 @@ const validateTemplateConfig = function({ value, name, schemaProp, plugin }) {
 }
 
 // Wrap `value(...args)` to first perform JSON validation
-const templateVarWrapper = function({ value, name, schema }, ...args) {
+const templateVarWrapper = function ({ value, name, schema }, ...args) {
   const schemas = Array.isArray(schema) ? schema : [schema]
 
   schemas.forEach((schemaA, index) =>
@@ -71,7 +71,7 @@ const templateVarWrapper = function({ value, name, schema }, ...args) {
   return value(...args)
 }
 
-const checkVar = function({ schema, value, name, index }) {
+const checkVar = function ({ schema, value, name, index }) {
   const message = getMessage({ name, index })
 
   if (value === undefined) {
@@ -81,7 +81,7 @@ const checkVar = function({ schema, value, name, index }) {
   checkSchema({ schema, value, message })
 }
 
-const getMessage = function({ name, index }) {
+const getMessage = function ({ name, index }) {
   const cardinal = numberToCardinal(index + 1)
   const message = `${cardinal} argument to '${name}'`
   return message
@@ -89,7 +89,7 @@ const getMessage = function({ name, index }) {
 
 // Helper function arguments cannot be `undefined` unless
 // `schema.x-optional: true`
-const checkVarUndefined = function({
+const checkVarUndefined = function ({
   schema: { 'x-optional': isOptional = false },
   message,
 }) {
@@ -100,6 +100,6 @@ const checkVarUndefined = function({
   throw new TestApiError(`${message} must be defined`)
 }
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }

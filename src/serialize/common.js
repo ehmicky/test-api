@@ -27,7 +27,7 @@ import { isObject } from '../utils/types.js'
 //  - but serialized to JSON in output for the reasons above
 
 // Check if valid JSON type
-export const isJsonType = function(value) {
+export const isJsonType = function (value) {
   return (
     ['string', 'number', 'boolean'].includes(typeof value) ||
     value === null ||
@@ -37,7 +37,7 @@ export const isJsonType = function(value) {
 }
 
 // Error message
-export const getMessage = function({ value, path }) {
+export const getMessage = function ({ value, path }) {
   const property = getPath(path)
   return `property '${property}' with value '${value}' is invalid: it can only be a JSON type, undefined or a function`
 }

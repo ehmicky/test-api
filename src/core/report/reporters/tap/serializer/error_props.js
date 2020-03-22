@@ -4,7 +4,7 @@ import filterObj from 'filter-obj'
 import { indent } from '../../../utils/indent.js'
 
 // YAML error properties for each failed assertion
-export const getErrorProps = function({ ok, error }) {
+export const getErrorProps = function ({ ok, error }) {
   if (ok || error === undefined) {
     return ''
   }
@@ -15,7 +15,7 @@ export const getErrorProps = function({ ok, error }) {
   return errorProps
 }
 
-const getError = function({ message, name, stack, ...error }) {
+const getError = function ({ message, name, stack, ...error }) {
   const at = getAt({ stack })
 
   const errorA = { message, operator: name, at, stack, ...error }
@@ -23,7 +23,7 @@ const getError = function({ message, name, stack, ...error }) {
   return errorB
 }
 
-const getAt = function({ stack }) {
+const getAt = function ({ stack }) {
   if (stack === undefined) {
     return
   }
@@ -35,12 +35,12 @@ const getAt = function({ stack }) {
 // Remove leading '  at' from stack trace
 const AT_REGEXP = /^.*at /u
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }
 
 // Serialize error to indented YAML
-const serializeErrorProps = function({ error }) {
+const serializeErrorProps = function ({ error }) {
   const errorProps = yamlDump(error, YAML_OPTS)
   const errorPropsA = indent(errorProps)
   const errorPropsB = `\n  ---\n${errorPropsA}...`

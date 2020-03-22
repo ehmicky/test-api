@@ -4,7 +4,7 @@ import { isObject } from '../../../utils/types.js'
 
 // Apply `config.report.REPORTER.level` to remove some `task.PLUGIN.*`
 // Use `task.originalTask` but do not keep it
-export const filterTaskData = function({
+export const filterTaskData = function ({
   task: { originalTask, ...task },
   options: {
     level: { taskData },
@@ -18,7 +18,7 @@ export const filterTaskData = function({
   )
 }
 
-const reduceTaskData = function({ task, originalTask, name, taskData }) {
+const reduceTaskData = function ({ task, originalTask, name, taskData }) {
   if (task[name] === undefined) {
     return task
   }
@@ -26,11 +26,11 @@ const reduceTaskData = function({ task, originalTask, name, taskData }) {
   return TASK_DATA[taskData]({ task, originalTask, name })
 }
 
-const keepNone = function({ task, name }) {
+const keepNone = function ({ task, name }) {
   return omit(task, [name])
 }
 
-const keepAdded = function({ task, originalTask, name }) {
+const keepAdded = function ({ task, originalTask, name }) {
   if (originalTask[name] === undefined) {
     return task
   }
@@ -48,11 +48,11 @@ const keepAdded = function({ task, originalTask, name }) {
   return { ...task, [name]: taskValue }
 }
 
-const areObjects = function({ task, originalTask, name }) {
+const areObjects = function ({ task, originalTask, name }) {
   return isObject(originalTask[name]) && isObject(task[name])
 }
 
-const removeOriginalTaskKeys = function({ task, originalTask, name }) {
+const removeOriginalTaskKeys = function ({ task, originalTask, name }) {
   const originalTaskKeys = Object.keys(originalTask[name])
   const taskValue = omit(task[name], originalTaskKeys)
   return taskValue

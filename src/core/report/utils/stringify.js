@@ -5,7 +5,7 @@ import { highlightAuto } from 'emphasize'
 import { truncate } from './truncate.js'
 
 // Serialize, colorize, prettify and truncate a value
-export const stringify = function(value, { highlight = false } = {}) {
+export const stringify = function (value, { highlight = false } = {}) {
   if (typeof value === 'string') {
     return prettifyString(value, { highlight })
   }
@@ -13,14 +13,14 @@ export const stringify = function(value, { highlight = false } = {}) {
   return prettifyOthers(value)
 }
 
-const prettifyString = function(string, { highlight }) {
+const prettifyString = function (string, { highlight }) {
   // We truncate right away to speed-up syntax highlighting
   const stringA = truncate(string)
   const stringB = highlightString(stringA, { highlight })
   return stringB
 }
 
-const highlightString = function(string, { highlight }) {
+const highlightString = function (string, { highlight }) {
   if (!highlight) {
     return string
   }
@@ -29,7 +29,7 @@ const highlightString = function(string, { highlight }) {
   return highlightAuto(string).value
 }
 
-const prettifyOthers = function(value) {
+const prettifyOthers = function (value) {
   const string = inspect(value, INSPECT_OPTS)
   const stringA = truncate(string)
   const stringB = stringA.includes('\n') ? `\n${stringA}` : stringA

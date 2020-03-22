@@ -1,7 +1,7 @@
 import { TestApiError } from '../../../../errors/error.js'
 
 // Parse a HTTP response
-export const getRawResponse = async function({
+export const getRawResponse = async function ({
   rawResponse,
   rawResponse: { status },
   rawRequest,
@@ -25,7 +25,7 @@ export const getRawResponse = async function({
 //  - this implies original case is lost
 //  - it is automatically done by both the Fetch standard and Node.js
 //    core `http` module
-const getHeaders = function({ rawResponse: { headers } }) {
+const getHeaders = function ({ rawResponse: { headers } }) {
   const headersA = [...headers.entries()]
   const headersB = headersA.map(([name, value]) => ({
     [`headers.${name}`]: value,
@@ -34,7 +34,7 @@ const getHeaders = function({ rawResponse: { headers } }) {
   return headersC
 }
 
-const getBodyHandler = function(
+const getBodyHandler = function (
   { message, type },
   { rawRequest: { timeout } },
 ) {

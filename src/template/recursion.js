@@ -4,12 +4,12 @@ import { TestApiError } from '../errors/error.js'
 
 // Since templates can return other templates which then get evaluated, we need
 // to check for infinite recursions.
-export const checkRecursion = function({
+export const checkRecursion = function ({
   template,
   opts,
   opts: { recursive, stack = [] },
 }) {
-  const hasRecursion = stack.some(templateA => isEqual(template, templateA))
+  const hasRecursion = stack.some((templateA) => isEqual(template, templateA))
 
   const stackA = [...stack, template]
 
@@ -23,11 +23,11 @@ export const checkRecursion = function({
 }
 
 // Pretty printing of the recursion stack
-const printRecursion = function({ stack }) {
+const printRecursion = function ({ stack }) {
   return stack.map(printTemplate).join(`\n ${RIGHT_ARROW} `)
 }
 
-const printTemplate = function({ type, name, arg }) {
+const printTemplate = function ({ type, name, arg }) {
   if (type === 'function') {
     return `${name}: ${JSON.stringify(arg)}`
   }

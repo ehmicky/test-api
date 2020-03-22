@@ -2,7 +2,7 @@ import { fireRequest } from './fetch.js'
 import { getRawResponse } from './response.js'
 
 // Fire actual HTTP call
-export const request = async function({ call, call: { rawRequest } = {} }) {
+export const request = async function ({ call, call: { rawRequest } = {} }) {
   if (call === undefined) {
     return
   }

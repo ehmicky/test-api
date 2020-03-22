@@ -5,7 +5,7 @@ import { getBinPath } from 'get-bin-path'
 const BINARY_PATH = getBinPath()
 const TASKS_FILE = 'test/tasks.yml'
 
-test('Smoke test', async t => {
+test('Smoke test', async (t) => {
   const { exitCode, stdout } = await execa(await BINARY_PATH, [TASKS_FILE], {
     reject: false,
   })

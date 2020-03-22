@@ -4,7 +4,7 @@ import { getReporters } from './reporters.js'
 import { addOptions } from './options.js'
 
 // Starts reporting
-export const start = async function(startData, context) {
+export const start = async function (startData, context) {
   const { config } = context
 
   const reporters = getReporters({ config })
@@ -23,7 +23,7 @@ export const start = async function(startData, context) {
 }
 
 // Used to ensure tasks ordering
-const getOrdering = function({ _tasks: tasks }) {
+const getOrdering = function ({ _tasks: tasks }) {
   const taskKeys = tasks.map(({ key }) => key)
   return { taskKeys, tasks: {}, index: 0 }
 }

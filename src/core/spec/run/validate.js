@@ -12,7 +12,7 @@ import {
 // Add OpenAPI specification to `task.validate.*`
 // Use the specification response matching both the current operation and
 // the received status code `{ '200': validate, default: validate, ... }`
-export const addSpecToValidate = function({
+export const addSpecToValidate = function ({
   validate = {},
   pluginNames,
   operation: { responses, operationId },
@@ -35,7 +35,7 @@ export const addSpecToValidate = function({
 // Modifies `validate.status` to only allow status codes described in the
 // specification.
 // If `validate.status` already exists, intersects with it.
-const getSpecStatus = function({
+const getSpecStatus = function ({
   validate: { status = DEFAULT_STATUS },
   responses,
   operationId,
@@ -69,7 +69,7 @@ const getSpecStatus = function({
 const DEFAULT_STATUS = '2xx'
 
 // Can only specify `validate.status` of status codes described in specification
-const validateEmptyStatus = function({
+const validateEmptyStatus = function ({
   statuses,
   responseStatuses,
   status,
@@ -89,7 +89,7 @@ const validateEmptyStatus = function({
 
 // If there is a `default` response, it becomes `validate.STATUSES` where
 // `STATUSES` are all the other valid HTTP statuses.
-const handleDefaultResponse = function({ responseStatus, responses }) {
+const handleDefaultResponse = function ({ responseStatus, responses }) {
   if (responseStatus !== 'default') {
     return responseStatus
   }

@@ -3,7 +3,7 @@
 // E.g. /-.-/g and 'abc-A-def-B-hij' return ['abc', '-A-', 'def', '-B-', 'hij']
 // If no matches, returns `undefined`.
 // `regExp` must have the `g` flag.
-export const searchRegExp = function(regExp, string) {
+export const searchRegExp = function (regExp, string) {
   const delims = string.match(regExp)
 
   if (delims === null) {
@@ -18,12 +18,12 @@ export const searchRegExp = function(regExp, string) {
 
   // Non-delimiters are empty strings when delimiters are at the beginning or
   // the end, or when two delimiters follow each others.
-  const tokensA = tokens.filter(token => token !== '')
+  const tokensA = tokens.filter((token) => token !== '')
   return tokensA
 }
 
 // Interleave delimiters and non-delimiters
-const interleaveDelims = function({ match, index, delims }) {
+const interleaveDelims = function ({ match, index, delims }) {
   const delim = delims[index]
 
   // Last match

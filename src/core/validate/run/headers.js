@@ -5,7 +5,7 @@ import { checkSchema } from '../../../validation/check.js'
 import { checkRequired } from './required.js'
 
 // Validates response headers
-export const validateHeaders = function({ validate, response }) {
+export const validateHeaders = function ({ validate, response }) {
   const validatedHeaders = removePrefixes(validate, 'headers')
   const headers = removePrefixes(response, 'headers')
 
@@ -14,7 +14,7 @@ export const validateHeaders = function({ validate, response }) {
   )
 }
 
-const validateHeader = function({ name, schema, headers }) {
+const validateHeader = function ({ name, schema, headers }) {
   const header = getResponseHeader({ headers, name })
 
   checkRequired({
@@ -37,8 +37,8 @@ const validateHeader = function({ name, schema, headers }) {
   })
 }
 
-const getResponseHeader = function({ headers, name }) {
-  const nameB = Object.keys(headers).find(nameA => nameA === name)
+const getResponseHeader = function ({ headers, name }) {
+  const nameB = Object.keys(headers).find((nameA) => nameA === name)
 
   if (nameB === undefined) {
     return
@@ -47,5 +47,5 @@ const getResponseHeader = function({ headers, name }) {
   return headers[nameB]
 }
 
-const PROPERTY = name => getPath(['task', 'validate', `headers.${name}`])
-const NAME = name => `response header '${name}'`
+const PROPERTY = (name) => getPath(['task', 'validate', `headers.${name}`])
+const NAME = (name) => `response header '${name}'`

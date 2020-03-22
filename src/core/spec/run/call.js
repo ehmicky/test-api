@@ -10,7 +10,7 @@ import { setInvalidParams } from './invalid.js'
 const { $$random: randomHelper } = template
 
 // Add OpenAPI specification parameters to `task.call.*`
-export const addSpecToCall = function({ call, operation: { params } }) {
+export const addSpecToCall = function ({ call, operation: { params } }) {
   // Make sure `task.call` remains `undefined` if it is and no parameter is
   // added
   if (Object.keys(params).length === 0) {
@@ -25,7 +25,7 @@ export const addSpecToCall = function({ call, operation: { params } }) {
 
   const paramsB = setInvalidParams({ params: paramsA, specialValues })
 
-  const paramsC = mapValues(paramsB, schema => randomHelper(schema))
+  const paramsC = mapValues(paramsB, (schema) => randomHelper(schema))
 
   // Specification params have less priority than `task.call.*`
   const callC = merge(paramsC, callB)

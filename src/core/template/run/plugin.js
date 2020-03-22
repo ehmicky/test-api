@@ -5,7 +5,7 @@ import { isTemplateName } from '../../../template/parse.js'
 import { wrapTemplateVars } from './check.js'
 
 // Retrieve all `plugin.template`
-export const getPluginsVars = function({
+export const getPluginsVars = function ({
   context,
   context: { _plugins: plugins },
 }) {
@@ -14,14 +14,14 @@ export const getPluginsVars = function({
   return { pluginsVars, pluginsVarsMap }
 }
 
-const getPluginsVarsMap = function({ context, plugins }) {
-  const pluginsVarsMap = plugins.map(plugin =>
+const getPluginsVarsMap = function ({ context, plugins }) {
+  const pluginsVarsMap = plugins.map((plugin) =>
     getPluginVars({ plugin, context }),
   )
   return Object.assign({}, ...pluginsVarsMap)
 }
 
-const getPluginVars = function({
+const getPluginVars = function ({
   plugin,
   plugin: { name, template },
   context,
@@ -39,7 +39,7 @@ const getPluginVars = function({
   return { [name]: varsA }
 }
 
-const getVars = function({ plugin, plugin: { template }, context }) {
+const getVars = function ({ plugin, plugin: { template }, context }) {
   if (typeof template !== 'function') {
     return template
   }
@@ -52,7 +52,7 @@ const getVars = function({ plugin, plugin: { template }, context }) {
 }
 
 // Add `error.message|module` when `plugin.template` throws
-const getVarsHandler = function(error, { plugin: { name } }) {
+const getVarsHandler = function (error, { plugin: { name } }) {
   // eslint-disable-next-line fp/no-mutation, no-param-reassign
   error.message = `Error while retrieving 'plugin.template': ${error.message}`
 
@@ -65,11 +65,11 @@ const getVarsHandler = function(error, { plugin: { name } }) {
 }
 
 // Validate `plugin.template` return value
-const validateVarNames = function({ vars, plugin }) {
-  Object.keys(vars).forEach(name => validateVarName({ name, plugin }))
+const validateVarNames = function ({ vars, plugin }) {
+  Object.keys(vars).forEach((name) => validateVarName({ name, plugin }))
 }
 
-const validateVarName = function({ name, plugin }) {
+const validateVarName = function ({ name, plugin }) {
   if (isTemplateName({ name })) {
     return
   }
@@ -87,7 +87,7 @@ const validateVarName = function({ name, plugin }) {
 // Like this, adding core template variables is non-breaking.
 // Also this allows overriding / monkey-patching core (which can be
 // either good or bad).
-const mergePluginsVars = function({ plugins, pluginsVarsMap }) {
+const mergePluginsVars = function ({ plugins, pluginsVarsMap }) {
   // eslint-disable-next-line fp/no-mutating-methods
   const pluginsVars = plugins
     .filter(({ name }) => name !== 'template')

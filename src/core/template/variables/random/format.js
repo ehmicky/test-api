@@ -13,11 +13,11 @@ const {
 // Allow `json-schema-faker` to use all the `format` that `ajv` can handle,
 // except `regexp`. Note that AJV does not support JSON schema v7 formats
 // `idn-email|hostname` nor `iri[-reference]`
-export const addCustomFormats = function() {
+export const addCustomFormats = function () {
   Object.entries(CUSTOM_FORMATS).forEach(addCustomFormat)
 }
 
-const addCustomFormat = function([name, regexp]) {
+const addCustomFormat = function ([name, regexp]) {
   jsonSchemaFaker.format(name, () => jsonSchemaFaker.random.randexp(regexp))
 }
 

@@ -16,7 +16,7 @@ import { addFetchRequestHeaders, addContentLength } from './extra_headers.js'
 //    return value.
 //  - this implies server must ignore headers case
 //  - other plugins modifying `request.call` must use lowercase headers
-export const serialize = async function({ call }) {
+export const serialize = async function ({ call }) {
   if (call === undefined) {
     return
   }
@@ -37,7 +37,7 @@ export const serialize = async function({ call }) {
   return { call: { ...call, request: requestB, rawRequest: rawRequestA } }
 }
 
-const normalizeCall = async function({ call }) {
+const normalizeCall = async function ({ call }) {
   const callA = normalizeContentType({ call })
 
   const callB = normalizeMethod({ call: callA })
@@ -49,7 +49,7 @@ const normalizeCall = async function({ call }) {
   return callD
 }
 
-const normalizeTimeout = function({
+const normalizeTimeout = function ({
   call: { timeout = DEFAULT_TIMEOUT, ...call },
 }) {
   return { ...call, timeout }
@@ -57,23 +57,23 @@ const normalizeTimeout = function({
 
 const DEFAULT_TIMEOUT = 1e6
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }
 
-const stringifyParam = function(value, key, call) {
+const stringifyParam = function (value, key, call) {
   const { location } = keyToLocation({ key })
   return PARAM_STRINGIFIERS[location]({ value, call })
 }
 
 // `url`, `query` and `header` values might not be strings.
 // In which case they are JSON stringified
-const stringifyParamFlat = function({ value }) {
+const stringifyParamFlat = function ({ value }) {
   return stringifyFlat(value)
 }
 
 // Stringify the request body according to HTTP request header `Content-Type`
-const stringifyBody = function({
+const stringifyBody = function ({
   value,
   call: { 'headers.content-type': contentType },
 }) {
@@ -84,7 +84,7 @@ const stringifyBody = function({
 }
 
 // Keep `timeout` as an integer, and assign default value
-const keepAsIs = function({ value }) {
+const keepAsIs = function ({ value }) {
   return value
 }
 

@@ -17,7 +17,7 @@ import { defaultInstance } from './instance.js'
 //    the error
 //  - error.valuePath|schemaPath: path to error.value|schema.
 //    Can be prefixed by `arg.valueProp|schemaProp`
-const validateFromSchema = function({
+const validateFromSchema = function ({
   schema,
   value,
   valueProp,
@@ -44,7 +44,7 @@ const validateFromSchema = function({
   return errorA
 }
 
-const getError = function({
+const getError = function ({
   error,
   schema,
   value,
@@ -73,7 +73,7 @@ const getError = function({
   return errorB
 }
 
-const getMessage = function({ error, message, valueProp }) {
+const getMessage = function ({ error, message, valueProp }) {
   const messagePrefix = getMessagePrefix({ message, valueProp })
   const errorMessage = Ajv.prototype
     .errorsText([error], { dataVar: '' })
@@ -83,7 +83,7 @@ const getMessage = function({ error, message, valueProp }) {
 
 const FIRST_CHAR_REGEXP = /^[. ]/u
 
-const getMessagePrefix = function({ message, valueProp }) {
+const getMessagePrefix = function ({ message, valueProp }) {
   if (message !== undefined) {
     return capitalize(message)
   }
@@ -98,13 +98,13 @@ const getMessagePrefix = function({ message, valueProp }) {
 // `error.dataPath` is properly escaped, e.g. can be `.NAME`, `[INDEX]` or
 // `["NAME"]` for names that need to be escaped.
 // However it starts with a dot, which we strip.
-const getErrorPath = function({ error: { dataPath } }) {
+const getErrorPath = function ({ error: { dataPath } }) {
   return dataPath.replace(FIRST_DOT_REGEXP, '')
 }
 
 const FIRST_DOT_REGEXP = /^\./u
 
-const getValue = function({ errorPath, value }) {
+const getValue = function ({ errorPath, value }) {
   if (errorPath === '') {
     return value
   }
@@ -112,27 +112,27 @@ const getValue = function({ errorPath, value }) {
   return get(value, errorPath)
 }
 
-const getValuePath = function({ errorPath, valueProp }) {
+const getValuePath = function ({ errorPath, valueProp }) {
   return concatProp(valueProp, errorPath)
 }
 
-const getSchemaParts = function({ error: { schemaPath } }) {
+const getSchemaParts = function ({ error: { schemaPath } }) {
   return jsonPointerToParts(schemaPath)
 }
 
-const getSchema = function({ schemaParts, schema }) {
+const getSchema = function ({ schemaParts, schema }) {
   const key = schemaParts[schemaParts.length - 1]
   const value = get(schema, schemaParts)
   return { [key]: value }
 }
 
-const getSchemaPath = function({ schemaParts, schemaProp }) {
+const getSchemaPath = function ({ schemaParts, schemaProp }) {
   const schemaPath = getPath(schemaParts)
   const schemaPathA = concatProp(schemaProp, schemaPath)
   return schemaPathA
 }
 
-const concatProp = function(prop, path) {
+const concatProp = function (prop, path) {
   if (prop === undefined) {
     return path
   }
@@ -148,7 +148,7 @@ const concatProp = function(prop, path) {
   return `${prop}.${path}`
 }
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }
 

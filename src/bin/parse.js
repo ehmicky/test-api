@@ -1,6 +1,6 @@
 import filterObj from 'filter-obj'
 
-export const parseConfig = function({ yargs }) {
+export const parseConfig = function ({ yargs }) {
   const { _: tasks, ...config } = yargs.parse()
 
   const configA = filterObj(config, isUserOpt)
@@ -11,7 +11,7 @@ export const parseConfig = function({ yargs }) {
 }
 
 // Remove `yargs`-specific options, shortcuts and dash-cased
-const isUserOpt = function(key, value) {
+const isUserOpt = function (key, value) {
   return (
     value !== undefined &&
     !INTERNAL_KEYS.includes(key) &&

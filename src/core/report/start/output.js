@@ -4,7 +4,7 @@ import { createWriteStream } from 'fs'
 import { TestApiError } from '../../../errors/error.js'
 
 // Where to output report according to `config.report.REPORTER.output`
-export const normalizeOutput = async function({
+export const normalizeOutput = async function ({
   options: { output },
   reporter: { name },
 }) {
@@ -25,7 +25,7 @@ export const normalizeOutput = async function({
   }
 }
 
-const getFileStream = function(output) {
+const getFileStream = function (output) {
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
     const stream = createWriteStream(output)

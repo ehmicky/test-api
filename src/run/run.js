@@ -4,14 +4,14 @@ import { getTaskReturn } from '../plugins/return/main.js'
 import { runHandlers } from '../plugins/handlers.js'
 
 // Run each `plugin.run()`
-export const runTask = async function({ task, context, plugins, nestedPath }) {
+export const runTask = async function ({ task, context, plugins, nestedPath }) {
   const taskA = await runAll({ task, context, plugins, nestedPath })
 
   const taskB = getTaskReturn({ task: taskA, plugins })
   return taskB
 }
 
-const runAll = async function({
+const runAll = async function ({
   task,
   task: { skipped },
   context,
@@ -45,7 +45,7 @@ const runAll = async function({
 
 // Top-level errors are returned as `task.error`
 // From `error: { task }` to `task: { error }`
-const runAllHandler = function(error) {
+const runAllHandler = function (error) {
   const { task } = error
 
   // eslint-disable-next-line fp/no-delete, no-param-reassign
@@ -56,7 +56,7 @@ const runAllHandler = function(error) {
   return task
 }
 
-const getContext = function({ context, plugins, nestedPath }) {
+const getContext = function ({ context, plugins, nestedPath }) {
   const recursiveRunTaskA = recursiveRunTask.bind(null, {
     context,
     plugins,
@@ -74,7 +74,7 @@ const getContext = function({ context, plugins, nestedPath }) {
 // Pass simplified `_runTask()` for recursive tasks
 // Tasks can use `_nestedPath` to know if this is a recursive call
 // As opposed to regular `_runTask()`, failed task throws.
-const recursiveRunTask = async function(
+const recursiveRunTask = async function (
   { context, plugins, nestedPath },
   { task, task: { key }, self, getError },
 ) {
@@ -103,7 +103,7 @@ const recursiveRunTask = async function(
 //  - template check recursions only within a given task
 //  - tasks recursion can happen even without any templating involved
 //    (when any plugin uses `_runTask()`)
-const checkRecursion = function({ nestedPath = [], key, self }) {
+const checkRecursion = function ({ nestedPath = [], key, self }) {
   if (self || !nestedPath.includes(key)) {
     return
   }
@@ -114,7 +114,7 @@ const checkRecursion = function({ nestedPath = [], key, self }) {
 
 const RIGHT_ARROW = '\u21AA'
 
-const appendNestedPath = function({ nestedPath = [], key, self }) {
+const appendNestedPath = function ({ nestedPath = [], key, self }) {
   // `_nestedPath` is unchanged if `self: true`
   // Used when `_runTask()` is called to call current task,
   // e.g. by `repeat` plugin
@@ -129,7 +129,7 @@ const appendNestedPath = function({ nestedPath = [], key, self }) {
 // When `getError()` is specified, we throw that error instead but with
 // `error.nested` set to the nested task.
 // This can be done recursively, leading to a chain of `error.nested`
-const throwRecursiveError = function({ task, error, getError }) {
+const throwRecursiveError = function ({ task, error, getError }) {
   if (getError === undefined) {
     // eslint-disable-next-line fp/no-mutation, no-param-reassign
     error.task = task
@@ -151,7 +151,7 @@ const throwRecursiveError = function({ task, error, getError }) {
 // We do this by attaching it to `error.task`, then extracting it on a top-level
 // error handler.
 // The error is finally set to `task.error`
-const onError = function(error, task) {
+const onError = function (error, task) {
   // Recursive tasks already have `error.task` defined
   if (error.task === undefined) {
     // eslint-disable-next-line fp/no-mutation, no-param-reassign
@@ -165,6 +165,6 @@ const onError = function(error, task) {
 // errors (as opposed to throwing an exception)
 // This implies successful tasks might be emptier than expected.
 // This is used e.g. by `skip|only` or `repeat` plugins
-const stopFunc = function({ done }) {
+const stopFunc = function ({ done }) {
   return done
 }

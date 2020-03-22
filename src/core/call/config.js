@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import METHODS from 'methods'
 
-const UPPERCASE_METHODS = METHODS.map(method => method.toUpperCase())
+const UPPERCASE_METHODS = METHODS.map((method) => method.toUpperCase())
 
 export const config = {
   task: {

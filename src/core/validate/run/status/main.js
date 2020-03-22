@@ -4,7 +4,7 @@ import { parseStatus } from './parse.js'
 import { normalizeStatuses } from './normalize.js'
 
 // Validates response status code
-export const validateStatus = function({
+export const validateStatus = function ({
   validate: { status: vStatus = DEFAULT_STATUS },
   response: { status },
 }) {

@@ -17,7 +17,7 @@ import { addScopes, addKey, validateScopes } from './scope.js'
 //    streaming-friendly.
 //  - it gives a stronger sense that tasks are run in parallel.
 //  - it allows `task.name` to be `undefined`.
-export const loadTasks = async function({ tasks }) {
+export const loadTasks = async function ({ tasks }) {
   const fileTasks = await loadFileTasks({ tasks })
 
   const inlineTasks = loadInlineTasks({ tasks })
@@ -33,21 +33,21 @@ export const loadTasks = async function({ tasks }) {
 }
 
 // Load tasks that are specified in files
-const loadFileTasks = async function({ tasks }) {
-  const tasksA = tasks.filter(task => typeof task === 'string')
+const loadFileTasks = async function ({ tasks }) {
+  const tasksA = tasks.filter((task) => typeof task === 'string')
 
   // Can use globbing
   const paths = await fastGlob(tasksA)
 
   validateScopes({ paths })
 
-  const tasksB = await Promise.all(paths.map(path => loadTaskFile({ path })))
+  const tasksB = await Promise.all(paths.map((path) => loadTaskFile({ path })))
   const tasksC = tasksB.flat()
   return tasksC
 }
 
 // Load and parse each task file in parallel
-const loadTaskFile = async function({ path }) {
+const loadTaskFile = async function ({ path }) {
   const content = await readTaskFile(path)
   const tasks = parseTaskFile({ path, content })
 
@@ -57,7 +57,7 @@ const loadTaskFile = async function({ path }) {
   return tasksA
 }
 
-const readTaskFile = async function(path) {
+const readTaskFile = async function (path) {
   try {
     return await promises.readFile(path)
   } catch (error) {
@@ -68,7 +68,7 @@ const readTaskFile = async function(path) {
 }
 
 // YAML parsing
-const parseTaskFile = function({ path, content }) {
+const parseTaskFile = function ({ path, content }) {
   try {
     return loadYaml(content, { ...YAML_OPTS, filename: path })
   } catch (error) {
@@ -87,8 +87,8 @@ const YAML_OPTS = {
 }
 
 // Load tasks that are specified directly as objects
-const loadInlineTasks = function({ tasks }) {
-  const tasksA = tasks.filter(task => typeof task !== 'string')
+const loadInlineTasks = function ({ tasks }) {
+  const tasksA = tasks.filter((task) => typeof task !== 'string')
 
   validateInlineTasks({ tasks: tasksA })
 

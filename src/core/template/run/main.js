@@ -23,7 +23,7 @@ import { templateHandler } from './error.js'
 //    many issues
 //  - templating is a user-facing feature. Plugin writers can `require()`
 //    template functions directly and use their functions if needed.
-export const run = function(task, context) {
+export const run = function (task, context) {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
   const noEvalProps = filterObj(task, NO_EVAL_PROPS)
@@ -31,7 +31,7 @@ export const run = function(task, context) {
 
   const taskB = evalTaskTemplate({ task: taskA, vars, pluginsVarsMap })
 
-  return promiseThen(taskB, taskC => returnTask({ task: taskC, noEvalProps }))
+  return promiseThen(taskB, (taskC) => returnTask({ task: taskC, noEvalProps }))
 }
 
 // Make sure those properties are not checked for templating
@@ -39,7 +39,7 @@ const NO_EVAL_PROPS = ['originalTask', 'key', 'variables', 'template']
 
 // Retrieving variables cannot happen during a `start` handler because we might
 // need to pass `context._runTask()`, e.g. to `variables` `plugin.template()`
-const getVars = function({ task: { template: taskTemplates }, context }) {
+const getVars = function ({ task: { template: taskTemplates }, context }) {
   const { pluginsVars, pluginsVarsMap } = getPluginsVars({ context })
 
   const vars = { ...pluginsVars, ...taskTemplates }
@@ -47,12 +47,12 @@ const getVars = function({ task: { template: taskTemplates }, context }) {
   return { vars, pluginsVarsMap }
 }
 
-const evalTaskTemplate = function({ task, vars, pluginsVarsMap }) {
+const evalTaskTemplate = function ({ task, vars, pluginsVarsMap }) {
   try {
     const retVal = evalTemplate(task, vars)
     // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
-      ? retVal.catch(error => templateHandler(error, { pluginsVarsMap }))
+      ? retVal.catch((error) => templateHandler(error, { pluginsVarsMap }))
       : retVal
   } catch (error) {
     templateHandler(error, { pluginsVarsMap })
@@ -61,7 +61,7 @@ const evalTaskTemplate = function({ task, vars, pluginsVarsMap }) {
 
 // Update `originalTask` so that templates are shown evaluated in both return
 // value and reporting
-const returnTask = function({ task, noEvalProps }) {
+const returnTask = function ({ task, noEvalProps }) {
   const taskA = { ...task, ...noEvalProps }
 
   // No nested `originalTask` in final return value

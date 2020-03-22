@@ -5,11 +5,11 @@ import { isObject } from '../../../utils/types.js'
 import { checkIsSchema } from '../../../validation/meta.js'
 
 // Handler JSON schemas in `task.validate.headers|body`
-export const handleJsonSchemas = function({ validate }) {
+export const handleJsonSchemas = function ({ validate }) {
   return mapValues(validate, handleJsonSchema)
 }
 
-const handleJsonSchema = function(value, prop) {
+const handleJsonSchema = function (value, prop) {
   if (!hasJsonSchema({ prop })) {
     return value
   }
@@ -23,12 +23,12 @@ const handleJsonSchema = function(value, prop) {
   return value
 }
 
-const hasJsonSchema = function({ prop }) {
+const hasJsonSchema = function ({ prop }) {
   return prop.startsWith('headers.') || prop === 'body'
 }
 
 // `task.validate.headers|body: non-object` is shortcut for `{ enum: [value] }`
-const applyShortcut = function({ value }) {
+const applyShortcut = function ({ value }) {
   const type = guessType(value)
   return { ...type, enum: [value] }
 }
@@ -36,7 +36,7 @@ const applyShortcut = function({ value }) {
 // When using the shortcut notation, we need to set the `type` to make sure it
 // matches the value (in case it is not set, or set to several types, or set to
 // a different type)
-const guessType = function(value) {
+const guessType = function (value) {
   if (value === undefined) {
     return
   }
@@ -46,18 +46,18 @@ const guessType = function(value) {
 }
 
 const TYPES = Object.entries({
-  null: value => value === null,
+  null: (value) => value === null,
   integer: Number.isInteger,
-  number: value => typeof value === 'number' && !Number.isInteger(value),
-  string: value => typeof value === 'string',
-  boolean: value => typeof value === 'boolean',
+  number: (value) => typeof value === 'number' && !Number.isInteger(value),
+  string: (value) => typeof value === 'string',
+  boolean: (value) => typeof value === 'boolean',
   array: Array.isArray,
   // Default
   object: () => true,
 })
 
 // Validate `task.validate.headers|body` are valid JSON schemas
-const validateJsonSchema = function({ value, prop }) {
+const validateJsonSchema = function ({ value, prop }) {
   const valueProp = getPath(['task', 'validate', prop])
   checkIsSchema({ value, valueProp })
 }

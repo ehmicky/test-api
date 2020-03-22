@@ -4,14 +4,14 @@ import { promisify } from 'util'
 import { result } from '../../utils/result.js'
 
 // Call reporters' functions then write return value to output
-export const callReporters = async function({ reporters, type }, ...args) {
-  const promises = reporters.map(reporter =>
+export const callReporters = async function ({ reporters, type }, ...args) {
+  const promises = reporters.map((reporter) =>
     callReporter({ reporter, type }, ...args),
   )
   await Promise.all(promises)
 }
 
-const callReporter = async function(
+const callReporter = async function (
   {
     reporter,
     reporter: {
@@ -39,15 +39,15 @@ const callReporter = async function(
   }
 }
 
-const getArgs = function({ args, options }) {
-  const [argA, context] = args.map(arg => result(arg, { options }))
+const getArgs = function ({ args, options }) {
+  const [argA, context] = args.map((arg) => result(arg, { options }))
   const argsA = [argA, { ...context, options }].filter(
-    argB => argB !== undefined,
+    (argB) => argB !== undefined,
   )
   return argsA
 }
 
-const endReporting = async function({ output }) {
+const endReporting = async function ({ output }) {
   // Give enough time for `output` stream to be flushed
   await promisify(setTimeout)()
 

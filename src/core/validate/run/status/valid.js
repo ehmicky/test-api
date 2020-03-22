@@ -7,5 +7,5 @@ export const VALID_STATUSES = Object.keys(STATUS_CODES)
 
 export const VALID_STATUSES_MAP = groupBy(
   VALID_STATUSES,
-  status => `${status[0]}xx`,
+  (status) => `${status[0]}xx`,
 )

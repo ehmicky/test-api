@@ -4,7 +4,7 @@ import { parseTemplate } from '../../../template/parse.js'
 // eslint-disable-next-line no-shadow
 const { propertyIsEnumerable } = Object.prototype
 
-export const templateHandler = function(error, { pluginsVarsMap }) {
+export const templateHandler = function (error, { pluginsVarsMap }) {
   if (error.property !== undefined) {
     // eslint-disable-next-line fp/no-mutation, no-param-reassign
     error.property = `task.${error.property}`
@@ -15,7 +15,7 @@ export const templateHandler = function(error, { pluginsVarsMap }) {
 }
 
 // Add `error.module`
-const addPlugin = function({ error, error: { value }, pluginsVarsMap }) {
+const addPlugin = function ({ error, error: { value }, pluginsVarsMap }) {
   if (error.module !== undefined || value === undefined) {
     return error
   }
@@ -32,7 +32,7 @@ const addPlugin = function({ error, error: { value }, pluginsVarsMap }) {
 
 // Find the plugin that created this template variable (if it's coming from a
 // `plugin.template`)
-const findPlugin = function({ value: { template }, pluginsVarsMap }) {
+const findPlugin = function ({ value: { template }, pluginsVarsMap }) {
   // Should never return `undefined` since `error.value` should always be a
   // template
   const { name } = parseTemplate(template)

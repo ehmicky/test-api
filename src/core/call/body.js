@@ -3,11 +3,11 @@ import { is as isMime } from 'type-is'
 // Retrieve a parser and stringifier for a specific MIME type
 // TODO: replace by real body parsing library and add support for other
 // content types
-export const findBodyHandler = function({ mime }) {
+export const findBodyHandler = function ({ mime }) {
   return BODY_HANDLERS.find(({ condition }) => condition({ mime })) || {}
 }
 
-const isJson = function({ mime }) {
+const isJson = function ({ mime }) {
   return isMime(mime, JSON_MIMES) !== false
 }
 

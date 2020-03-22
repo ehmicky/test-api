@@ -5,7 +5,7 @@ const currentPackage = readPkgUp()
 
 // Add `User-Agent` request header
 // Can be overriden
-export const normalizeUserAgent = async function({
+export const normalizeUserAgent = async function ({
   call,
   call: { 'headers.user-agent': userAgent },
 }) {
@@ -13,7 +13,7 @@ export const normalizeUserAgent = async function({
   return { ...call, 'headers.user-agent': userAgentA }
 }
 
-const getUserAgent = async function({ userAgent }) {
+const getUserAgent = async function ({ userAgent }) {
   if (userAgent !== undefined) {
     return userAgent
   }

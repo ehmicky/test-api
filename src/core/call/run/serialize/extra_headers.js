@@ -8,13 +8,13 @@ const { byteLength } = Buffer
 // to `rawRequest`
 // Unfortunately the library does not allow accessing them, so we need to repeat
 // its logic here and recalculate them.
-export const addFetchRequestHeaders = function({ call }) {
+export const addFetchRequestHeaders = function ({ call }) {
   const headers = getFetchRequestHeaders({ call })
   const headersA = mapKeys(headers, (value, name) => `headers.${name}`)
   return { ...call, ...headersA }
 }
 
-const getFetchRequestHeaders = function({
+const getFetchRequestHeaders = function ({
   call: {
     'headers.accept': accept = DEFAULT_ACCEPT,
     'headers.accept-encoding': acceptEncoding = DEFAULT_ACCEPT_ENCODING,
@@ -29,7 +29,7 @@ const DEFAULT_ACCEPT_ENCODING = 'gzip,deflate'
 const DEFAULT_CONNECTION = 'close'
 
 // Same for `Content-Length` (must be done after body has been serialized)
-export const addContentLength = function({ request, rawRequest }) {
+export const addContentLength = function ({ request, rawRequest }) {
   const contentLength = getContentLength({ rawRequest })
 
   if (contentLength === undefined) {
@@ -44,7 +44,7 @@ export const addContentLength = function({ request, rawRequest }) {
   return { request: requestA, rawRequest: rawRequestA }
 }
 
-const getContentLength = function({ rawRequest: { method, body } }) {
+const getContentLength = function ({ rawRequest: { method, body } }) {
   if (body != null) {
     return byteLength(body)
   }

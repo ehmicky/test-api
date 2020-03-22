@@ -3,7 +3,7 @@ import { getErrorProps } from './error_props.js'
 import { checkArgument } from './check.js'
 
 // TAP assert
-export const assert = function(
+export const assert = function (
   state,
   { ok, name = '', directive = {}, error },
 ) {
@@ -24,7 +24,7 @@ export const assert = function(
   )
 }
 
-const getCategory = function({ ok, directive: { skip } }) {
+const getCategory = function ({ ok, directive: { skip } }) {
   if (skip !== undefined && skip !== false) {
     return 'skip'
   }
@@ -37,7 +37,7 @@ const getCategory = function({ ok, directive: { skip } }) {
 }
 
 // Update index|tests|pass|skip|fail counters
-const updateState = function({ state, category }) {
+const updateState = function ({ state, category }) {
   // eslint-disable-next-line fp/no-mutation, no-param-reassign
   state[category] += 1
 
@@ -46,7 +46,7 @@ const updateState = function({ state, category }) {
   return state.index
 }
 
-const getOk = function({ ok }) {
+const getOk = function ({ ok }) {
   checkArgument(ok, 'boolean')
 
   if (ok) {
@@ -56,7 +56,7 @@ const getOk = function({ ok }) {
   return 'not ok'
 }
 
-const getName = function({ name }) {
+const getName = function ({ name }) {
   checkArgument(name, 'string')
 
   if (name === '') {

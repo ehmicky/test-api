@@ -3,7 +3,7 @@ import { checkSchema } from '../../../validation/check.js'
 import { checkRequired } from './required.js'
 
 // Validates response body
-export const validateBody = function({
+export const validateBody = function ({
   validate: { body: schema },
   response: { body },
 }) {

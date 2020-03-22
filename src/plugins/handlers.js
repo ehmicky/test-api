@@ -5,7 +5,7 @@ import { reduceAsync } from '../utils/reduce.js'
 // They also receive `readOnlyArgs` as input, but cannot modify it
 // An error handler can also be added to every handler
 // Handlers can be async
-export const runHandlers = function({
+export const runHandlers = function ({
   type,
   plugins,
   input,
@@ -24,18 +24,18 @@ export const runHandlers = function({
   })
 }
 
-const getContext = function({ context, plugins }) {
+const getContext = function ({ context, plugins }) {
   const pluginNames = plugins.map(({ name }) => name)
   return { ...context, pluginNames, _plugins: plugins }
 }
 
-const getHandlers = function({ plugins, type, onError, context }) {
+const getHandlers = function ({ plugins, type, onError, context }) {
   return plugins
-    .flatMap(plugin => getPluginHandlers({ plugin, type }))
-    .map(handler => callHandler.bind(null, { handler, onError, context }))
+    .flatMap((plugin) => getPluginHandlers({ plugin, type }))
+    .map((handler) => callHandler.bind(null, { handler, onError, context }))
 }
 
-const getPluginHandlers = function({ plugin, plugin: { name }, type }) {
+const getPluginHandlers = function ({ plugin, plugin: { name }, type }) {
   const handlers = plugin[type]
 
   if (handlers === undefined) {
@@ -47,11 +47,11 @@ const getPluginHandlers = function({ plugin, plugin: { name }, type }) {
   // error is thrown at the middle of the handler
   const handlersA = Array.isArray(handlers) ? handlers : [handlers]
 
-  const handlersB = handlersA.map(func => ({ func, name }))
+  const handlersB = handlersA.map((func) => ({ func, name }))
   return handlersB
 }
 
-const callHandler = async function(
+const callHandler = async function (
   { handler: { func, name }, onError, context },
   input,
 ) {
@@ -63,7 +63,7 @@ const callHandler = async function(
 }
 
 // Add `error.module` to every thrown error
-const pluginErrorHandler = function({ name, error, input, onError }) {
+const pluginErrorHandler = function ({ name, error, input, onError }) {
   // Recursive handlers already have `error.module` defined
   if (error.module === undefined) {
     // eslint-disable-next-line fp/no-mutation, no-param-reassign
@@ -77,10 +77,10 @@ const pluginErrorHandler = function({ name, error, input, onError }) {
   throw error
 }
 
-const runHandler = function(input, handler) {
+const runHandler = function (input, handler) {
   return handler(input)
 }
 
-const defaultMergeReturn = function(input, newInput) {
+const defaultMergeReturn = function (input, newInput) {
   return { ...input, ...newInput }
 }
