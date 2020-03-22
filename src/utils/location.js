@@ -1,7 +1,7 @@
 // Use dot notation for `task.call.*`, e.g. `task.call['query.VAR']`
 // to indicate both `location` and `name`
 export const keyToLocation = function ({ key }) {
-  if (SINGLE_NAME_LOCATIONS.includes(key)) {
+  if (SINGLE_NAME_LOCATIONS.has(key)) {
     return { location: key, name: key }
   }
 
@@ -12,7 +12,7 @@ export const keyToLocation = function ({ key }) {
 }
 
 export const locationToKey = function ({ location, name }) {
-  if (SINGLE_NAME_LOCATIONS.includes(location)) {
+  if (SINGLE_NAME_LOCATIONS.has(location)) {
     return location
   }
 
@@ -22,7 +22,7 @@ export const locationToKey = function ({ location, name }) {
 }
 
 // Those locations do not use dot notations
-const SINGLE_NAME_LOCATIONS = ['method', 'server', 'path', 'body']
+const SINGLE_NAME_LOCATIONS = new Set(['method', 'server', 'path', 'body'])
 
 // Headers are normalized to lowercase, to make them case-insensitive
 const normalizeHeaderKey = function (key) {

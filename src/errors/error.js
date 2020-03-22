@@ -40,7 +40,7 @@ class PropsError extends Error {
 
 // Enforce which properties can be attached to `error.*`
 const validateProperty = function (property) {
-  if (VALID_PROPERTIES.includes(property)) {
+  if (VALID_PROPERTIES_SET.has(property)) {
     return
   }
 
@@ -63,6 +63,7 @@ const CORE_VALID_PROPERTIES = [
   'nested',
 ]
 const VALID_PROPERTIES = [...USER_VALID_PROPERTIES, ...CORE_VALID_PROPERTIES]
+const VALID_PROPERTIES_SET = new Set(VALID_PROPERTIES)
 
 // Tries to guess `error.expected` from simple `error.schema`
 const getExpected = function ({ properties: { schema, expected } }) {

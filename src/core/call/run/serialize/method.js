@@ -15,7 +15,7 @@ export const normalizeMethod = function ({
 const DEFAULT_METHOD = 'GET'
 
 const validateMethod = function ({ method }) {
-  if (METHODS.includes(method.toLowerCase())) {
+  if (METHODS_SET.has(method.toLowerCase())) {
     return
   }
 
@@ -24,3 +24,5 @@ const validateMethod = function ({ method }) {
     value: method,
   })
 }
+
+const METHODS_SET = new Set(METHODS)

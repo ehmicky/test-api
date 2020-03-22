@@ -29,12 +29,14 @@ import { isObject } from '../utils/types.js'
 // Check if valid JSON type
 export const isJsonType = function (value) {
   return (
-    ['string', 'number', 'boolean'].includes(typeof value) ||
+    LITERAL_TYPES.has(typeof value) ||
     value === null ||
     Array.isArray(value) ||
     isObject(value)
   )
 }
+
+const LITERAL_TYPES = new Set(['string', 'number', 'boolean'])
 
 // Error message
 export const getMessage = function ({ value, path }) {

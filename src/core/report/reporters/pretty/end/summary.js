@@ -19,8 +19,10 @@ export const printSummary = function ({ tasks }) {
 
 // Do not show `Skipped` if none skipped
 const shouldPrint = function ([name, count]) {
-  return ['pass', 'fail'].includes(name) || (name === 'skip' && count !== 0)
+  return SHOULD_PRINT_SET.has(name) || (name === 'skip' && count !== 0)
 }
+
+const SHOULD_PRINT_SET = new Set(['pass', 'fail'])
 
 const printEntry = function ({ name, count, padLength }) {
   const nameA = NAMES[name]

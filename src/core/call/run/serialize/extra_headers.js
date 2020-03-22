@@ -49,9 +49,11 @@ const getContentLength = function ({ rawRequest: { method, body } }) {
     return byteLength(body)
   }
 
-  if (!['put', 'post'].includes(method)) {
+  if (!CONTENT_LENGTH_METHODS.has(method)) {
     return
   }
 
   return 0
 }
+
+const CONTENT_LENGTH_METHODS = new Set(['put', 'post'])

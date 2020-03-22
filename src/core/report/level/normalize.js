@@ -13,23 +13,23 @@ const DEFAULT_LEVEL = 'info'
 
 const LEVELS = {
   silent: {
-    types: [],
+    types: new Set([]),
     taskData: 'none',
   },
   error: {
-    types: ['fail'],
+    types: new Set(['fail']),
     taskData: 'none',
   },
   warn: {
-    types: ['fail'],
+    types: new Set(['fail']),
     taskData: 'added',
   },
   info: {
-    types: ['fail', 'pass', 'skip'],
+    types: new Set(['fail', 'pass', 'skip']),
     taskData: 'added',
   },
   debug: {
-    types: ['fail', 'pass', 'skip'],
+    types: new Set(['fail', 'pass', 'skip']),
     taskData: 'all',
   },
 }

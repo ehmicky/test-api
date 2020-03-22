@@ -19,10 +19,10 @@ export const getDirective = function ({ directive = {} }) {
 }
 
 const isDirective = function ([name]) {
-  return DIRECTIVES.includes(name.toLowerCase())
+  return DIRECTIVES.has(name.toLowerCase())
 }
 
-const DIRECTIVES = ['skip', 'todo']
+const DIRECTIVES = new Set(['skip', 'todo'])
 
 const getDirectiveComment = function ({ comment }) {
   if (comment === undefined || comment === true) {

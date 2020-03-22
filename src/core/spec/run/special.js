@@ -21,12 +21,12 @@ const initSpecialValues = function () {
 
 const evalNode = function (specialValues, value, path) {
   // Can escape special values with a backslash
-  if (ESCAPED_VALUES.includes(value)) {
+  if (ESCAPED_VALUES.has(value)) {
     return value.replace(ESCAPING_CHAR, '')
   }
 
   // Not a special value: leave as is
-  if (!SPECIAL_VALUES.includes(value)) {
+  if (!SPECIAL_VALUES.has(value)) {
     return value
   }
 
@@ -38,6 +38,10 @@ const evalNode = function (specialValues, value, path) {
   // over `spec` params
 }
 
-const SPECIAL_VALUES = ['valid', 'invalid']
+const SPECIAL_VALUES_ARR = ['valid', 'invalid']
+const SPECIAL_VALUES = new Set(SPECIAL_VALUES_ARR)
 const ESCAPING_CHAR = '\\'
-const ESCAPED_VALUES = SPECIAL_VALUES.map((value) => `${ESCAPING_CHAR}${value}`)
+const ESCAPED_VALUES_ARR = SPECIAL_VALUES_ARR.map(
+  (value) => `${ESCAPING_CHAR}${value}`,
+)
+const ESCAPED_VALUES = new Set(ESCAPED_VALUES_ARR)

@@ -6,7 +6,7 @@ export const isSilent = function ({
     level: { types },
   },
 }) {
-  return types.length === 0
+  return types.size === 0
 }
 
 // Some `config.report.REPORTER.level` will only show errors, i.e. see if task
@@ -24,5 +24,5 @@ export const isSilentType = function ({
     level: { types },
   },
 }) {
-  return !types.includes(resultType)
+  return !types.has(resultType)
 }
