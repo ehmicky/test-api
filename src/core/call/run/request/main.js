@@ -1,5 +1,4 @@
 import { fireRequest } from './fetch.js'
-import { getRawResponse } from './response.js'
 
 // Fire actual HTTP call
 export const request = async function ({ call, call: { rawRequest } = {} }) {
@@ -8,8 +7,5 @@ export const request = async function ({ call, call: { rawRequest } = {} }) {
   }
 
   const rawResponse = await fireRequest({ rawRequest })
-
-  const rawResponseA = await getRawResponse({ rawResponse, rawRequest })
-
-  return { call: { ...call, rawResponse: rawResponseA } }
+  return { call: { ...call, rawResponse } }
 }
