@@ -1,7 +1,7 @@
 import { callReporters } from '../call.js'
 
-import { getReporters } from './reporters.js'
 import { addOptions } from './options.js'
+import { getReporters } from './reporters.js'
 
 // Starts reporting
 export const start = async function (startData, context) {

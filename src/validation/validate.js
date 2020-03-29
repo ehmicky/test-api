@@ -1,8 +1,8 @@
 /* eslint-disable-line max-lines */
 import Ajv from 'ajv'
-import moize from 'moize'
-import { get } from 'lodash'
 import filterObj from 'filter-obj'
+import { get } from 'lodash'
+import moize from 'moize'
 import { capitalize } from 'underscore.string'
 
 import { jsonPointerToParts } from '../utils/json_pointer.js'

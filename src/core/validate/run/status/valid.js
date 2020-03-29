@@ -1,5 +1,5 @@
-import { STATUS_CODES } from 'statuses'
 import { groupBy } from 'lodash'
+import { STATUS_CODES } from 'statuses'
 
 // All possible HTTP status code as an array and as a
 // `{ "1xx": [...], "2xx": [...], ... }` map

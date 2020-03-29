@@ -1,7 +1,7 @@
 import { serializeOutput } from '../../serialize/output.js'
 
-import { filterTaskData } from './level/task_data.js'
 import { callReporters } from './call.js'
+import { filterTaskData } from './level/task_data.js'
 
 // Ends reporting
 export const end = async function (tasks, context) {

@@ -1,5 +1,5 @@
-import { dump as yamlDump, DEFAULT_FULL_SCHEMA } from 'js-yaml'
 import filterObj from 'filter-obj'
+import { dump as yamlDump, DEFAULT_FULL_SCHEMA } from 'js-yaml'
 
 import { indent } from '../../../utils/indent.js'
 

@@ -3,9 +3,9 @@ import { difference } from 'lodash'
 import { TestApiError } from '../../../../errors/error.js'
 import { sortArray } from '../../../../utils/sort.js'
 
+import { normalizeStatuses } from './normalize.js'
 import { parseRanges, replaceByRanges } from './range.js'
 import { VALID_STATUSES } from './valid.js'
-import { normalizeStatuses } from './normalize.js'
 
 // Parse `validate.status` into an array of possible statuses
 export const parseStatus = function ({ status, property }) {

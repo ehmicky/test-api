@@ -1,8 +1,8 @@
 import filterObj from 'filter-obj'
 
 import { checkSchema } from '../../../validation/check.js'
-import { isSilent } from '../level/silent.js'
 import { normalizeLevel } from '../level/normalize.js'
+import { isSilent } from '../level/silent.js'
 
 import { COMMON_OPTIONS_SCHEMA } from './common_options_schema.js'
 import { normalizeOutput } from './output.js'

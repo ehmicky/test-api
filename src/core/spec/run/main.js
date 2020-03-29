@@ -1,5 +1,5 @@
-import { getOperation } from './operation.js'
 import { addSpecToCall } from './call.js'
+import { getOperation } from './operation.js'
 import { addSpecToValidate } from './validate.js'
 
 // Add OpenAPI specification to `task.call|validate.*`

@@ -4,9 +4,9 @@ import { get } from 'lodash'
 import { crawl } from '../utils/crawl.js'
 import { promiseThen, promiseAllThen } from '../utils/promise.js'
 
+import { templateHandler } from './error.js'
 import { parseTemplate, parseEscape } from './parse.js'
 import { checkRecursion } from './recursion.js'
-import { templateHandler } from './error.js'
 
 // This is a data templating system.
 // As opposed to most other templating system, it works over (parsed) data

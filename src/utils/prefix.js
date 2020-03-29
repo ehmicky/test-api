@@ -1,5 +1,5 @@
-import { mapKeys } from 'lodash'
 import filterObj from 'filter-obj'
+import { mapKeys } from 'lodash'
 
 // Handle special dot notation `task['headers.NAME']`,
 // `task['query.NAME']`, etc.

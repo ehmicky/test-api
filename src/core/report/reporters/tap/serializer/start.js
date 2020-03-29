@@ -1,5 +1,5 @@
-import { version } from './version.js'
 import { plan } from './plan.js'
+import { version } from './version.js'
 
 // Start TAP output
 export const start = function ({ count, colors }) {

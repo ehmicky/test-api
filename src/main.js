@@ -1,15 +1,15 @@
+import { loadConfig } from './config/main.js'
 import { handleFinalFailure } from './errors/final.js'
 import { topLevelHandler } from './errors/top.js'
-import { loadConfig } from './config/main.js'
-import { getTasks } from './tasks/get.js'
-import { removeOriginalTasks } from './tasks/original.js'
 import { loadPlugins } from './plugins/load.js'
-import { loadTasks } from './run/load.js'
-import { startTasks } from './run/start.js'
-import { runTask } from './run/run.js'
 import { completeTask } from './run/complete.js'
-// eslint-disable-next-line import/max-dependencies
 import { endTasks } from './run/end.js'
+import { loadTasks } from './run/load.js'
+import { runTask } from './run/run.js'
+import { startTasks } from './run/start.js'
+import { getTasks } from './tasks/get.js'
+// eslint-disable-next-line import/max-dependencies
+import { removeOriginalTasks } from './tasks/original.js'
 
 // Main entry point
 // Does in order:

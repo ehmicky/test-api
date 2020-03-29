@@ -1,6 +1,6 @@
 import { TestApiError } from '../errors/error.js'
-import { getPath } from '../utils/path.js'
 import { parseInput } from '../serialize/input.js'
+import { getPath } from '../utils/path.js'
 
 import { loadTasks } from './load.js'
 import { validateTasksSyntax } from './validate/syntax.js'

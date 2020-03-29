@@ -1,7 +1,7 @@
 import got from 'got'
 
-import { removePrefixes } from '../../../../utils/prefix.js'
 import { TestApiError } from '../../../../errors/error.js'
+import { removePrefixes } from '../../../../utils/prefix.js'
 
 import { getAgent } from './agent.js'
 

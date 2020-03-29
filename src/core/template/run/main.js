@@ -1,11 +1,11 @@
-import omit from 'omit.js'
 import filterObj from 'filter-obj'
+import omit from 'omit.js'
 
-import { promiseThen } from '../../../utils/promise.js'
 import { evalTemplate } from '../../../template/eval.js'
+import { promiseThen } from '../../../utils/promise.js'
 
-import { getPluginsVars } from './plugin.js'
 import { templateHandler } from './error.js'
+import { getPluginsVars } from './plugin.js'
 
 // Substitute templates `{ $$name: arg }` and `$$name` for dynamic values.
 // Including in deep properties.

@@ -1,6 +1,6 @@
 import Chalk from 'chalk'
-import { stdout as supportsColor } from 'supports-color'
 import { get, mapValues } from 'lodash'
+import { stdout as supportsColor } from 'supports-color'
 
 import { isObject } from '../../../../../utils/types.js'
 

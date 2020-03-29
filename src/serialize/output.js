@@ -1,13 +1,13 @@
-import { crawl } from '../utils/crawl.js'
 import { convertPlainObject } from '../errors/convert.js'
+import { crawl } from '../utils/crawl.js'
 
-import { addSerializeFail } from './fail.js'
 import {
   isJsonType,
   getMessage,
   UNDEFINED,
   ESCAPED_UNDEFINED,
 } from './common.js'
+import { addSerializeFail } from './fail.js'
 
 // Applied on tasks output, i.e. what is reported and returned
 export const serializeOutput = function ({ task, plugins }) {

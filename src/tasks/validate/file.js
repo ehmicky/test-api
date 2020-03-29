@@ -1,5 +1,5 @@
-import { isObject } from '../../utils/types.js'
 import { TestApiError } from '../../errors/error.js'
+import { isObject } from '../../utils/types.js'
 
 // Validate content of tasks specified in files
 export const validateFileTasks = function ({ tasks, path }) {

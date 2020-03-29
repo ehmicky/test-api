@@ -1,6 +1,6 @@
-import { getPath } from '../../../utils/path.js'
 import { BugError } from '../../../errors/error.js'
 import { isTemplateName } from '../../../template/parse.js'
+import { getPath } from '../../../utils/path.js'
 
 import { wrapTemplateVars } from './check.js'
 

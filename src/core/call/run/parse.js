@@ -1,7 +1,7 @@
 import { mapValues } from 'lodash'
 
-import { parseFlat } from '../../../utils/flat.js'
 import { TestApiError } from '../../../errors/error.js'
+import { parseFlat } from '../../../utils/flat.js'
 import { findBodyHandler } from '../body.js'
 
 // Parse response

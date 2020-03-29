@@ -1,9 +1,9 @@
-import { normalizeValidate } from './normalize.js'
-import { handleJsonSchemas } from './json_schema.js'
-import { addByStatus } from './by_status.js'
-import { validateStatus } from './status/main.js'
-import { validateHeaders } from './headers.js'
 import { validateBody } from './body.js'
+import { addByStatus } from './by_status.js'
+import { validateHeaders } from './headers.js'
+import { handleJsonSchemas } from './json_schema.js'
+import { normalizeValidate } from './normalize.js'
+import { validateStatus } from './status/main.js'
 
 // Validate response against `task.validate.*` JSON schemas
 export const run = function ({ validate = {}, call, call: { response } = {} }) {

@@ -1,14 +1,14 @@
-import { mapValues } from 'lodash'
 import filterObj from 'filter-obj'
+import { mapValues } from 'lodash'
 
 import { stringifyFlat } from '../../../../utils/flat.js'
 import { keyToLocation } from '../../../../utils/location.js'
 import { findBodyHandler } from '../../body.js'
 
 import { normalizeContentType } from './content_type.js'
+import { addFetchRequestHeaders, addContentLength } from './extra_headers.js'
 import { normalizeMethod } from './method.js'
 import { normalizeUserAgent } from './user_agent.js'
-import { addFetchRequestHeaders, addContentLength } from './extra_headers.js'
 
 // Serialize request parameters
 // Request headers name are only allowed lowercase:

@@ -1,8 +1,8 @@
 import omit from 'omit.js'
 
 import { TestApiError } from '../../errors/error.js'
-import { testRegExp } from '../../utils/regexp.js'
 import { mergeWithTemplates } from '../../template/merge.js'
+import { testRegExp } from '../../utils/regexp.js'
 
 // Merge tasks whose name include RegExp matching other task names.
 // I.e. special task name to allow for shared properties

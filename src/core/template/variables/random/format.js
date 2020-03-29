@@ -1,5 +1,5 @@
-import jsonSchemaFaker from 'json-schema-faker'
 import { fast, full } from 'ajv/lib/compile/formats.js'
+import jsonSchemaFaker from 'json-schema-faker'
 
 const { date: dateRegExp, time: timeRegExp } = fast
 const {

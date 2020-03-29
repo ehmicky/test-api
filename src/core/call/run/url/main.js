@@ -1,8 +1,8 @@
-import { getServer } from './server.js'
-import { addPath } from './path.js'
-import { addUrlParams } from './params.js'
 import { normalizeUrl } from './normalize.js'
+import { addUrlParams } from './params.js'
+import { addPath } from './path.js'
 import { addQueryParams } from './query.js'
+import { getServer } from './server.js'
 
 // Build request URL from request parameters
 export const addUrl = function ({ call, call: { request, rawRequest } = {} }) {

@@ -1,8 +1,8 @@
 import filterObj from 'filter-obj'
 
 import { TestApiError } from '../errors/error.js'
-import { getPath } from '../utils/path.js'
 import { parseInput } from '../serialize/input.js'
+import { getPath } from '../utils/path.js'
 
 import { validateConfig } from './validate.js'
 

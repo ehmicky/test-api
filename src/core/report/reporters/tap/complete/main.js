@@ -1,6 +1,6 @@
-import { getResultType } from '../../../utils/result_type.js'
-import { SEPARATOR } from '../../../utils/line.js'
 import { getReportProps } from '../../../props/main.js'
+import { SEPARATOR } from '../../../utils/line.js'
+import { getResultType } from '../../../utils/result_type.js'
 import { assert as serializerAssert } from '../serializer/main.js'
 
 import { getErrorProps } from './error_props.js'

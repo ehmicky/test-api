@@ -1,5 +1,5 @@
-import { difference } from 'lodash'
 import filterObj from 'filter-obj'
+import { difference } from 'lodash'
 
 import { getModule } from '../../../modules.js'
 

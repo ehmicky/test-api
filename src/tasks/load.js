@@ -6,9 +6,9 @@ import { sortBy } from 'lodash'
 
 import { TestApiError } from '../errors/error.js'
 
+import { addScopes, addKey, validateScopes } from './scope.js'
 import { validateFileTasks } from './validate/file.js'
 import { validateInlineTasks } from './validate/inline.js'
-import { addScopes, addKey, validateScopes } from './scope.js'
 
 // Load tasks.
 // Tasks are specified as an array of objects instead of a map of objects

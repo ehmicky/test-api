@@ -1,5 +1,5 @@
-import { testRegExp } from '../../utils/regexp.js'
 import { TestApiError } from '../../errors/error.js'
+import { testRegExp } from '../../utils/regexp.js'
 
 // `task.skip: anyValue` will skip those tasks
 // Can also use `config.skip: 'RegExp' or ['RegExp', ...]`

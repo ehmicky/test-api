@@ -1,6 +1,6 @@
-import { randomHelper } from './variables/random/main.js'
 import { envHelper } from './variables/env.js'
 import { fakerHelper } from './variables/faker.js'
+import { randomHelper } from './variables/random/main.js'
 
 export const template = {
   $$random: randomHelper,

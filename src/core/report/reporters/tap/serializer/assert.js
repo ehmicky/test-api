@@ -1,6 +1,6 @@
+import { checkArgument } from './check.js'
 import { getDirective } from './directive.js'
 import { getErrorProps } from './error_props.js'
-import { checkArgument } from './check.js'
 
 // TAP assert
 export const assert = function (

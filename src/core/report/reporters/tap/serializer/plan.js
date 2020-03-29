@@ -1,5 +1,5 @@
-import { getDirective } from './directive.js'
 import { checkArgument } from './check.js'
+import { getDirective } from './directive.js'
 
 // TAP plan
 export const plan = function ({ count }) {

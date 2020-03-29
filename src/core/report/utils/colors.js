@@ -1,6 +1,6 @@
 import chalk from 'chalk'
-import stripAnsi from 'strip-ansi'
 import { mapValues } from 'lodash'
+import stripAnsi from 'strip-ansi'
 
 import { isObject } from '../../../utils/types.js'
 

@@ -1,8 +1,8 @@
 import { mapValues, mapKeys } from 'lodash'
 import omit from 'omit.js'
 
-import { normalizeSchema } from './json_schema.js'
 import { getNegotiationsResponse } from './content_negotiation.js'
+import { normalizeSchema } from './json_schema.js'
 
 // Normalize OpenAPI responses into specification-agnostic format
 export const normalizeResponses = function ({

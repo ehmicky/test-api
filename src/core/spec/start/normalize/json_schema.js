@@ -1,5 +1,5 @@
-import openapiToJsonSchema from 'openapi-schema-to-json-schema'
 import omit from 'omit.js'
+import openapiToJsonSchema from 'openapi-schema-to-json-schema'
 
 import { crawl } from '../../../../utils/crawl.js'
 

@@ -1,6 +1,6 @@
+import { getReportProps } from '../../../props/main.js'
 import { getResultType } from '../../../utils/result_type.js'
 import { clearSpinner } from '../../../utils/spinner.js'
-import { getReportProps } from '../../../props/main.js'
 
 import { getHeader } from './header.js'
 import { printReportProps } from './report_props.js'

@@ -1,10 +1,10 @@
 import { merge } from '../../../../../utils/merge.js'
 import { getNegotiationsParams } from '../content_negotiation.js'
 
-import { normalizeParams } from './normalize.js'
-import { normalizeFormData } from './form_data.js'
-import { getSecParams } from './security.js'
 import { getConstants } from './constants.js'
+import { normalizeFormData } from './form_data.js'
+import { normalizeParams } from './normalize.js'
+import { getSecParams } from './security.js'
 
 // Normalize OpenAPI request parameters into specification-agnostic format
 export const getParams = function ({

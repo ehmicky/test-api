@@ -1,7 +1,7 @@
 import { TestApiError } from '../../../../errors/error.js'
 
-import { parseStatus } from './parse.js'
 import { normalizeStatuses } from './normalize.js'
+import { parseStatus } from './parse.js'
 
 // Validates response status code
 export const validateStatus = function ({

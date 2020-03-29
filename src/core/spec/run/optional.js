@@ -1,6 +1,6 @@
+import filterObj from 'filter-obj'
 import { mapValues } from 'lodash'
 import omit from 'omit.js'
-import filterObj from 'filter-obj'
 
 // Spec parameters are only generated if either:
 //  - they are required

@@ -3,9 +3,9 @@ import { mapValues } from 'lodash'
 import { merge } from '../../../utils/merge.js'
 import { template } from '../../template/main.js'
 
-import { getSpecialValues } from './special.js'
-import { removeOptionals } from './optional.js'
 import { setInvalidParams } from './invalid.js'
+import { removeOptionals } from './optional.js'
+import { getSpecialValues } from './special.js'
 
 const { $$random: randomHelper } = template
 

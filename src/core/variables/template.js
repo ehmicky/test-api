@@ -1,8 +1,8 @@
-import { mapValues } from 'lodash'
 import filterObj from 'filter-obj'
+import { mapValues } from 'lodash'
 
-import { get, tryGet } from '../../utils/get.js'
 import { TestApiError } from '../../errors/error.js'
+import { get, tryGet } from '../../utils/get.js'
 
 // `task.variables.$$NAME: '[PATH] [OPTS]'` allows using `$$NAME` in any task,
 // to run the task that defined the variables, and retrieve a specific property
