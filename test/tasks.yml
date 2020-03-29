@@ -1,2 +1,3 @@
 - name: Test task
-  call: {}
+  call:
+    server: http://testTest.com.gz
