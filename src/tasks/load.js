@@ -1,4 +1,4 @@
-import { promises } from 'fs'
+import { promises as fs } from 'fs'
 
 import fastGlob from 'fast-glob'
 import { load as loadYaml, JSON_SCHEMA } from 'js-yaml'
@@ -59,7 +59,7 @@ const loadTaskFile = async function ({ path }) {
 
 const readTaskFile = async function (path) {
   try {
-    return await promises.readFile(path)
+    return await fs.readFile(path)
   } catch (error) {
     throw new TestApiError(
       `Could not load task file '${path}': ${error.message}`,
