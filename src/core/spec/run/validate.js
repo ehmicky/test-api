@@ -1,5 +1,5 @@
 import { mapKeys, difference, intersection } from 'lodash'
-import { STATUS_CODES } from 'statuses'
+import { codes } from 'statuses'
 
 import { TestApiError } from '../../../errors/error.js'
 import { merge } from '../../../utils/merge.js'
@@ -95,7 +95,7 @@ const handleDefaultResponse = function ({ responseStatus, responses }) {
   }
 
   const responseStatuses = Object.keys(responses)
-  const validStatuses = Object.keys(STATUS_CODES)
+  const validStatuses = codes.map(String)
   const statuses = difference(validStatuses, responseStatuses)
 
   const key = serializeStatus({ statuses })
