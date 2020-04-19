@@ -45,7 +45,7 @@ export const addContentLength = function ({ request, rawRequest }) {
 }
 
 const getContentLength = function ({ rawRequest: { method, body } }) {
-  if (body != null) {
+  if (body !== undefined && body !== null) {
     return byteLength(body)
   }
 
