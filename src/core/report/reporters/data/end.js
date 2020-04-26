@@ -7,7 +7,7 @@ export const end = function (tasks, { options, options: { spinner } }) {
   stopSpinner(spinner)
 
   const tasksA = getTasks({ tasks, options })
-  const tasksB = JSON.stringify(tasksA, null, 2)
+  const tasksB = JSON.stringify(tasksA, undefined, 2)
   return `${tasksB}\n`
 }
 

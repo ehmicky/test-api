@@ -34,10 +34,10 @@ export const evalTemplate = function (
   opts = {},
   stack = undefined,
 ) {
-  const recursive = recursiveEval.bind(null, vars, opts)
+  const recursive = recursiveEval.bind(undefined, vars, opts)
   const optsA = { ...opts, vars, stack, recursive }
 
-  return crawl(data, evalNode.bind(null, optsA))
+  return crawl(data, evalNode.bind(undefined, optsA))
 }
 
 // Recursive calls, done automatically when evaluating `$$name`

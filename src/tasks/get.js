@@ -18,7 +18,7 @@ export const getTasks = async function ({ config: { tasks } }) {
 // Validate tasks are JSON and turn `undefined` strings into actual `undefined`
 const parseTasks = function ({ tasks }) {
   return tasks.map((task) =>
-    parseInput(task, throwParseError.bind(null, task.key)),
+    parseInput(task, throwParseError.bind(undefined, task.key)),
   )
 }
 

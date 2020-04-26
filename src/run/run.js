@@ -57,7 +57,7 @@ const runAllHandler = function (error) {
 }
 
 const getContext = function ({ context, plugins, nestedPath }) {
-  const recursiveRunTaskA = recursiveRunTask.bind(null, {
+  const recursiveRunTaskA = recursiveRunTask.bind(undefined, {
     context,
     plugins,
     nestedPath,

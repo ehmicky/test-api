@@ -14,7 +14,7 @@ export const checkRecursion = function ({
   const stackA = [...stack, template]
 
   if (!hasRecursion) {
-    const recursiveA = recursive.bind(null, stackA)
+    const recursiveA = recursive.bind(undefined, stackA)
     return { ...opts, recursive: recursiveA }
   }
 

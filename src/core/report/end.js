@@ -14,7 +14,7 @@ export const end = async function (tasks, context) {
 
   const tasksA = tasks.map((task) => serializeOutput({ task, plugins }))
 
-  const arg = getArg.bind(null, { tasks: tasksA, plugins })
+  const arg = getArg.bind(undefined, { tasks: tasksA, plugins })
 
   await callReporters({ reporters, type: 'end' }, arg, context)
 }

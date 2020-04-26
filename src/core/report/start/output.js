@@ -29,7 +29,7 @@ const getFileStream = function (output) {
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
     const stream = createWriteStream(output)
-    stream.on('open', resolve.bind(null, stream))
+    stream.on('open', resolve.bind(undefined, stream))
     stream.on('error', reject)
   })
 }

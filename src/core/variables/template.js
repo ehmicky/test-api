@@ -27,7 +27,7 @@ const getTaskVariables = function ({
   const variablesA = filterObj(variables, isDefined)
 
   const taskVariables = mapValues(variablesA, (value) =>
-    evalTask.bind(null, { key, value, allTasks, runTask }),
+    evalTask.bind(undefined, { key, value, allTasks, runTask }),
   )
   return taskVariables
 }
@@ -48,7 +48,7 @@ const evalTask = async function ({ key, value, allTasks, runTask }) {
 const runVariableTask = async function ({ key, allTasks, runTask }) {
   const taskA = allTasks.find((task) => task.key === key)
 
-  const getError = getTaskError.bind(null, { task: taskA })
+  const getError = getTaskError.bind(undefined, { task: taskA })
   const taskB = await runTask({ task: taskA, getError })
   return taskB
 }

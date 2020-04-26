@@ -21,7 +21,7 @@ const validateTaskSyntax = function (task) {
   }
 
   const taskA = omit(task, ['key'])
-  const taskB = JSON.stringify(taskA, null, 2)
+  const taskB = JSON.stringify(taskA, undefined, 2)
   throw new TestApiError(
     `${syntaxTest.message} in the following task:\n${taskB}`,
   )

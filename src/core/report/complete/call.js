@@ -19,8 +19,8 @@ export const callComplete = async function ({
   // point.
   const taskA = serializeOutput({ task, plugins })
 
-  const arg = getArg.bind(null, { task: taskA, plugins })
-  const callContext = getContext.bind(null, { task: taskA, context })
+  const arg = getArg.bind(undefined, { task: taskA, plugins })
+  const callContext = getContext.bind(undefined, { task: taskA, context })
 
   await callReporters({ reporters, type: 'complete' }, arg, callContext)
 

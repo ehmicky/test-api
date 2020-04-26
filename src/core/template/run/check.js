@@ -44,7 +44,7 @@ const wrapTemplateVar = function ({ value, name, schema, plugin }) {
 
   validateTemplateConfig({ value, name, schemaProp, plugin })
 
-  const valueA = templateVarWrapper.bind(null, { value, name, schema })
+  const valueA = templateVarWrapper.bind(undefined, { value, name, schema })
   return valueA
 }
 

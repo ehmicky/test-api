@@ -32,7 +32,9 @@ const getContext = function ({ context, plugins }) {
 const getHandlers = function ({ plugins, type, onError, context }) {
   return plugins
     .flatMap((plugin) => getPluginHandlers({ plugin, type }))
-    .map((handler) => callHandler.bind(null, { handler, onError, context }))
+    .map((handler) =>
+      callHandler.bind(undefined, { handler, onError, context }),
+    )
 }
 
 const getPluginHandlers = function ({ plugin, plugin: { name }, type }) {

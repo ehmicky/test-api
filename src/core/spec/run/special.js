@@ -7,7 +7,7 @@ import { crawl } from '../../../utils/crawl.js'
 export const getSpecialValues = function ({ call }) {
   const specialValues = initSpecialValues()
 
-  const callA = crawl(call, evalNode.bind(null, specialValues))
+  const callA = crawl(call, evalNode.bind(undefined, specialValues))
 
   return { call: callA, specialValues }
 }
