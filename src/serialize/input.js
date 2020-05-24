@@ -18,7 +18,7 @@ export const parseInput = function (taskOrConfig, throwError) {
 
 const parseInputValue = function ({ value, path, throwError }) {
   if (value === UNDEFINED) {
-    return undefined
+    return
   }
 
   if (value === ESCAPED_UNDEFINED) {

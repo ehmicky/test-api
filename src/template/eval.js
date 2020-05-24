@@ -28,12 +28,7 @@ import { checkRecursion } from './recursion.js'
 
 // Evaluate template
 // eslint-disable-next-line max-params
-export const evalTemplate = function (
-  data,
-  vars = {},
-  opts = {},
-  stack = undefined,
-) {
+export const evalTemplate = function (data, vars = {}, opts = {}, stack) {
   const recursive = recursiveEval.bind(undefined, vars, opts)
   const optsA = { ...opts, vars, stack, recursive }
 
