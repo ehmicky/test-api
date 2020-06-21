@@ -5,9 +5,9 @@ import { checkIsSchema } from '../validation/meta.js'
 export const validateJsonSchemas = function ({
   plugin: { name, config = {} },
 }) {
-  Object.entries(config).forEach(([propName, schema]) =>
-    validateJsonSchema({ schema, name, propName }),
-  )
+  Object.entries(config).forEach(([propName, schema]) => {
+    validateJsonSchema({ schema, name, propName })
+  })
 }
 
 const validateJsonSchema = function ({ schema, name, propName }) {

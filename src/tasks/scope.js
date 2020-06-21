@@ -41,9 +41,9 @@ export const addKey = function ({ scope, name, ...task }) {
 // and `task.key` must be unique, we validate every filename is unique.
 export const validateScopes = function ({ paths }) {
   const scopes = paths.map(getScope)
-  scopes.forEach((scope, index) =>
-    validateScope({ scope, index, scopes, paths }),
-  )
+  scopes.forEach((scope, index) => {
+    validateScope({ scope, index, scopes, paths })
+  })
 }
 
 const validateScope = function ({ scope, index, scopes, paths }) {

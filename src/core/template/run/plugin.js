@@ -66,7 +66,9 @@ const getVarsHandler = function (error, { plugin: { name } }) {
 
 // Validate `plugin.template` return value
 const validateVarNames = function ({ vars, plugin }) {
-  Object.keys(vars).forEach((name) => validateVarName({ name, plugin }))
+  Object.keys(vars).forEach((name) => {
+    validateVarName({ name, plugin })
+  })
 }
 
 const validateVarName = function ({ name, plugin }) {

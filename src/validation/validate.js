@@ -1,4 +1,4 @@
-/* eslint-disable-line max-lines */
+/* eslint-disable max-lines */
 import Ajv from 'ajv'
 import filterObj from 'filter-obj'
 import { get } from 'lodash'
@@ -155,3 +155,4 @@ const isDefined = function (key, value) {
 // Compilation is automatically memoized by `ajv` but not validation
 const mValidateFromSchema = moize(validateFromSchema, { isDeepEqual: true })
 export { mValidateFromSchema as validateFromSchema }
+/* eslint-enable max-lines */

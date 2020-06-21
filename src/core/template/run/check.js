@@ -64,9 +64,9 @@ const validateTemplateConfig = function ({ value, name, schemaProp, plugin }) {
 const templateVarWrapper = function ({ value, name, schema }, ...args) {
   const schemas = Array.isArray(schema) ? schema : [schema]
 
-  schemas.forEach((schemaA, index) =>
-    checkVar({ schema: schemaA, value: args[index], name, index }),
-  )
+  schemas.forEach((schemaA, index) => {
+    checkVar({ schema: schemaA, value: args[index], name, index })
+  })
 
   return value(...args)
 }

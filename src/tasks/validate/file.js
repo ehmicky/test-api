@@ -9,7 +9,9 @@ export const validateFileTasks = function ({ tasks, path }) {
     )
   }
 
-  tasks.forEach((task) => validateFileTask({ task, path }))
+  tasks.forEach((task) => {
+    validateFileTask({ task, path })
+  })
 }
 
 const validateFileTask = function ({ task, path }) {

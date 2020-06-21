@@ -1,4 +1,4 @@
-/* eslint-disable-line max-lines */
+/* eslint-disable max-lines */
 import { get } from 'lodash'
 
 import { crawl } from '../utils/crawl.js'
@@ -27,7 +27,7 @@ import { checkRecursion } from './recursion.js'
 // `undefined` values are not treated differently than other values.
 
 // Evaluate template
-// eslint-disable-next-line max-params
+// eslint-disable-next-line max-params, default-param-last
 export const evalTemplate = function (data, vars = {}, opts = {}, stack) {
   const recursive = recursiveEval.bind(undefined, vars, opts)
   const optsA = { ...opts, vars, stack, recursive }
@@ -247,3 +247,4 @@ const getProp = function ({ data, propPath }) {
 
   return get(data, propPath)
 }
+/* eslint-enable max-lines */

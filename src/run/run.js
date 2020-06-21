@@ -1,4 +1,4 @@
-/* eslint-disable-line max-lines */
+/* eslint-disable max-lines */
 import { TestApiError } from '../errors/error.js'
 import { runHandlers } from '../plugins/handlers.js'
 import { getTaskReturn } from '../plugins/return/main.js'
@@ -168,3 +168,4 @@ const onError = function (error, task) {
 const stopFunc = function ({ done }) {
   return done
 }
+/* eslint-enable max-lines */

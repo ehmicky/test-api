@@ -9,9 +9,9 @@ export const validateHeaders = function ({ validate, response }) {
   const validatedHeaders = removePrefixes(validate, 'headers')
   const headers = removePrefixes(response, 'headers')
 
-  Object.entries(validatedHeaders).forEach(([name, schema]) =>
-    validateHeader({ name, schema, headers }),
-  )
+  Object.entries(validatedHeaders).forEach(([name, schema]) => {
+    validateHeader({ name, schema, headers })
+  })
 }
 
 const validateHeader = function ({ name, schema, headers }) {
