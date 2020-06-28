@@ -4,7 +4,7 @@ export const defineCli = function () {
   return yargs
     .options(CONFIG)
     .usage(USAGE)
-    .example(RUN_EXAMPLE, 'Run tasks')
+    .example(EXAMPLES)
     .help()
     .version()
     .strict()
@@ -61,5 +61,9 @@ TASKS_FILES... are JSON or YAML files containing the tasks to perform.
 Can include globbing patterns.
 Defaults to any file ending with 'tasks.yml.json'`
 
-const RUN_EXAMPLE =
-  '$0 --merge.spec.definition ./openapi.yml --merge.call.server http://localhost:5001 ./**/*.tasks.yml'
+const EXAMPLES = [
+  [
+    '$0 --merge.spec.definition ./openapi.yml --merge.call.server http://localhost:5001 ./**/*.tasks.yml',
+    'Run tasks',
+  ],
+]
