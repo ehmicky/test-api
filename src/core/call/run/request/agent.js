@@ -24,6 +24,6 @@ const HTTPS_PROTOCOL = 'https://'
 
 // We want to re-use the same agent for several requests, but not if options
 // are different
-const mGetAgent = moize(getAgent, { isDeepEqual: true })
+const mGetAgent = moize(getAgent, { isDeepEqual: true, maxSize: 1e3 })
 
 export { mGetAgent as getAgent }

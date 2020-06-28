@@ -153,6 +153,9 @@ const isDefined = function (key, value) {
 }
 
 // Compilation is automatically memoized by `ajv` but not validation
-const mValidateFromSchema = moize(validateFromSchema, { isDeepEqual: true })
+const mValidateFromSchema = moize(validateFromSchema, {
+  isDeepEqual: true,
+  maxSize: 1e4,
+})
 export { mValidateFromSchema as validateFromSchema }
 /* eslint-enable max-lines */
