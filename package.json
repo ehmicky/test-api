@@ -40,7 +40,7 @@
     "deepmerge": "^4.2.2",
     "emphasize": "^3.0.0",
     "faker": "^4.1.0",
-    "fast-glob": "^3.2.2",
+    "fast-glob": "^3.2.4",
     "filter-obj": "^2.0.1",
     "got": "^11.5.0",
     "is-mergeable-object": "^1.1.1",
