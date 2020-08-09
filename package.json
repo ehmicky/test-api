@@ -32,7 +32,7 @@
     "lib": "src"
   },
   "dependencies": {
-    "@apidevtools/swagger-parser": "^10.0.0",
+    "@apidevtools/swagger-parser": "^10.0.1",
     "ajv": "^6.12.4",
     "chalk": "^4.1.0",
     "cli-truncate": "^2.1.0",
