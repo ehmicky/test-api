@@ -57,7 +57,7 @@
     "read-pkg-up": "^7.0.1",
     "statuses": "^2.0.0",
     "strip-ansi": "^6.0.0",
-    "supports-color": "^7.1.0",
+    "supports-color": "^7.2.0",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "update-notifier": "^4.1.1",
