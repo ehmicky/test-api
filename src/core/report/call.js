@@ -49,6 +49,8 @@ const getArgs = function ({ args, options }) {
 
 const endReporting = async function ({ output }) {
   // Give enough time for `output` stream to be flushed
+  // TODO: replace with `timers/promises` `setTimeout()` after dropping support
+  // for Node <15.0.0
   await promisify(setTimeout)()
 
   if (output === stdout) {
