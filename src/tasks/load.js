@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 
 import fastGlob from 'fast-glob'
 import { load as loadYaml, JSON_SCHEMA } from 'js-yaml'
-import { sortBy } from 'lodash'
+import sortOn from 'sort-on'
 
 import { TestApiError } from '../errors/error.js'
 
@@ -28,7 +28,7 @@ export const loadTasks = async function ({ tasks }) {
 
   // Ensure task object keys order is always the same, because it's the one
   // used for reporting and we want an ordered and stable output
-  const tasksC = sortBy(tasksB, 'scope')
+  const tasksC = sortOn(tasksB, 'scope')
   return tasksC
 }
 

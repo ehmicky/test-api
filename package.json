@@ -55,6 +55,7 @@
     "ora": "^5.1.0",
     "path-to-regexp": "^6.2.0",
     "read-pkg-up": "^7.0.1",
+    "sort-on": "^4.1.0",
     "statuses": "^2.0.0",
     "strip-ansi": "^6.0.0",
     "supports-color": "^7.2.0",
