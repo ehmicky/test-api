@@ -68,7 +68,7 @@ const callHandler = async function (
 const pluginErrorHandler = function ({ name, error, input, onError }) {
   // Recursive handlers already have `error.module` defined
   if (error.module === undefined) {
-    // eslint-disable-next-line fp/no-mutation, no-param-reassign
+    // eslint-disable-next-line no-param-reassign
     error.module = `plugin-${name}`
   }
 

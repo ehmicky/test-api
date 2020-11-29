@@ -131,7 +131,7 @@ const appendNestedPath = function ({ nestedPath = [], key, self }) {
 // This can be done recursively, leading to a chain of `error.nested`
 const throwRecursiveError = function ({ task, error, getError }) {
   if (getError === undefined) {
-    // eslint-disable-next-line fp/no-mutation, no-param-reassign
+    // eslint-disable-next-line no-param-reassign
     error.task = task
     throw error
   }
@@ -154,7 +154,7 @@ const throwRecursiveError = function ({ task, error, getError }) {
 const onError = function (error, task) {
   // Recursive tasks already have `error.task` defined
   if (error.task === undefined) {
-    // eslint-disable-next-line fp/no-mutation, no-param-reassign
+    // eslint-disable-next-line no-param-reassign
     error.task = task
   }
 

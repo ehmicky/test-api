@@ -13,7 +13,7 @@ export const templateHandler = function (error, { template, data, path }) {
 
 const appendMessage = function ({ error, template: { name } }) {
   const message = getMessage({ error })
-  // eslint-disable-next-line fp/no-mutation, no-param-reassign
+  // eslint-disable-next-line no-param-reassign
   error.message = `${TEMPLATE_ERROR_MESSAGE} '${name}': ${message}`
 }
 

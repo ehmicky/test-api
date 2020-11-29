@@ -6,7 +6,7 @@ const { propertyIsEnumerable } = Object.prototype
 
 export const templateHandler = function (error, { pluginsVarsMap }) {
   if (error.property !== undefined) {
-    // eslint-disable-next-line fp/no-mutation, no-param-reassign
+    // eslint-disable-next-line no-param-reassign
     error.property = `task.${error.property}`
   }
 
@@ -23,7 +23,7 @@ const addPlugin = function ({ error, error: { value }, pluginsVarsMap }) {
   const plugin = findPlugin({ value, pluginsVarsMap })
 
   if (plugin !== undefined) {
-    // eslint-disable-next-line fp/no-mutation, no-param-reassign
+    // eslint-disable-next-line no-param-reassign
     error.module = `plugin-${plugin[0]}`
   }
 
