@@ -36,7 +36,7 @@
     "ajv": "^6.12.6",
     "chalk": "^4.1.0",
     "cli-truncate": "^2.1.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.8.0",
     "deepmerge": "^4.2.2",
     "emphasize": "^4.0.0",
     "faker": "^4.1.0",
