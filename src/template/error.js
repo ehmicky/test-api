@@ -13,7 +13,6 @@ export const templateHandler = function (error, { template, data, path }) {
 
 const appendMessage = function ({ error, template: { name } }) {
   const message = getMessage({ error })
-  // eslint-disable-next-line no-param-reassign
   error.message = `${TEMPLATE_ERROR_MESSAGE} '${name}': ${message}`
 }
 
@@ -41,7 +40,7 @@ const setErrorProps = function ({ error, data, path }) {
   // to allow `error.*` to set its own attributes, e.g. `error.property` below
   const errorProps = omit(error, KEPT_ERROR_PROPS)
   Object.keys(errorProps).forEach((errorProp) => {
-    // eslint-disable-next-line fp/no-delete, no-param-reassign
+    // eslint-disable-next-line fp/no-delete
     delete error[errorProp]
   })
   const value = { template: data, ...errorProps }

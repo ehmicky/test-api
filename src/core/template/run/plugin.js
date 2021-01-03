@@ -53,11 +53,9 @@ const getVars = function ({ plugin, plugin: { template }, context }) {
 
 // Add `error.message|module` when `plugin.template` throws
 const getVarsHandler = function (error, { plugin: { name } }) {
-  // eslint-disable-next-line no-param-reassign
   error.message = `Error while retrieving 'plugin.template': ${error.message}`
 
   if (error.module === undefined) {
-    // eslint-disable-next-line no-param-reassign
     error.module = `plugin-${name}`
   }
 
