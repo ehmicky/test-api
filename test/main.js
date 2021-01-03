@@ -12,5 +12,6 @@ test('Smoke test', async (t) => {
   const stdoutA = stdout
     .replace(/User-Agent.*/gu, '')
     .replace(/ [^ :]+:80/gu, '')
+    .replace(/(Could not connect).*/gmu, '$1')
   t.snapshot({ exitCode, stdout: stdoutA })
 })
