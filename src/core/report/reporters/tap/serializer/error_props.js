@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { dump as yamlDump, DEFAULT_FULL_SCHEMA } from 'js-yaml'
+import { dump as yamlDump, DEFAULT_SCHEMA } from 'js-yaml'
 
 import { indent } from '../../../utils/indent.js'
 
@@ -48,7 +48,7 @@ const serializeErrorProps = function ({ error }) {
 }
 
 const YAML_OPTS = {
-  schema: DEFAULT_FULL_SCHEMA,
+  schema: DEFAULT_SCHEMA,
   noRefs: true,
   // Otherwise `tap-out` parser crashes
   flowLevel: 1,
