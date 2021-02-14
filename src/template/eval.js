@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+// eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get } from 'lodash'
 
 import { crawl } from '../utils/crawl.js'
@@ -123,7 +124,8 @@ const evalSingleData = function ({ template, opts, data, propPath }) {
     )
     // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
-      ? retVal.catch((error) => templateHandler(error, { template }))
+      ? // eslint-disable-next-line promise/prefer-await-to-callbacks
+        retVal.catch((error) => templateHandler(error, { template }))
       : retVal
   } catch (error) {
     templateHandler(error, { template })

@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import Ajv from 'ajv'
 import filterObj from 'filter-obj'
+// eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get } from 'lodash'
 import moize from 'moize'
 import { capitalize } from 'underscore.string'

@@ -32,7 +32,7 @@ const getData = function ({
 }) {
   // Stranded order, e.g. `data: [1, 2, 3]` and `times: 2` results in
   // `[1, 2, 3, 1, 2, 3]` not `[1, 1, 2, 2, 3, 3]`
-  return new Array(times).fill(data).flat()
+  return Array.from({ length: times }, () => data).flat()
 }
 
 const DEFAULT_TIMES = 1

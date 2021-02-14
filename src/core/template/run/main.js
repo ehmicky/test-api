@@ -52,7 +52,8 @@ const evalTaskTemplate = function ({ task, vars, pluginsVarsMap }) {
     const retVal = evalTemplate(task, vars)
     // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
-      ? retVal.catch((error) => templateHandler(error, { pluginsVarsMap }))
+      ? // eslint-disable-next-line promise/prefer-await-to-callbacks
+        retVal.catch((error) => templateHandler(error, { pluginsVarsMap }))
       : retVal
   } catch (error) {
     templateHandler(error, { pluginsVarsMap })

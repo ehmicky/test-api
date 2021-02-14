@@ -1,4 +1,5 @@
 import Chalk from 'chalk'
+// eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get, mapValues } from 'lodash'
 import { stdout as supportsColor } from 'supports-color'
 
