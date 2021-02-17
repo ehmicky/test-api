@@ -3,8 +3,8 @@
   "version": "43.0.0",
   "main": "build/src/main.js",
   "files": [
-    "build/src",
-    "!*~"
+    "build/src/**/*.{js,ts,map,json,sh,md,png}",
+    "examples/**/*.{js,ts,map,json,sh,md}"
   ],
   "bin": {
     "test-api": "build/src/bin/main.js"
