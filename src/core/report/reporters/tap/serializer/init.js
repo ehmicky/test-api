@@ -2,8 +2,7 @@ import { getColors } from './colors.js'
 
 // Create new state object
 export const init = function ({ count, colors } = {}) {
-  const colorsA = getColors({ colors })
-
+  const colorsA = getColors(colors)
   return { ...DEFAULT_STATE, count, colors: colorsA }
 }
 

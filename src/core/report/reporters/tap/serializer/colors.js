@@ -1,27 +1,18 @@
-import Chalk from 'chalk'
 // eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get, mapValues } from 'lodash'
-import { stdout as supportsColor } from 'supports-color'
 
 import { isObject } from '../../../../../utils/types.js'
+
+import { getChalk } from './chalk.js'
 
 // Used for colored output
 // `opts.colors: false` can be used to disable it
 // `opts.colors: object` can be used to theme
 // By default, it guesses (e.g. no colors if output is redirected)
-export const getColors = function ({ colors }) {
-  const level = getLevel(colors)
-  const chalk = new Chalk.Instance({ level })
+export const getColors = function (colors) {
+  const chalk = getChalk(colors)
   const theme = getTheme({ chalk, colors })
   return theme
-}
-
-const getLevel = function (colors) {
-  if (!colors) {
-    return 0
-  }
-
-  return Math.max(supportsColor.level, 1)
 }
 
 const getTheme = function ({ chalk, colors }) {
