@@ -1,16 +1,15 @@
+import colorsOption from 'colors-option'
 // eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get, mapValues } from 'lodash'
 
 import { isObject } from '../../../../../utils/types.js'
-
-import { getChalk } from './chalk.js'
 
 // Used for colored output
 // `opts.colors: false` can be used to disable it
 // `opts.colors: object` can be used to theme
 // By default, it guesses (e.g. no colors if output is redirected)
 export const getColors = function (colors) {
-  const chalk = getChalk(colors)
+  const chalk = colorsOption({ colors })
   const theme = getTheme({ chalk, colors })
   return theme
 }

@@ -34,8 +34,8 @@
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.2",
     "ajv": "^6.12.6",
-    "chalk": "^4.1.0",
     "cli-truncate": "^2.1.0",
+    "colors-option": "^1.0.0",
     "core-js": "^3.8.1",
     "deepmerge": "^4.2.2",
     "emphasize": "^4.0.0",

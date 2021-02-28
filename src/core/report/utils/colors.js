@@ -1,8 +1,10 @@
-import chalk from 'chalk'
+import colorsOption from 'colors-option'
 import { mapValues } from 'lodash'
 import stripAnsi from 'strip-ansi'
 
 import { isObject } from '../../../utils/types.js'
+
+const chalk = colorsOption()
 
 // Colors used in reporting
 const { yellow, inverse } = chalk
