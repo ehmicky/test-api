@@ -13,7 +13,11 @@ export const fireRequest = async function ({
   const agent = getAgent({ https, url })
 
   try {
-    const { statusCode, headers: headersA, body: bodyA } = await got({
+    const {
+      statusCode,
+      headers: headersA,
+      body: bodyA,
+    } = await got({
       url,
       method,
       headers,
