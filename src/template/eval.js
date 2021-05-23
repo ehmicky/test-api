@@ -124,7 +124,7 @@ const evalSingleData = function ({ template, opts, data, propPath }) {
     )
     // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
-      ? // eslint-disable-next-line promise/prefer-await-to-callbacks
+      ? // eslint-disable-next-line promise/prefer-await-to-then, promise/prefer-await-to-callbacks
         retVal.catch((error) => templateHandler(error, { template }))
       : retVal
   } catch (error) {
