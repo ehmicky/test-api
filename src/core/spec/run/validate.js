@@ -1,5 +1,5 @@
 import lodash from 'lodash'
-import { codes } from 'statuses'
+import statusesLib from 'statuses'
 
 import { TestApiError } from '../../../errors/error.js'
 import { merge } from '../../../utils/merge.js'
@@ -95,7 +95,7 @@ const handleDefaultResponse = function ({ responseStatus, responses }) {
   }
 
   const responseStatuses = Object.keys(responses)
-  const validStatuses = codes.map(String)
+  const validStatuses = statusesLib.codes.map(String)
   const statuses = lodash.difference(validStatuses, responseStatuses)
 
   const key = serializeStatus({ statuses })
