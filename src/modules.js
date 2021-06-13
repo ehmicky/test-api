@@ -16,7 +16,7 @@ export const getModule = async function (name, info) {
 }
 
 // Load module
-// TODO: `require(`${modulePrefix}${name}`)` instead
+// TODO: `import(`${modulePrefix}${name}`)` instead
 // Can only done once we moved core plugins/reporters to separate repositories
 const loadModule = async function ({ name, info, info: { corePath } }) {
   try {
@@ -41,8 +41,8 @@ const loadModuleHandler = function (
 }
 
 // Error when loading a plugin that is not installed.
-// This will also be triggered when loading a plugin that tries to `require()`
-// a non-existing file. Unfortunately we cannot distinguish without parsing
+// This will also be triggered when loading a plugin that tries to import a
+// non-existing file. Unfortunately we cannot distinguish without parsing
 // `error.message` which is brittle.
 const checkModuleNotFound = function ({
   code,
