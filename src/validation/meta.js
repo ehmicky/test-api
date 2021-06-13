@@ -1,7 +1,13 @@
-import JSON_SCHEMA_SCHEMA from 'ajv/lib/refs/json-schema-draft-04.json'
+import { createRequire } from 'module'
+
 import omit from 'omit.js'
 
 import { checkSchema } from './check.js'
+
+const JSON_SCHEMA_SCHEMA = 'ajv/lib/refs/json-schema-draft-04.json'
+
+// TODO: remove once JSON imports are possible
+const requireJson = createRequire(import.meta.url)
 
 // Like `checkSchema()` but validating that the value is a JSON schema v4
 export const checkIsSchema = function (opts) {
@@ -16,7 +22,10 @@ const getSchemaMessage = function ({ valueProp }) {
 }
 
 const getJsonSchemaSchema = function () {
-  return SCHEMA_FIXES.reduce((schema, fix) => fix(schema), JSON_SCHEMA_SCHEMA)
+  return SCHEMA_FIXES.reduce(
+    (schema, fix) => fix(schema),
+    requireJson(JSON_SCHEMA_SCHEMA),
+  )
 }
 
 const removeId = function (schema) {
