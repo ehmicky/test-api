@@ -53,18 +53,24 @@ test-api **/*.tasks.yml
 
 # Usage (Node.js)
 
-```js
-const { run } = require('test-api')
+<!-- Remove 'eslint-skip' once estree supports top-level await -->
+<!-- eslint-skip -->
 
-const promise = run(options)
+```js
+import { run } from 'test-api'
+
+await run(options)
 ```
 
 If a task failed, `run()` will reject the promise with a `TestApiError`.
 
 Options are passed as arguments. Tasks are passed as a `tasks` argument.
 
+<!-- Remove 'eslint-skip' once estree supports top-level await -->
+<!-- eslint-skip -->
+
 ```js
-const promise = run({
+await run({
   tasks: ['**/*.tasks.yml'],
   merge: { spec: { definition: 'openapi_schema.yml' } },
 })
