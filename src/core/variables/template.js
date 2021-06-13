@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { TestApiError } from '../../errors/error.js'
 import { get, tryGet } from '../../utils/get.js'
@@ -26,7 +26,7 @@ const getTaskVariables = function ({
 
   const variablesA = filterObj(variables, isDefined)
 
-  const taskVariables = mapValues(variablesA, (value) =>
+  const taskVariables = lodash.mapValues(variablesA, (value) =>
     evalTask.bind(undefined, { key, value, allTasks, runTask }),
   )
   return taskVariables

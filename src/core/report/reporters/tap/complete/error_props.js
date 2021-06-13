@@ -1,4 +1,4 @@
-import { mapValues, mapKeys } from 'lodash'
+import lodash from 'lodash'
 import underscoreString from 'underscore.string'
 
 import { removeColors } from '../../../utils/colors.js'
@@ -46,8 +46,8 @@ export const getErrorProps = function ({ ok, reportProps }) {
 //  - remove ANSI color sequences
 //  - rename keys to underscore style
 const normalizeReportProps = function ({ reportProps }) {
-  const reportPropsA = mapValues(reportProps, normalizeReportPropValue)
-  const reportPropsB = mapKeys(reportPropsA, normalizeReportPropKey)
+  const reportPropsA = lodash.mapValues(reportProps, normalizeReportPropValue)
+  const reportPropsB = lodash.mapKeys(reportPropsA, normalizeReportPropKey)
   return reportPropsB
 }
 

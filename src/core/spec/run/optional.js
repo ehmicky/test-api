@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 import omit from 'omit.js'
 
 // Spec parameters are only generated if either:
@@ -19,7 +19,7 @@ const removeTopLevel = function ({ params, call }) {
     params,
     (key, param) => !isSkippedOptional({ param, key, call }),
   )
-  const paramsB = mapValues(paramsA, removeOptionalProp)
+  const paramsB = lodash.mapValues(paramsA, removeOptionalProp)
   return paramsB
 }
 
@@ -34,7 +34,7 @@ const removeOptionalProp = function (param) {
 
 // Spec nested properties are marked as required by using JSON schema `required`
 const removeNested = function ({ params, call }) {
-  return mapValues(params, (schema, key) =>
+  return lodash.mapValues(params, (schema, key) =>
     removeNonRequired({ schema, definedProps: call[key] }),
   )
 }
@@ -53,7 +53,7 @@ const removeNonRequired = function ({
     (name) => required.includes(name) || definedProps[name] !== undefined,
   )
 
-  const propertiesB = mapValues(propertiesA, (property, name) =>
+  const propertiesB = lodash.mapValues(propertiesA, (property, name) =>
     removeNonRequired({ schema: property, definedProps: definedProps[name] }),
   )
 

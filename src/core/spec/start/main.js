@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash'
+import lodash from 'lodash'
 
 import { loadOpenApiSpec } from './load.js'
 import { normalizeSpec } from './normalize/main.js'
@@ -20,7 +20,7 @@ export const start = async function (startData, { _allTasks: allTasks }) {
 // If several tasks share the same OpenAPI specification, which is very likely,
 // we only load it once for all of them
 const groupTasks = function ({ allTasks }) {
-  const tasksGroups = groupBy(allTasks, stringifyDefinition)
+  const tasksGroups = lodash.groupBy(allTasks, stringifyDefinition)
   const tasksGroupsA = Object.values(tasksGroups)
   return tasksGroupsA
 }

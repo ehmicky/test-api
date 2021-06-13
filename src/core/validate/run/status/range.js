@@ -1,4 +1,4 @@
-import { difference } from 'lodash'
+import lodash from 'lodash'
 
 import { VALID_STATUSES_MAP } from './valid.js'
 
@@ -27,7 +27,7 @@ export const replaceByRanges = function ({ statuses }) {
 }
 
 const replaceByRange = function (statuses, [range, rangeStatuses]) {
-  const statusesA = difference(statuses, rangeStatuses)
+  const statusesA = lodash.difference(statuses, rangeStatuses)
 
   // Only if all possible status codes for that range are here
   if (statuses.length - statusesA.length !== rangeStatuses.length) {

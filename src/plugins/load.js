@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url'
 
-import { difference } from 'lodash'
+import lodash from 'lodash'
 
 import { getModule } from '../modules.js'
 
@@ -21,7 +21,7 @@ export const loadPlugins = async function ({ config, config: { plugins } }) {
 
 const normalizePlugins = function ({ plugins }) {
   // Specifing core plugins is a noop
-  const pluginsA = difference(plugins, CORE_PLUGINS)
+  const pluginsA = lodash.difference(plugins, CORE_PLUGINS)
 
   const pluginsB = [...new Set(pluginsA)]
 

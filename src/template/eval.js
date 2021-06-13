@@ -1,6 +1,5 @@
 /* eslint-disable max-lines */
-// eslint-disable-next-line you-dont-need-lodash-underscore/get
-import { get } from 'lodash'
+import lodash from 'lodash'
 
 import { crawl } from '../utils/crawl.js'
 import { promiseThen, promiseAllThen } from '../utils/promise.js'
@@ -247,6 +246,7 @@ const getProp = function ({ data, propPath }) {
     return data
   }
 
-  return get(data, propPath)
+  // eslint-disable-next-line you-dont-need-lodash-underscore/get
+  return lodash.get(data, propPath)
 }
 /* eslint-enable max-lines */

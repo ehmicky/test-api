@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { stringifyFlat } from '../../../../utils/flat.js'
 import { keyToLocation } from '../../../../utils/location.js'
@@ -27,7 +27,7 @@ export const serialize = async function ({ call }) {
 
   const requestA = filterObj(request, isDefined)
 
-  const rawRequest = mapValues(requestA, stringifyParam)
+  const rawRequest = lodash.mapValues(requestA, stringifyParam)
 
   const { request: requestB, rawRequest: rawRequestA } = addContentLength({
     request: requestA,

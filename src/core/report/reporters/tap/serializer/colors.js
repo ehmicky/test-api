@@ -1,6 +1,5 @@
 import colorsOption from 'colors-option'
-// eslint-disable-next-line you-dont-need-lodash-underscore/get
-import { get, mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { isObject } from '../../../../../utils/types.js'
 
@@ -15,7 +14,7 @@ export const getColors = function (colors) {
 }
 
 const getTheme = function ({ chalk, colors }) {
-  return mapValues(DEFAULT_THEME, (defaultColor, key) =>
+  return lodash.mapValues(DEFAULT_THEME, (defaultColor, key) =>
     getThemeColor({ defaultColor, colors, key, chalk }),
   )
 }
@@ -37,7 +36,8 @@ const getThemeColor = function ({ defaultColor, colors, key, chalk }) {
     return color
   }
 
-  return get(chalk, color)
+  // eslint-disable-next-line you-dont-need-lodash-underscore/get
+  return lodash.get(chalk, color)
 }
 
 const getColor = function ({ defaultColor, colors, key }) {

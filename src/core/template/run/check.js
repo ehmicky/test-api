@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { mapKeys, mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { BugError, TestApiError } from '../../../errors/error.js'
 import { numberToCardinal } from '../../../utils/cardinal.js'
@@ -11,7 +11,7 @@ import { checkSchema } from '../../../validation/check.js'
 export const wrapTemplateVars = function ({ vars, plugin }) {
   const templateConfig = getTemplateConfig({ plugin })
 
-  const varsA = mapValues(templateConfig, (schema, name) =>
+  const varsA = lodash.mapValues(templateConfig, (schema, name) =>
     wrapTemplateVar({ value: vars[name], name, schema, plugin }),
   )
 
@@ -24,7 +24,7 @@ const getTemplateConfig = function ({ plugin: { config } }) {
   const templateConfig = filterObj(config, (key) =>
     key.startsWith(TEMPLATE_CONFIG_PREFIX),
   )
-  const templateConfigA = mapKeys(templateConfig, (value, key) =>
+  const templateConfigA = lodash.mapKeys(templateConfig, (value, key) =>
     key.replace(TEMPLATE_CONFIG_PREFIX, ''),
   )
   return templateConfigA

@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url'
 
 import filterObj from 'filter-obj'
-import { difference } from 'lodash'
+import lodash from 'lodash'
 
 import { getModule } from '../../../modules.js'
 
@@ -22,7 +22,7 @@ export const getReporters = async function ({ config }) {
 const getNames = function ({ config: { report = {} } }) {
   const reportA = filterObj(report, isDefined)
   const names = Object.keys(reportA)
-  const namesA = difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
+  const namesA = lodash.difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
 
   // When `config.report` is `undefined` or an empty object
   if (namesA.length === 0) {

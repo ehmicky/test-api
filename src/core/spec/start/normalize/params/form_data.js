@@ -1,5 +1,5 @@
 import filterObj from 'filter-obj'
-import { mapKeys } from 'lodash'
+import lodash from 'lodash'
 
 import { isFormData, removeFormDataPrefix } from '../form_data.js'
 
@@ -25,7 +25,7 @@ const formDataToBody = function ({ formDataParams, params }) {
 }
 
 const getBody = function ({ formDataParams }) {
-  const properties = mapKeys(formDataParams, (value, key) =>
+  const properties = lodash.mapKeys(formDataParams, (value, key) =>
     removeFormDataPrefix(key),
   )
   const required = getRequired({ properties })

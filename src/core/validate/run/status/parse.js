@@ -1,4 +1,4 @@
-import { difference } from 'lodash'
+import lodash from 'lodash'
 
 import { TestApiError } from '../../../../errors/error.js'
 import { sortArray } from '../../../../utils/sort.js'
@@ -26,7 +26,7 @@ export const parseStatus = function ({ status, property }) {
 }
 
 const checkValidStatuses = function ({ statuses, property }) {
-  const invalidStatuses = difference(statuses, VALID_STATUSES)
+  const invalidStatuses = lodash.difference(statuses, VALID_STATUSES)
 
   if (invalidStatuses.length === 0) {
     return

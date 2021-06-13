@@ -1,4 +1,4 @@
-import { mapKeys, difference, intersection } from 'lodash'
+import lodash from 'lodash'
 import { codes } from 'statuses'
 
 import { TestApiError } from '../../../errors/error.js'
@@ -24,7 +24,7 @@ export const addSpecToValidate = function ({
 
   const status = getSpecStatus({ validate, responses, operationId })
 
-  const responsesA = mapKeys(responses, (value, responseStatus) =>
+  const responsesA = lodash.mapKeys(responses, (value, responseStatus) =>
     handleDefaultResponse({ responseStatus, responses }),
   )
 
@@ -50,7 +50,7 @@ const getSpecStatus = function ({
   // Specification statuses
   const responseStatuses = Object.keys(responses)
   // Only keep specification statuses from `validate.status`
-  const statusesA = intersection(statuses, responseStatuses)
+  const statusesA = lodash.intersection(statuses, responseStatuses)
 
   validateEmptyStatus({
     statuses: statusesA,
@@ -96,7 +96,7 @@ const handleDefaultResponse = function ({ responseStatus, responses }) {
 
   const responseStatuses = Object.keys(responses)
   const validStatuses = codes.map(String)
-  const statuses = difference(validStatuses, responseStatuses)
+  const statuses = lodash.difference(validStatuses, responseStatuses)
 
   const key = serializeStatus({ statuses })
   return key

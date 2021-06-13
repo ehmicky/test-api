@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer'
 
-import { mapKeys } from 'lodash'
+import lodash from 'lodash'
 
 const { byteLength } = Buffer
 
@@ -10,7 +10,7 @@ const { byteLength } = Buffer
 // its logic here and recalculate them.
 export const addFetchRequestHeaders = function ({ call }) {
   const headers = getFetchRequestHeaders({ call })
-  const headersA = mapKeys(headers, (value, name) => `headers.${name}`)
+  const headersA = lodash.mapKeys(headers, (value, name) => `headers.${name}`)
   return { ...call, ...headersA }
 }
 

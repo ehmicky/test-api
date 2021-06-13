@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { merge } from '../../../utils/merge.js'
 import { template } from '../../template/main.js'
@@ -25,7 +25,7 @@ export const addSpecToCall = function ({ call, operation: { params } }) {
 
   const paramsB = setInvalidParams({ params: paramsA, specialValues })
 
-  const paramsC = mapValues(paramsB, (schema) => randomHelper(schema))
+  const paramsC = lodash.mapValues(paramsB, (schema) => randomHelper(schema))
 
   // Specification params have less priority than `task.call.*`
   const callC = merge(paramsC, callB)

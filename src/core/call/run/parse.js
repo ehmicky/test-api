@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { TestApiError } from '../../../errors/error.js'
 import { parseFlat } from '../../../utils/flat.js'
@@ -22,7 +22,7 @@ export const parse = function ({
 
 // Parses a response's headers
 const parseHeaders = function ({ headers }) {
-  return mapValues(headers, parseHeader)
+  return lodash.mapValues(headers, parseHeader)
 }
 
 const parseHeader = function (header) {

@@ -1,4 +1,4 @@
-import { mapValues, mapKeys } from 'lodash'
+import lodash from 'lodash'
 import omit from 'omit.js'
 
 import { getNegotiationsResponse } from './content_negotiation.js'
@@ -10,7 +10,7 @@ export const normalizeResponses = function ({
   operation,
   operation: { responses },
 }) {
-  return mapValues(responses, (response) =>
+  return lodash.mapValues(responses, (response) =>
     normalizeResponse({ response, spec, operation }),
   )
 }
@@ -30,12 +30,12 @@ const getResponseHeaders = function ({
   spec,
   operation,
 }) {
-  const headersA = mapValues(headers, getResponseHeader)
+  const headersA = lodash.mapValues(headers, getResponseHeader)
 
   const contentNegotiations = getNegotiationsResponse({ spec, operation })
   const headersB = { ...contentNegotiations, ...headersA }
 
-  const headersC = mapKeys(headersB, normalizeHeaderKey)
+  const headersC = lodash.mapKeys(headersB, normalizeHeaderKey)
   return headersC
 }
 

@@ -1,6 +1,6 @@
 import { env } from 'process'
 
-import { mapValues } from 'lodash'
+import lodash from 'lodash'
 
 import { parseFlat } from '../../../utils/flat.js'
 
@@ -8,7 +8,7 @@ import { parseFlat } from '../../../utils/flat.js'
 // Replaced by `process.env.envVarName`
 const getEnv = function () {
   // Allow environment variables to be integers, booleans, etc.
-  return mapValues(env, parseFlat)
+  return lodash.mapValues(env, parseFlat)
 }
 
 export const envHelper = getEnv()

@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash'
+import lodash from 'lodash'
 
 import { TestApiError } from '../errors/error.js'
 
@@ -9,7 +9,9 @@ export const checkRecursion = function ({
   opts,
   opts: { recursive, stack = [] },
 }) {
-  const hasRecursion = stack.some((templateA) => isEqual(template, templateA))
+  const hasRecursion = stack.some((templateA) =>
+    lodash.isEqual(template, templateA),
+  )
 
   const stackA = [...stack, template]
 

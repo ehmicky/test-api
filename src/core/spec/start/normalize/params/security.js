@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash'
+import lodash from 'lodash'
 
 import { TestApiError } from '../../../../../errors/error.js'
 import { locationToKey } from '../../../../../utils/location.js'
@@ -21,7 +21,7 @@ export const getSecParams = function ({
 
 const getSecRefs = function ({ security }) {
   const securityA = security.flatMap(Object.entries)
-  const securityB = uniqBy(securityA, JSON.stringify)
+  const securityB = lodash.uniqBy(securityA, JSON.stringify)
   return securityB
 }
 

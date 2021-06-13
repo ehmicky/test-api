@@ -1,8 +1,7 @@
 /* eslint-disable max-lines */
 import Ajv from 'ajv'
 import filterObj from 'filter-obj'
-// eslint-disable-next-line you-dont-need-lodash-underscore/get
-import { get } from 'lodash'
+import lodash from 'lodash'
 import moize from 'moize'
 import underscoreString from 'underscore.string'
 
@@ -110,7 +109,8 @@ const getValue = function ({ errorPath, value }) {
     return value
   }
 
-  return get(value, errorPath)
+  // eslint-disable-next-line you-dont-need-lodash-underscore/get
+  return lodash.get(value, errorPath)
 }
 
 const getValuePath = function ({ errorPath, valueProp }) {
@@ -123,7 +123,8 @@ const getSchemaParts = function ({ error: { schemaPath } }) {
 
 const getSchema = function ({ schemaParts, schema }) {
   const key = schemaParts[schemaParts.length - 1]
-  const value = get(schema, schemaParts)
+  // eslint-disable-next-line you-dont-need-lodash-underscore/get
+  const value = lodash.get(schema, schemaParts)
   return { [key]: value }
 }
 
