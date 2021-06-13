@@ -1,5 +1,3 @@
-import { fileURLToPath } from 'url'
-
 import lodash from 'lodash'
 
 import { getModule } from '../modules.js'
@@ -57,7 +55,7 @@ const loadPlugin = async function ({ name, config }) {
 const MODULE_OPTS = {
   title: 'plugin',
   modulePrefix: 'test-api-plugin-',
-  corePath: fileURLToPath(new URL('../core/', import.meta.url)),
+  corePath: new URL('../core/', import.meta.url),
   schema: PLUGIN_SCHEMA,
 }
 
