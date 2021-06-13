@@ -8,7 +8,7 @@ import { PLUGIN_SCHEMA } from './plugin_schema.js'
 import { validateJsonSchemas } from './validate.js'
 import { verifyConfig } from './verify.js'
 
-// Retrieve `config.plugins` then `require()` all the plugins
+// Retrieve `config.plugins` then import all the plugins
 // Also validate their configuration
 export const loadPlugins = function ({ config, config: { plugins } }) {
   const pluginsA = normalizePlugins({ plugins })

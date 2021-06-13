@@ -21,8 +21,8 @@ import { getPluginsVars } from './plugin.js'
 //  - some template variables are task-specific, others not, i.e. we would need
 //    to provide different template variables at different stages, creating
 //    many issues
-//  - templating is a user-facing feature. Plugin writers can `require()`
-//    template functions directly and use their functions if needed.
+//  - templating is a user-facing feature. Plugin writers can import template
+//    functions directly and use their functions if needed.
 export const run = function (task, context) {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
