@@ -1,14 +1,14 @@
-import { fast, full } from 'ajv/lib/compile/formats.js'
+import formats from 'ajv/lib/compile/formats.js'
 import jsonSchemaFaker from 'json-schema-faker'
 
-const { date: dateRegExp, time: timeRegExp } = fast
+const { date: dateRegExp, time: timeRegExp } = formats.fast
 const {
   url: urlRegExp,
   'uri-template': uriTemplateRegExp,
   'json-pointer': jsonPointerRegExp,
   'relative-json-pointer': relJsonPointerRegExp,
   'json-pointer-uri-fragment': jsonPointerFragRegExp,
-} = full
+} = formats.full
 
 // Allow `json-schema-faker` to use all the `format` that `ajv` can handle,
 // except `regexp`. Note that AJV does not support JSON schema v7 formats
