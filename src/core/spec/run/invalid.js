@@ -1,5 +1,4 @@
-// eslint-disable-next-line node/file-extension-in-import
-import { get, set } from 'lodash/fp'
+import dotProp from 'dot-prop'
 
 // Inverse OpenAPI params where `call.*: invalid` was used
 export const setInvalidParams = function ({
@@ -11,13 +10,13 @@ export const setInvalidParams = function ({
 
 const reduceInvalidParam = function (params, path) {
   // Retrieve current OpenAPI definition
-  const param = get(path, params)
+  const param = dotProp.get(params, path)
 
   // Then inverse it
   const paramA = getInvalidParam({ param })
 
   // And set it back
-  return set(path, paramA, params)
+  return dotProp.set(params, path, paramA)
 }
 
 const getInvalidParam = function ({ param }) {
