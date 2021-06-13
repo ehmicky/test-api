@@ -9,10 +9,12 @@ import { COMMON_OPTIONS_SCHEMA } from './common_options_schema.js'
 import { REPORTER_SCHEMA } from './reporter_schema.js'
 
 // Get `startData.report.reporters`
-export const getReporters = function ({ config }) {
+export const getReporters = async function ({ config }) {
   const names = getNames({ config })
 
-  const reporters = names.map((name) => getModule(name, MODULE_OPTS))
+  const reporters = await Promise.all(
+    names.map((name) => getModule(name, MODULE_OPTS)),
+  )
   return reporters
 }
 

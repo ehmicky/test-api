@@ -2,13 +2,13 @@ import { TestApiError, BugError } from './errors/error.js'
 import { checkSchema } from './validation/check.js'
 
 // A module is either a plugin or a reporter
-export const getModule = function (name, info) {
+export const getModule = async function (name, info) {
   // Can pass the module object directly
   if (typeof name !== 'string') {
     return name
   }
 
-  const moduleObj = loadModule({ name, info })
+  const moduleObj = await loadModule({ name, info })
 
   validateModule({ moduleObj, info })
 
@@ -18,11 +18,9 @@ export const getModule = function (name, info) {
 // Load module
 // TODO: `require(`${modulePrefix}${name}`)` instead
 // Can only done once we moved core plugins/reporters to separate repositories
-const loadModule = function ({ name, info, info: { corePath } }) {
+const loadModule = async function ({ name, info, info: { corePath } }) {
   try {
-    // TODO: replace with `import()` once it is supported by default by ESLint
-    // eslint-disable-next-line import/no-dynamic-require, node/global-require
-    const moduleObj = require(`${corePath}${name}/main.js`)
+    const moduleObj = await import(`${corePath}${name}/main.js`)
     return { ...moduleObj, name }
   } catch (error) {
     loadModuleHandler(error, { name, info })

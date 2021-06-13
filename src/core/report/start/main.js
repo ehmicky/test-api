@@ -7,7 +7,7 @@ import { getReporters } from './reporters.js'
 export const start = async function (startData, context) {
   const { config } = context
 
-  const reporters = getReporters({ config })
+  const reporters = await getReporters({ config })
 
   const reportersA = await addOptions({ reporters, config, context })
 

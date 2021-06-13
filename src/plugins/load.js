@@ -10,10 +10,12 @@ import { verifyConfig } from './verify.js'
 
 // Retrieve `config.plugins` then import all the plugins
 // Also validate their configuration
-export const loadPlugins = function ({ config, config: { plugins } }) {
+export const loadPlugins = async function ({ config, config: { plugins } }) {
   const pluginsA = normalizePlugins({ plugins })
 
-  const pluginsB = pluginsA.map((name) => loadPlugin({ name, config }))
+  const pluginsB = await Promise.all(
+    pluginsA.map((name) => loadPlugin({ name, config })),
+  )
   return pluginsB
 }
 
@@ -42,8 +44,8 @@ const CORE_PLUGINS = [
 // TODO: use a separate bundled package instead
 const DEFAULT_PLUGINS = ['spec', 'call', 'validate']
 
-const loadPlugin = function ({ name, config }) {
-  const plugin = getModule(name, MODULE_OPTS)
+const loadPlugin = async function ({ name, config }) {
+  const plugin = await getModule(name, MODULE_OPTS)
 
   validateJsonSchemas({ plugin })
 

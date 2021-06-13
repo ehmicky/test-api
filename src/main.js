@@ -29,7 +29,7 @@ export const run = async function (config = {}) {
 
     const tasks = await getTasks({ config: configA })
 
-    const plugins = loadPlugins({ config: configA })
+    const plugins = await loadPlugins({ config: configA })
 
     const tasksA = await performRun({ config: configA, tasks, plugins })
     return tasksA
