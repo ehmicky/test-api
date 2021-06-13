@@ -1,6 +1,6 @@
 import { inspect } from 'util'
 
-import { highlightAuto } from 'emphasize'
+import emphasize from 'emphasize'
 
 import { truncate } from './truncate.js'
 
@@ -26,7 +26,7 @@ const highlightString = function (string, { highlight }) {
   }
 
   // Automatic syntax highlighting according to MIME type/format
-  return highlightAuto(string).value
+  return emphasize.highlightAuto(string).value
 }
 
 const prettifyOthers = function (value) {
