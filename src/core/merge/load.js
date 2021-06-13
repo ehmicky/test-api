@@ -42,7 +42,7 @@ const findMergeTasks = function ({ task: { key, scope }, mergeTasks }) {
   return mergeTasks
     .filter(({ merge }) => testMergeRegExp(merge, key))
     .sort((taskA, taskB) => compareMergeTasks({ taskA, taskB, scope }))
-    .map((task) => omit(task, NOT_MERGED_ATTRIBUTES))
+    .map((task) => omit.default(task, NOT_MERGED_ATTRIBUTES))
 }
 
 const testMergeRegExp = function (merge, key) {

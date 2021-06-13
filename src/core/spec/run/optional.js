@@ -29,7 +29,7 @@ const isSkippedOptional = function ({ param: { optional }, key, call }) {
 
 // Remove `optional` now that it's been used (it is not valid JSON schema)
 const removeOptionalProp = function (param) {
-  return omit(param, ['optional'])
+  return omit.default(param, ['optional'])
 }
 
 // Spec nested properties are marked as required by using JSON schema `required`

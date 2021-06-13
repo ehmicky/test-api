@@ -13,7 +13,7 @@ export const normalizeSchema = function ({ schema }) {
   const schemaB = openapiToJsonSchema(schemaA)
 
   // `ajv` complains about it
-  const schemaC = omit(schemaB, ['$schema'])
+  const schemaC = omit.default(schemaB, ['$schema'])
 
   return schemaC
 }

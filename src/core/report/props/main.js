@@ -36,7 +36,9 @@ const callReportFuncs = function ({
 
   // Separate `title` from the rest as it is handled differently
   const titles = reportResult.map(({ title }) => title).filter(isDefinedTitle)
-  const reportProps = reportResult.map((props) => omit(props, ['title']))
+  const reportProps = reportResult.map((props) =>
+    omit.default(props, ['title']),
+  )
 
   return { titles, reportProps }
 }
@@ -67,7 +69,7 @@ const callReportFunc = function ({ plugin: { report, name }, context, task }) {
 }
 
 const getReportValue = function ({ report, context, taskValue }) {
-  const contextA = omit(context, OMITTED_CONTEXT_PROPS)
+  const contextA = omit.default(context, OMITTED_CONTEXT_PROPS)
   const reportValue = report(taskValue, contextA)
   return reportValue
 }

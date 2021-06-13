@@ -38,7 +38,7 @@ const setErrorProps = function ({ error, data, path }) {
 
   // We move template error attributes from `error.*` to `error.value.*`
   // to allow `error.*` to set its own attributes, e.g. `error.property` below
-  const errorProps = omit(error, KEPT_ERROR_PROPS)
+  const errorProps = omit.default(error, KEPT_ERROR_PROPS)
   Object.keys(errorProps).forEach((errorProp) => {
     // eslint-disable-next-line fp/no-delete
     delete error[errorProp]

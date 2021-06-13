@@ -27,7 +27,7 @@ export const run = function (task, context) {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
   const noEvalProps = filterObj(task, NO_EVAL_PROPS)
-  const taskA = omit(task, NO_EVAL_PROPS)
+  const taskA = omit.default(task, NO_EVAL_PROPS)
 
   const taskB = evalTaskTemplate({ task: taskA, vars, pluginsVarsMap })
 
@@ -66,6 +66,6 @@ const returnTask = function ({ task, noEvalProps }) {
   const taskA = { ...task, ...noEvalProps }
 
   // No nested `originalTask` in final return value
-  const taskB = omit(taskA, ['originalTask'])
+  const taskB = omit.default(taskA, ['originalTask'])
   return { ...taskB, originalTask: taskB }
 }

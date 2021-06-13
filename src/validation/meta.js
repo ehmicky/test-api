@@ -29,7 +29,7 @@ const getJsonSchemaSchema = function () {
 }
 
 const removeId = function (schema) {
-  return omit(schema, ['id', '$schema'])
+  return omit.default(schema, ['id', '$schema'])
 }
 
 // `exclusiveMinimum` boolean is not valid in the JSON schema version

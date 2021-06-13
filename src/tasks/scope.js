@@ -26,7 +26,7 @@ const getScope = function (path) {
 // Plugins that must target other tasks should target their `task.key`
 export const addKey = function ({ scope, name, ...task }) {
   // Make sure it is not overridden by user
-  const taskA = omit(task, ['key'])
+  const taskA = omit.default(task, ['key'])
 
   if (scope === undefined) {
     return { key: name, name, ...taskA }

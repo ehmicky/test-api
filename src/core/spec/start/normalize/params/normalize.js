@@ -45,7 +45,7 @@ const getSchema = function ({ schema }) {
   // `allowEmptyValue` is deprecated and is ambiguous
   // (https://github.com/OAI/OpenAPI-Specification/issues/1573)
   // so we skip it
-  const schemaA = omit(schema, ['allowEmptyValue'])
+  const schemaA = omit.default(schema, ['allowEmptyValue'])
   // OpenAPI schema can be either a `schema` property, or is directly merged in
   const schemaB = schemaA.schema || schemaA
   const schemaC = normalizeSchema({ schema: schemaB })

@@ -41,7 +41,7 @@ const getResponseHeaders = function ({
 
 const getResponseHeader = function (value) {
   // We do not support `header` `collectionFormat`
-  const schema = omit(value, ['collectionFormat'])
+  const schema = omit.default(value, ['collectionFormat'])
 
   const schemaA = normalizeSchema({ schema })
   return schemaA

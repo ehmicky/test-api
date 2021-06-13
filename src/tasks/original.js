@@ -11,5 +11,5 @@ export const addOriginalTasks = function ({ tasks }) {
 // `originalTask` is kept only for reporters, but should not be reported nor
 // returned
 export const removeOriginalTasks = function ({ tasks }) {
-  return tasks.map((task) => omit(task, ['originalTask']))
+  return tasks.map((task) => omit.default(task, ['originalTask']))
 }
