@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url'
+
 import notifier from 'node-notifier'
 
 import { isSilentType } from '../../level/silent.js'
@@ -49,7 +51,7 @@ const addSkipMessage = function ({ message, skip, options }) {
 const PASS_OPTS = {
   title: 'Tasks passed.',
   message: getPassMessage,
-  icon: `${__dirname}/passed.png`,
+  icon: fileURLToPath(new URL('passed.png', import.meta.url)),
   sound: false,
   resultType: 'pass',
 }
@@ -57,7 +59,7 @@ const PASS_OPTS = {
 const FAIL_OPTS = {
   title: 'Tasks failed!',
   message: getFailMessage,
-  icon: `${__dirname}/failed.png`,
+  icon: fileURLToPath(new URL('failed.png', import.meta.url)),
   sound: 'Basso',
   resultType: 'fail',
 }

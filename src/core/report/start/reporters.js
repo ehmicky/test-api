@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url'
+
 import filterObj from 'filter-obj'
 import { difference } from 'lodash'
 
@@ -37,7 +39,7 @@ const DEFAULT_REPORTERS = ['pretty']
 const MODULE_OPTS = {
   title: 'reporter',
   modulePrefix: 'test-api-reporter-',
-  corePath: `${__dirname}/../reporters/`,
+  corePath: fileURLToPath(new URL('../reporters/', import.meta.url)),
   props: ({ name }) => ({ property: `config.report.${name}` }),
   schema: REPORTER_SCHEMA,
 }

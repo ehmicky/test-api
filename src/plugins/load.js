@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url'
+
 import { difference } from 'lodash'
 
 import { getModule } from '../modules.js'
@@ -53,7 +55,7 @@ const loadPlugin = function ({ name, config }) {
 const MODULE_OPTS = {
   title: 'plugin',
   modulePrefix: 'test-api-plugin-',
-  corePath: `${__dirname}/../core/`,
+  corePath: fileURLToPath(new URL('../core/', import.meta.url)),
   schema: PLUGIN_SCHEMA,
 }
 
