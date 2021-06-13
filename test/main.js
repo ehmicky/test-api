@@ -1,12 +1,14 @@
+import { fileURLToPath } from 'url'
+
 import test from 'ava'
 import execa from 'execa'
 import { getBinPath } from 'get-bin-path'
 
-const BINARY_PATH = getBinPath()
-const TASKS_FILE = 'test/tasks.yml'
+const TASKS_FILE = fileURLToPath(new URL('tasks.yml', import.meta.url))
 
 test('Smoke test', async (t) => {
-  const { exitCode, stdout } = await execa(await BINARY_PATH, [TASKS_FILE], {
+  const binaryPath = await getBinPath()
+  const { exitCode, stdout } = await execa('node', [binaryPath, TASKS_FILE], {
     reject: false,
   })
   const stdoutA = stdout
