@@ -1,4 +1,4 @@
-import { capitalize } from 'underscore.string'
+import underscoreString from 'underscore.string'
 
 import { isObject } from '../../../../../utils/types.js'
 import { yellow, orange } from '../../../utils/colors.js'
@@ -21,7 +21,9 @@ export const printReportProps = function ({ reportProps, resultType }) {
 // Print top-level level pairs
 const printTopPair = function ([name, value]) {
   const valueA = printReportProp(value)
-  return `${orange(`${capitalize(name)}:`)} ${indentValue(valueA)}`
+  return `${orange(`${underscoreString.capitalize(name)}:`)} ${indentValue(
+    valueA,
+  )}`
 }
 
 // Print `error.*` properties in error printed message

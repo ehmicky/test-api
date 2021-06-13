@@ -1,5 +1,5 @@
 import { mapValues, mapKeys } from 'lodash'
-import { underscored } from 'underscore.string'
+import underscoreString from 'underscore.string'
 
 import { removeColors } from '../../../utils/colors.js'
 
@@ -62,7 +62,7 @@ const normalizeReportPropKey = function (value, name) {
     return tapName
   }
 
-  return underscored(name)
+  return underscoreString.underscored(name)
 }
 
 // Rename core properties names to names common in TAP output

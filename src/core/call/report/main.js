@@ -1,4 +1,4 @@
-import { titleize } from 'underscore.string'
+import underscoreString from 'underscore.string'
 
 import { removePrefixes } from '../../../utils/prefix.js'
 import { sortArray } from '../../../utils/sort.js'
@@ -86,7 +86,7 @@ const printHeaders = function (object) {
 const printHeader = function ([name, value]) {
   // Both `request.headers.*` and `response.headers.*` are normalized
   // to lowercase
-  const nameA = titleize(name)
+  const nameA = underscoreString.titleize(name)
   return `${yellow(`${nameA}:`)} ${value}`
 }
 

@@ -4,7 +4,7 @@ import filterObj from 'filter-obj'
 // eslint-disable-next-line you-dont-need-lodash-underscore/get
 import { get } from 'lodash'
 import moize from 'moize'
-import { capitalize } from 'underscore.string'
+import underscoreString from 'underscore.string'
 
 import { jsonPointerToParts } from '../utils/json_pointer.js'
 import { getPath } from '../utils/path.js'
@@ -86,7 +86,7 @@ const FIRST_CHAR_REGEXP = /^[. ]/u
 
 const getMessagePrefix = function ({ message, valueProp }) {
   if (message !== undefined) {
-    return capitalize(message)
+    return underscoreString.capitalize(message)
   }
 
   if (valueProp !== undefined) {

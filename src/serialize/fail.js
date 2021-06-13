@@ -1,4 +1,4 @@
-import { capitalize } from 'underscore.string'
+import underscoreString from 'underscore.string'
 
 import { convertPlainObject } from '../errors/convert.js'
 import { BugError } from '../errors/error.js'
@@ -21,7 +21,7 @@ const getSerializeFail = function ({
   error: { message, value, path },
   plugins,
 }) {
-  const messageA = capitalize(message)
+  const messageA = underscoreString.capitalize(message)
   // Make sure `error.value` is serializable
   const valueA = String(value)
   const property = getPath(['task', ...path])
