@@ -54,7 +54,7 @@ ${stack}`
 }
 
 const getRepositoryName = function ({ bugError }) {
-  if (module === undefined) {
+  if (bugError.module === undefined) {
     return DEFAULT_REPOSITORY
   }
 
