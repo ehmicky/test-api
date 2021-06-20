@@ -34,7 +34,7 @@
     "colors-option": "^1.0.0",
     "deepmerge": "^4.2.2",
     "dot-prop": "^6.0.1",
-    "emphasize": "^4.0.0",
+    "emphasize": "^5.0.0",
     "faker": "^4.1.0",
     "fast-glob": "^3.2.4",
     "filter-obj": "^2.0.1",
