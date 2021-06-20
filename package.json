@@ -37,7 +37,6 @@
     "ajv": "^6.12.6",
     "cli-truncate": "^2.1.0",
     "colors-option": "^1.0.0",
-    "core-js": "^3.10.0",
     "deepmerge": "^4.2.2",
     "dot-prop": "^6.0.1",
     "emphasize": "^4.0.0",
