@@ -1,6 +1,6 @@
 import { inspect } from 'util'
 
-import emphasize from 'emphasize'
+import { emphasize } from 'emphasize'
 
 import { truncate } from './truncate.js'
 
