@@ -3,6 +3,7 @@
   "version": "43.0.0",
   "type": "module",
   "exports": "./build/src/main.js",
+  "main": "./build/src/main.js",
   "files": [
     "build/src/**/*.{js,ts,map,json,sh,md,png}",
     "examples/**/*.{js,ts,map,json,sh,md}"
