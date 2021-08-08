@@ -58,7 +58,7 @@
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "update-notifier": "^5.0.1",
-    "yargs": "^17.0.1"
+    "yargs": "^17.1.1"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^1.0.43",
