@@ -54,7 +54,7 @@
     "read-pkg-up": "^8.0.0",
     "sort-on": "^4.1.0",
     "statuses": "^2.0.1",
-    "strip-ansi": "^7.0.0",
+    "strip-ansi": "^7.0.1",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.5",
     "update-notifier": "^5.0.1",
