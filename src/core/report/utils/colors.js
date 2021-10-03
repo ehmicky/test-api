@@ -1,5 +1,7 @@
 import colorsOption from 'colors-option'
 import lodash from 'lodash'
+// TODO: use `util.stripVTControlCharacters()` after dropping support for
+// Node <16.11.0
 import stripAnsi from 'strip-ansi'
 
 import { isObject } from '../../../utils/types.js'
