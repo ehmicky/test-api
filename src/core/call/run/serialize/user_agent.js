@@ -1,7 +1,7 @@
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { readPackageUpAsync } from 'read-pkg-up'
+import { readPackageUp } from 'read-pkg-up'
 
 // Add `User-Agent` request header
 // Can be overriden
@@ -21,6 +21,6 @@ const getUserAgent = async function ({ userAgent }) {
   const cwd = dirname(fileURLToPath(import.meta.url))
   const {
     packageJson: { name, version, homepage },
-  } = await readPackageUpAsync({ cwd })
+  } = await readPackageUp({ cwd })
   return `${name}/${version} (${homepage})`
 }
