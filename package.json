@@ -51,7 +51,7 @@
     "openapi-schema-to-json-schema": "^2.2.0",
     "ora": "^6.0.1",
     "path-to-regexp": "^6.2.0",
-    "read-pkg-up": "^8.0.0",
+    "read-pkg-up": "^9.0.0",
     "sort-on": "^4.1.0",
     "statuses": "^2.0.1",
     "strip-ansi": "^7.0.1",
