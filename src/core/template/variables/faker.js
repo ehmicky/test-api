@@ -1,3 +1,1 @@
-import faker from 'faker'
-
-export { faker as fakerHelper }
+export { default as fakerHelper } from 'faker'
