@@ -2,7 +2,7 @@ import { relative } from 'path'
 import { fileURLToPath } from 'url'
 
 import test from 'ava'
-import execa from 'execa'
+import { execa } from 'execa'
 import { getBinPath } from 'get-bin-path'
 import unixify from 'unixify'
 
