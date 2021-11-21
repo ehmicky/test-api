@@ -52,7 +52,7 @@
     "ora": "^6.0.1",
     "path-to-regexp": "^6.2.0",
     "read-pkg-up": "^9.0.0",
-    "sort-on": "^4.1.0",
+    "sort-on": "^5.0.0",
     "statuses": "^2.0.1",
     "strip-ansi": "^7.0.1",
     "type-is": "^1.6.18",
