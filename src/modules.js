@@ -1,3 +1,5 @@
+import { pathToFileURL } from 'url'
+
 import { TestApiError, BugError } from './errors/error.js'
 import { checkSchema } from './validation/check.js'
 
@@ -20,7 +22,7 @@ export const getModule = async function (name, info) {
 // Can only done once we moved core plugins/reporters to separate repositories
 const loadModule = async function ({ name, info, info: { corePath } }) {
   try {
-    const moduleObj = await import(`${corePath}${name}/main.js`)
+    const moduleObj = await import(pathToFileURL(`${corePath}${name}/main.js`))
     return { ...moduleObj, name }
   } catch (error) {
     loadModuleHandler(error, { name, info })
