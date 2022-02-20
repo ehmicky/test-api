@@ -37,7 +37,7 @@
     "dot-prop": "^7.2.0",
     "emphasize": "^5.0.0",
     "faker": "^5.5.3",
-    "fast-glob": "^3.2.7",
+    "fast-glob": "^3.2.11",
     "filter-obj": "^3.0.0",
     "got": "^11.8.3",
     "is-mergeable-object": "^1.1.1",
