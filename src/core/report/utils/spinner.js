@@ -17,7 +17,6 @@ export const startSpinner = function ({ index = -1, total }) {
 // Increment CLI spinner index
 export const incrementSpinner = function (state) {
   // We need to mutate state because the spinner is shared by parallel tasks
-  // eslint-disable-next-line fp/no-mutation, no-param-reassign
   state.index += 1
 
   const { index, total, instance } = state

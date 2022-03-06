@@ -38,10 +38,8 @@ const getCategory = function ({ ok, directive: { skip } }) {
 
 // Update index|tests|pass|skip|fail counters
 const updateState = function ({ state, category }) {
-  // eslint-disable-next-line fp/no-mutation, no-param-reassign
   state[category] += 1
 
-  // eslint-disable-next-line fp/no-mutation, no-param-reassign
   state.index += 1
   return state.index
 }

@@ -53,7 +53,6 @@ const serializeOutputValue = function ({ value, path, state }) {
   // If the value cannot be serialized, returns the first one as `error`.
   // Serialize that value to `undefined`
   const message = getMessage({ value, path })
-  // eslint-disable-next-line fp/no-mutation, no-param-reassign
   state.error = { message, value, path }
 }
 
