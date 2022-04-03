@@ -20,6 +20,7 @@ export const getModule = async function (name, info) {
 // Can only done once we moved core plugins/reporters to separate repositories
 const loadModule = async function ({ name, info, info: { corePath } }) {
   try {
+    // eslint-disable-next-line import/no-dynamic-require
     const moduleObj = await import(new URL(`${name}/main.js`, corePath))
     return { ...moduleObj, name }
   } catch (error) {
