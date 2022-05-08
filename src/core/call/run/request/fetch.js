@@ -22,7 +22,7 @@ export const fireRequest = async function ({
       method,
       headers,
       body,
-      timeout,
+      timeout: { request: timeout },
       agent,
     })
     const responseHeaders = getResponseHeaders(headersA)
