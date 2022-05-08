@@ -50,7 +50,7 @@
     "omit.js": "^2.0.2",
     "openapi-schema-to-json-schema": "^2.2.0",
     "ora": "^6.1.0",
-    "path-to-regexp": "^6.2.0",
+    "path-to-regexp": "^6.2.1",
     "read-pkg-up": "^9.1.0",
     "sort-on": "^5.0.0",
     "statuses": "^2.0.1",
