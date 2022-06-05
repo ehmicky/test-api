@@ -1,5 +1,5 @@
-// We use classes because that's the most conventional way of extending errors
-/* eslint-disable fp/no-class, fp/no-this */
+import errorType from 'error-type'
+
 import {
   isSimpleSchema,
   getSimpleSchemaConstant,
@@ -23,19 +23,11 @@ import { getWordsList } from '../utils/string.js'
 // will be defined:
 //  - `errors` `{array}`: all errors.
 //  - `tasks` `{array}`: all tasks.
-class PropsError extends Error {
-  constructor(message, properties = {}) {
-    super(message)
-    // eslint-disable-next-line fp/no-mutation
-    this.name = 'PropsError'
-
-    Object.keys(properties).forEach(validateProperty)
-
-    const expected = getExpected({ properties })
-
-    // eslint-disable-next-line fp/no-mutating-assign
-    Object.assign(this, { ...properties, ...expected })
-  }
+const onCreate = function (error, properties) {
+  Object.keys(properties).forEach(validateProperty)
+  const expected = getExpected({ properties })
+  // eslint-disable-next-line fp/no-mutating-assign
+  Object.assign(error, { ...properties, ...expected })
 }
 
 // Enforce which properties can be attached to `error.*`
@@ -80,23 +72,9 @@ const getExpected = function ({ properties: { schema, expected } }) {
 }
 
 // A normal error
-export class TestApiError extends PropsError {
-  constructor(...args) {
-    super(...args)
-    // eslint-disable-next-line fp/no-mutation
-    this.name = 'TestApiError'
-  }
-}
-
+export const TestApiError = errorType('TestApiError', onCreate)
 // An error indicating a problem in the library or in a plugin.
 // Note that any non `TestApiError` error is considered a bug.
 // Using `BugError` allows being more explicit and assigning
 // `error.*` properties.
-export class BugError extends PropsError {
-  constructor(...args) {
-    super(...args)
-    // eslint-disable-next-line fp/no-mutation
-    this.name = 'BugError'
-  }
-}
-/* eslint-enable fp/no-class, fp/no-this */
+export const BugError = errorType('BugError', onCreate)
