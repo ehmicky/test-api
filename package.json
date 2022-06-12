@@ -36,7 +36,7 @@
     "deepmerge": "^4.2.2",
     "dot-prop": "^7.2.0",
     "emphasize": "^5.0.0",
-    "error-type": "^1.1.8",
+    "error-type": "^1.1.9",
     "faker": "^5.5.3",
     "fast-glob": "^3.2.11",
     "filter-obj": "^3.0.0",
