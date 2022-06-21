@@ -1,4 +1,3 @@
-[![Build](https://github.com/ehmicky/test-api/workflows/Build/badge.svg)](https://github.com/ehmicky/test-api/actions)
 [![Node](https://img.shields.io/node/v/test-api.svg?logo=node.js)](https://www.npmjs.com/package/test-api)
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
