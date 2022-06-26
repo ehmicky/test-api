@@ -56,9 +56,6 @@ test-api **/*.tasks.yml
 
 # Usage (Node.js)
 
-<!-- Remove 'eslint-skip' once estree supports top-level await -->
-<!-- eslint-skip -->
-
 ```js
 import { run } from 'test-api'
 
@@ -68,9 +65,6 @@ await run(options)
 If a task failed, `run()` will reject the promise with a `TestApiError`.
 
 Options are passed as arguments. Tasks are passed as a `tasks` argument.
-
-<!-- Remove 'eslint-skip' once estree supports top-level await -->
-<!-- eslint-skip -->
 
 ```js
 await run({
