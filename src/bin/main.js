@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { dirname } from 'path'
-import { exit } from 'process'
 import { fileURLToPath } from 'url'
 
+import handleCliError from 'handle-cli-error'
 import { readPackageUp } from 'read-pkg-up'
 import UpdateNotifier from 'update-notifier'
 
@@ -21,8 +21,14 @@ const runCli = async function () {
     const tasks = await run(config)
     return tasks
   } catch (error) {
-    runCliHandler(error)
+    handleCliError(error, { silent: isSilentError(error), short: true })
   }
+}
+
+// Do not print error message if the error happened during task running, as
+// it's already been reported using `report`
+const isSilentError = function (error) {
+  return error instanceof Error && error.tasks !== undefined
 }
 
 // TODO: use static JSON imports once those are possible
@@ -30,19 +36,6 @@ const checkUpdate = async function () {
   const cwd = dirname(fileURLToPath(import.meta.url))
   const { packageJson } = await readPackageUp({ cwd, normalize: false })
   UpdateNotifier({ pkg: packageJson }).notify()
-}
-
-// If an error is thrown, print error's description, then exit with exit code 1
-const runCliHandler = function (error) {
-  const { tasks, message } = error instanceof Error ? error : new Error(error)
-
-  // Do not print error message if the error happened during task running, as
-  // it's already been reported using `report`
-  if (tasks === undefined) {
-    console.error(message)
-  }
-
-  exit(1)
 }
 
 runCli()
