@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { includeKeys, excludeKeys } from 'filter-obj'
 
 import { checkSchema } from '../../../validation/check.js'
 import { normalizeLevel } from '../level/normalize.js'
@@ -41,19 +41,19 @@ const getOptions = function ({
   config: { report = {}, report: { [name]: options = {} } = {} },
 }) {
   // Can use `config.report.level|output` to set those for any reporter
-  const globalOptions = filterObj(report, Object.keys(COMMON_OPTIONS_SCHEMA))
+  const globalOptions = includeKeys(report, Object.keys(COMMON_OPTIONS_SCHEMA))
 
   // Can use `true`, to make it CLI options-friendly
   if (options === true) {
     return globalOptions
   }
 
-  const optionsA = filterObj(options, isDefined)
+  const optionsA = excludeKeys(options, isUndefined)
   return { ...globalOptions, ...optionsA }
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 // Validate `config.report.REPORTER.*` against `reporter.config`

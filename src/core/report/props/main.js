@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import omit from 'omit.js'
 
 import { merge } from '../../../utils/merge.js'
@@ -99,9 +99,9 @@ const isDefinedTitle = function (title) {
 
 // Do not print properties that are not present
 const removeEmptyProps = function (object) {
-  return filterObj(object, isDefined)
+  return excludeKeys(object, isUndefined)
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }

@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { includeKeys } from 'filter-obj'
 import omit from 'omit.js'
 
 import { evalTemplate } from '../../../template/eval.js'
@@ -26,7 +26,7 @@ import { getPluginsVars } from './plugin.js'
 export const run = function (task, context) {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
-  const noEvalProps = filterObj(task, NO_EVAL_PROPS)
+  const noEvalProps = includeKeys(task, NO_EVAL_PROPS)
   const taskA = omit.default(task, NO_EVAL_PROPS)
 
   const taskB = evalTaskTemplate({ task: taskA, vars, pluginsVarsMap })

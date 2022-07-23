@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 
 import { getModule } from '../../../modules.js'
@@ -18,7 +18,7 @@ export const getReporters = async function ({ config }) {
 
 // Reporters are specified by using their name in `config.report.REPORTER`
 const getNames = function ({ config: { report = {} } }) {
-  const reportA = filterObj(report, isDefined)
+  const reportA = excludeKeys(report, isUndefined)
   const names = Object.keys(reportA)
   const namesA = lodash.difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
 
@@ -30,8 +30,8 @@ const getNames = function ({ config: { report = {} } }) {
   return namesA
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const DEFAULT_REPORTERS = ['pretty']

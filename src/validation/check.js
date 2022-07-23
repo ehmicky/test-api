@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 
 import { TestApiError, BugError } from '../errors/error.js'
 import { crawl } from '../utils/crawl.js'
@@ -44,11 +44,11 @@ const removeUndefinedProp = function (value) {
     return value
   }
 
-  return filterObj(value, isDefined)
+  return excludeKeys(value, isUndefined)
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const getErrorProps = function ({

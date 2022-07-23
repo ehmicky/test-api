@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 
 import { isObject } from '../../utils/types.js'
 
@@ -31,7 +31,7 @@ export const getTaskReturn = function ({
   }
 
   // Do not clutter with plugins that have nothing to return
-  const taskB = filterObj(taskA, isDefined)
+  const taskB = excludeKeys(taskA, isUndefined)
   return taskB
 }
 
@@ -75,6 +75,6 @@ const getReturnValue = function ({
   return { ...addedProps, ...originalValue }
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }

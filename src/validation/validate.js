@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import Ajv from 'ajv'
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 import moize from 'moize'
 import underscoreString from 'underscore.string'
@@ -69,7 +69,7 @@ const getError = function ({
     valuePath,
     schemaPath,
   }
-  const errorB = filterObj(errorA, isDefined)
+  const errorB = excludeKeys(errorA, isUndefined)
   return errorB
 }
 
@@ -150,8 +150,8 @@ const concatProp = function (prop, path) {
   return `${prop}.${path}`
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 // Compilation is automatically memoized by `ajv` but not validation

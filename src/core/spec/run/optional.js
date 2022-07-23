@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 import omit from 'omit.js'
 
@@ -15,9 +15,8 @@ export const removeOptionals = function ({ params, call }) {
 
 // Spec parameters are marked as required by using `optional: false` (default)
 const removeTopLevel = function ({ params, call }) {
-  const paramsA = filterObj(
-    params,
-    (key, param) => !isSkippedOptional({ param, key, call }),
+  const paramsA = excludeKeys(params, (key, param) =>
+    isSkippedOptional({ param, key, call }),
   )
   const paramsB = lodash.mapValues(paramsA, removeOptionalProp)
   return paramsB
@@ -48,9 +47,9 @@ const removeNonRequired = function ({
     return schema
   }
 
-  const propertiesA = filterObj(
+  const propertiesA = excludeKeys(
     properties,
-    (name) => required.includes(name) || definedProps[name] !== undefined,
+    (name) => definedProps[name] === undefined && !required.includes(name),
   )
 
   const propertiesB = lodash.mapValues(propertiesA, (property, name) =>

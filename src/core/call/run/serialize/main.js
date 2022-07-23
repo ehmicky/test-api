@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 
 import { stringifyFlat } from '../../../../utils/flat.js'
@@ -25,7 +25,7 @@ export const serialize = async function ({ call }) {
 
   const request = addFetchRequestHeaders({ call: callA })
 
-  const requestA = filterObj(request, isDefined)
+  const requestA = excludeKeys(request, isUndefined)
 
   const rawRequest = lodash.mapValues(requestA, stringifyParam)
 
@@ -57,8 +57,8 @@ const normalizeTimeout = function ({
 
 const DEFAULT_TIMEOUT = 1e6
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const stringifyParam = function (value, key, call) {

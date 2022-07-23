@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import { dump as yamlDump, DEFAULT_SCHEMA } from 'js-yaml'
 
 import { indent } from '../../../utils/indent.js'
@@ -19,7 +19,7 @@ const getError = function ({ message, name, stack, ...error }) {
   const at = getAt({ stack })
 
   const errorA = { message, operator: name, at, stack, ...error }
-  const errorB = filterObj(errorA, isDefined)
+  const errorB = excludeKeys(errorA, isUndefined)
   return errorB
 }
 
@@ -35,8 +35,8 @@ const getAt = function ({ stack }) {
 // Remove leading '  at' from stack trace
 const AT_REGEXP = /^.*at /u
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 // Serialize error to indented YAML

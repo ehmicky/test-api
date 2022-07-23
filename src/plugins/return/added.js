@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 
 // Retrieve the properties from `task.PLUGIN.*` that have been added by this
 // plugin, i.e. not in `originalTask.*`
@@ -24,9 +24,8 @@ export const getAddedProps = function ({
   }
 
   // `plugin.config.task` is an object. We remove its properties from `task.*`
-  const taskValueA = filterObj(
-    taskValue,
-    (key, value) => !shouldSkipProp({ value, key, taskConfig }),
+  const taskValueA = excludeKeys(taskValue, (key, value) =>
+    shouldSkipProp({ value, key, taskConfig }),
   )
 
   if (Object.keys(taskValueA).length === 0) {

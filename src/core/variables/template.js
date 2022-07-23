@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 
 import { TestApiError } from '../../errors/error.js'
@@ -24,7 +24,7 @@ const getTaskVariables = function ({
     return
   }
 
-  const variablesA = filterObj(variables, isDefined)
+  const variablesA = excludeKeys(variables, isUndefined)
 
   const taskVariables = lodash.mapValues(variablesA, (value) =>
     evalTask.bind(undefined, { key, value, allTasks, runTask }),
@@ -32,8 +32,8 @@ const getTaskVariables = function ({
   return taskVariables
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 // Runs a task and returns `task[PATH]`

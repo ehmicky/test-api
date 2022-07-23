@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { includeKeys, excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 
 import { BugError, TestApiError } from '../../../errors/error.js'
@@ -15,13 +15,13 @@ export const wrapTemplateVars = function ({ vars, plugin }) {
     wrapTemplateVar({ value: vars[name], name, schema, plugin }),
   )
 
-  const varsB = filterObj(varsA, isDefined)
+  const varsB = excludeKeys(varsA, isUndefined)
   return { ...vars, ...varsB }
 }
 
 // Return `plugin.config['template.*']`
 const getTemplateConfig = function ({ plugin: { config } }) {
-  const templateConfig = filterObj(config, (key) =>
+  const templateConfig = includeKeys(config, (key) =>
     key.startsWith(TEMPLATE_CONFIG_PREFIX),
   )
   const templateConfigA = lodash.mapKeys(templateConfig, (value, key) =>
@@ -100,6 +100,6 @@ const checkVarUndefined = function ({
   throw new TestApiError(`${message} must be defined`)
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }

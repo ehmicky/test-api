@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { includeKeys, excludeKeys } from 'filter-obj'
 
 import { merge } from '../../../utils/merge.js'
 import { getPath } from '../../../utils/path.js'
@@ -8,8 +8,8 @@ import { STATUS_REGEXP, parseStatus } from './status/parse.js'
 // `validate.STATUS.*` is like `validate.*` but as map according to status code.
 // STATUS can use ranges and comma-separated lists like `validate.status`
 export const addByStatus = function ({ validate, response }) {
-  const byStatus = filterObj(validate, isByStatus)
-  const validateA = filterObj(validate, (name) => !isByStatus(name))
+  const byStatus = includeKeys(validate, isByStatus)
+  const validateA = excludeKeys(validate, isByStatus)
 
   const byStatusA = Object.entries(byStatus)
     .filter(([status]) => matchesResponse({ status, response }))

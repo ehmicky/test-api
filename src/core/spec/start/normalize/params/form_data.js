@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { includeKeys, excludeKeys } from 'filter-obj'
 import lodash from 'lodash'
 
 import { isFormData, removeFormDataPrefix } from '../form_data.js'
@@ -8,7 +8,7 @@ import { isFormData, removeFormDataPrefix } from '../form_data.js'
 //     required: ['one'] }
 // TODO: make `collectionFormat` work for `formData` parameters
 export const normalizeFormData = function ({ params }) {
-  const formDataParams = filterObj(params, isFormData)
+  const formDataParams = includeKeys(params, isFormData)
 
   if (Object.keys(formDataParams).length === 0) {
     return params
@@ -20,7 +20,7 @@ export const normalizeFormData = function ({ params }) {
 
 const formDataToBody = function ({ formDataParams, params }) {
   const body = getBody({ formDataParams })
-  const paramsA = filterObj(params, (key) => !isFormData(key))
+  const paramsA = excludeKeys(params, isFormData)
   return { ...paramsA, body }
 }
 

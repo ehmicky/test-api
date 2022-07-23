@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 
 import { TestApiError } from '../errors/error.js'
 import { parseInput } from '../serialize/input.js'
@@ -13,7 +13,7 @@ export const loadConfig = function ({ config }) {
   const configA = parseInput(config, throwParseError)
 
   // Apply default values
-  const configB = filterObj(configA, isDefined)
+  const configB = excludeKeys(configA, isUndefined)
   const configC = { ...DEFAULT_CONFIG, ...configB }
 
   return configC
@@ -26,8 +26,8 @@ const throwParseError = function ({ message, value, path }) {
   throw new TestApiError(`Configuration ${message}`, { value, property })
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const DEFAULT_CONFIG = {
