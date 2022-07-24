@@ -39,7 +39,7 @@
     "error-type": "^1.2.0",
     "faker": "^5.5.3",
     "fast-glob": "^3.2.11",
-    "filter-obj": "^5.0.0",
+    "filter-obj": "^5.1.0",
     "got": "^12.1.0",
     "handle-cli-error": "^1.0.1",
     "is-mergeable-object": "^1.1.1",
