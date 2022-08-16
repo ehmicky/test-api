@@ -5,8 +5,7 @@
   "exports": "./build/src/main.js",
   "main": "./build/src/main.js",
   "files": [
-    "build/src/**/*.{js,ts,map,json,sh,md,png}",
-    "examples/**/*.{js,ts,map,json,sh,md}"
+    "build/src/**/*.{js,d.ts,json,png}"
   ],
   "bin": {
     "test-api": "build/src/bin/main.js"
@@ -24,7 +23,6 @@
   },
   "author": "ehmicky <ehmicky@gmail.com> (https://github.com/ehmicky)",
   "directories": {
-    "doc": "docs",
     "test": "test",
     "lib": "src"
   },
