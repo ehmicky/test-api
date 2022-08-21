@@ -1,4 +1,4 @@
-import errorType from 'error-type'
+import errorCustomClass from 'error-custom-class'
 
 import {
   isSimpleSchema,
@@ -72,9 +72,9 @@ const getExpected = function ({ props: { schema, expected } }) {
 }
 
 // A normal error
-export const TestApiError = errorType('TestApiError', onCreate)
+export const TestApiError = errorCustomClass('TestApiError', onCreate)
 // An error indicating a problem in the library or in a plugin.
 // Note that any non `TestApiError` error is considered a bug.
 // Using `BugError` allows being more explicit and assigning
 // `error.*` properties.
-export const BugError = errorType('BugError', onCreate)
+export const BugError = errorCustomClass('BugError', onCreate)
