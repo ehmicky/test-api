@@ -33,7 +33,7 @@ const testSkipRegExp = function (configSkip, key) {
   } catch (error) {
     throw new TestApiError(
       `'config.skip' '${configSkip}' is invalid: ${error.message}`,
-      { value: configSkip, property: 'config.skip' },
+      { props: { value: configSkip, property: 'config.skip' } },
     )
   }
 }

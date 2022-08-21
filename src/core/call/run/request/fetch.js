@@ -55,7 +55,7 @@ const handleRequestError = function ({ name, message }, { url, timeout }) {
 
   if (name === 'ReadError') {
     throw new TestApiError(`Could not read response body: ${message}`, {
-      property: 'task.call.response.body',
+      props: { property: 'task.call.response.body' },
     })
   }
 

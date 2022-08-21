@@ -46,5 +46,7 @@ const serializeToken = function (token, urlParams) {
 
 const throwError = function (message, { name }) {
   const property = getPath(['task', 'call', `url.${name}`])
-  throw new TestApiError(`The URL parameter '${name}' ${message}`, { property })
+  throw new TestApiError(`The URL parameter '${name}' ${message}`, {
+    props: { property },
+  })
 }

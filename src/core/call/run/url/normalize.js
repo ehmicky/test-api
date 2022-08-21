@@ -10,7 +10,7 @@ export const normalizeUrl = function (originalUrl) {
     throw new TestApiError(
       `Request URL '${originalUrl}' is not a valid full URL: ${error.message}`,
       // It could come from either `server` or `path`
-      { property: 'task.call', value: originalUrl },
+      { props: { property: 'task.call', value: originalUrl } },
     )
   }
 }

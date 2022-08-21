@@ -9,7 +9,7 @@ export const handleFinalFailure = function ({ tasks }) {
   }
 
   // Bundle several errors into one
-  throw new TestApiError('Some tasks failed', { tasks, errors })
+  throw new TestApiError('Some tasks failed', { props: { tasks, errors } })
 }
 
 const getFinalErrors = function ({ tasks }) {

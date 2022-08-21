@@ -74,7 +74,7 @@ const getTaskProp = function ({ task, task: { key }, value }) {
   const { wrongPath, value: valueA } = tryGet(task, path)
   throw new TestApiError(
     `task '${key}' did not return any property '${wrongPath}'`,
-    { value: valueA },
+    { props: { value: valueA } },
   )
 }
 

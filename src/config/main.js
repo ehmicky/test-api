@@ -23,7 +23,9 @@ export const loadConfig = function ({ config }) {
 // actual `undefined`
 const throwParseError = function ({ message, value, path }) {
   const property = getPath(['config', ...path])
-  throw new TestApiError(`Configuration ${message}`, { value, property })
+  throw new TestApiError(`Configuration ${message}`, {
+    props: { value, property },
+  })
 }
 
 const isUndefined = function (key, value) {

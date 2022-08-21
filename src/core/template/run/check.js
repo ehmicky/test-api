@@ -56,7 +56,7 @@ const validateTemplateConfig = function ({ value, name, schemaProp, plugin }) {
 
   throw new BugError(
     `'plugin.config["template.${name}"]' can only be defined if 'plugin.template.${name}' is a function`,
-    { value, property: schemaProp, module: `plugin-${plugin.name}` },
+    { props: { value, property: schemaProp, module: `plugin-${plugin.name}` } },
   )
 }
 

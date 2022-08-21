@@ -21,9 +21,9 @@ export const checkSchema = function ({ bug = false, value, ...opts }) {
 
   const ErrorType = bug ? BugError : TestApiError
   const { message } = error
-  const errorProps = getErrorProps({ opts, error })
+  const props = getErrorProps({ opts, error })
 
-  throw new ErrorType(message, errorProps)
+  throw new ErrorType(message, { props })
 }
 
 // Values whose key is defined but whose value is `undefined` `opts.value` are

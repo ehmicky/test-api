@@ -30,9 +30,7 @@ const validateForbidden = function ({ schema, value, property, name }) {
   }
 
   throw new TestApiError(`${name} should be empty`, {
-    property,
-    schema,
-    value,
+    props: { property, schema, value },
   })
 }
 
@@ -42,8 +40,6 @@ const validateRequired = function ({ schema, value, property, name }) {
   }
 
   throw new TestApiError(`${name} should not be empty`, {
-    property,
-    schema,
-    value,
+    props: { property, schema, value },
   })
 }

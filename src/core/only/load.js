@@ -42,7 +42,7 @@ const testOnlyRegExp = function (configOnly, key) {
   } catch (error) {
     throw new TestApiError(
       `'config.only' '${configOnly}' is invalid: ${error.message}`,
-      { value: configOnly, property: 'config.only' },
+      { props: { value: configOnly, property: 'config.only' } },
     )
   }
 }

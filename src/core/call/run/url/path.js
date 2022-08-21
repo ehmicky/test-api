@@ -13,7 +13,6 @@ const validatePath = function ({ path }) {
   }
 
   throw new TestApiError('Request path must start with a slash', {
-    property: 'task.call.path',
-    value: path,
+    props: { property: 'task.call.path', value: path },
   })
 }

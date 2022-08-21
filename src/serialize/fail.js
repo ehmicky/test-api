@@ -28,9 +28,7 @@ const getSerializeFail = function ({
   const moduleProp = guessModule({ path, plugins })
 
   const error = new BugError(messageA, {
-    value: valueA,
-    property,
-    ...moduleProp,
+    props: { value: valueA, property, ...moduleProp },
   })
   return error
 }

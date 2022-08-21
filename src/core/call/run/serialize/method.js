@@ -20,8 +20,7 @@ const validateMethod = function ({ method }) {
   }
 
   throw new TestApiError(`HTTP method '${method}' does not exist`, {
-    property: 'task.call.method',
-    value: method,
+    props: { property: 'task.call.method', value: method },
   })
 }
 

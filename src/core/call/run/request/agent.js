@@ -14,8 +14,7 @@ const getAgent = function ({ https = {}, url }) {
     return new Agent(https)
   } catch (error) {
     throw new TestApiError(`Invalid HTTPS options: ${error.message}`, {
-      property: 'call.https',
-      value: https,
+      props: { property: 'call.https', value: https },
     })
   }
 }

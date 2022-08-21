@@ -10,7 +10,9 @@ export const handleBugs = function ({ error }) {
 
   const message = getBugMessage({ bugError })
 
-  return new BugError(message, { module: bugError.module, bug: true })
+  return new BugError(message, {
+    props: { module: bugError.module, bug: true },
+  })
 }
 
 const findBugError = function ({ error, error: { errors = [error] } }) {

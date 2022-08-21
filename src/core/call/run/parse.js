@@ -56,7 +56,7 @@ const parseBody = function ({ body, headers }) {
   } catch (error) {
     throw new TestApiError(
       `Could not read response body as ${name}: ${error.message}`,
-      { property: 'task.call.response.body' },
+      { props: { property: 'task.call.response.body' } },
     )
   }
 }

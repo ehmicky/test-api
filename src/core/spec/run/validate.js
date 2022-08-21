@@ -83,7 +83,7 @@ const validateEmptyStatus = function ({
   const responseStatusesStr = getWordsList(responseStatuses)
   throw new TestApiError(
     `Specification for '${operationId}' describes the following status codes: ${responseStatusesStr} but 'task.validate.status' only allows the following status codes: ${status}`,
-    { value: status, expected, property: 'task.validate.status' },
+    { props: { value: status, expected, property: 'task.validate.status' } },
   )
 }
 

@@ -35,10 +35,9 @@ const loadModuleHandler = function (
   checkModuleNotFound({ code, name, info })
 
   const props = getProps({ info, name })
-  throw new BugError(
-    `The ${title} '${name}' could not be loaded: ${message}`,
+  throw new BugError(`The ${title} '${name}' could not be loaded: ${message}`, {
     props,
-  )
+  })
 }
 
 // Error when loading a plugin that is not installed.
@@ -58,7 +57,7 @@ const checkModuleNotFound = function ({
   const props = getProps({ info, name, addModule: false })
   throw new TestApiError(
     `The ${title} '${name}' is used in the configuration but is not installed. Please run 'npm install ${modulePrefix}${name}.`,
-    props,
+    { props },
   )
 }
 

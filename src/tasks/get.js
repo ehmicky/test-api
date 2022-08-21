@@ -25,8 +25,6 @@ const parseTasks = function ({ tasks }) {
 const throwParseError = function (key, { message, value, path }) {
   const property = getPath(['task', ...path])
   throw new TestApiError(`Task '${key}' ${message}`, {
-    task: key,
-    value,
-    property,
+    props: { task: key, value, property },
   })
 }

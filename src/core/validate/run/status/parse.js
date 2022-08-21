@@ -36,7 +36,7 @@ const checkValidStatuses = function ({ statuses, property }) {
   const expected = VALID_STATUSES.map(Number)
   throw new TestApiError(
     `The task definition is invalid: those are not valid HTTP status codes: ${statusesStr}`,
-    { value, expected, property },
+    { props: { value, expected, property } },
   )
 }
 

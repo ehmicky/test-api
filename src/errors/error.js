@@ -23,11 +23,11 @@ import { getWordsList } from '../utils/string.js'
 // will be defined:
 //  - `errors` `{array}`: all errors.
 //  - `tasks` `{array}`: all tasks.
-const onCreate = function (error, properties) {
-  Object.keys(properties).forEach(validateProperty)
-  const expected = getExpected({ properties })
+const onCreate = function (error, { props }) {
+  Object.keys(props).forEach(validateProperty)
+  const expected = getExpected({ props })
   // eslint-disable-next-line fp/no-mutating-assign
-  Object.assign(error, { ...properties, ...expected })
+  Object.assign(error, { ...props, ...expected })
 }
 
 // Enforce which properties can be attached to `error.*`
@@ -39,7 +39,7 @@ const validateProperty = function (property) {
   const validProperties = getWordsList(VALID_PROPERTIES, { op: 'and' })
   throw new BugError(
     `Error property '${property}' is invalid. The only valid error properties are: ${validProperties}`,
-    { value: property, expected: VALID_PROPERTIES },
+    { props: { value: property, expected: VALID_PROPERTIES } },
   )
 }
 
@@ -58,7 +58,7 @@ const VALID_PROPERTIES = [...USER_VALID_PROPERTIES, ...CORE_VALID_PROPERTIES]
 const VALID_PROPERTIES_SET = new Set(VALID_PROPERTIES)
 
 // Tries to guess `error.expected` from simple `error.schema`
-const getExpected = function ({ properties: { schema, expected } }) {
+const getExpected = function ({ props: { schema, expected } }) {
   if (expected !== undefined) {
     return { expected }
   }

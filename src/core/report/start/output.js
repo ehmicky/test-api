@@ -20,7 +20,7 @@ export const normalizeOutput = async function ({
   } catch (error) {
     throw new TestApiError(
       `Could not write output to file '${output}': ${error.message}`,
-      { property: `config.report.${name}.output`, value: output },
+      { props: { property: `config.report.${name}.output`, value: output } },
     )
   }
 }

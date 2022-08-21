@@ -51,10 +51,7 @@ const testMergeRegExp = function (merge, key) {
   } catch (error) {
     throw new TestApiError(
       `'task.merge' '${merge}' is invalid: ${error.message}`,
-      {
-        value: merge,
-        property: 'task.merge',
-      },
+      { props: { value: merge, property: 'task.merge' } },
     )
   }
 }

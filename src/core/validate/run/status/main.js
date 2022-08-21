@@ -17,7 +17,7 @@ export const validateStatus = function ({
   const { value: expected, statusesStr } = normalizeStatuses(vStatuses)
   throw new TestApiError(
     `Status code was expected to be ${statusesStr}, but got ${status}`,
-    { value: status, expected, property: PROPERTY },
+    { props: { value: status, expected, property: PROPERTY } },
   )
 }
 
