@@ -1,4 +1,9 @@
-import errorCustomClass from 'error-custom-class'
+import {
+  ponyfillCause,
+  ensureCorrectClass,
+  setErrorName,
+  sanitizeProperties,
+} from 'error-class-utils'
 
 import {
   isSimpleSchema,
@@ -23,7 +28,23 @@ import { getWordsList } from '../utils/string.js'
 // will be defined:
 //  - `errors` `{array}`: all errors.
 //  - `tasks` `{array}`: all tasks.
-const onCreate = function (error, { props }) {
+/* eslint-disable fp/no-this */
+const errorCustomClass = function (name) {
+  const CustomErrorClass = class extends Error {
+    constructor(message, parameters) {
+      super(message, parameters)
+      ensureCorrectClass(this, new.target)
+      ponyfillCause(this, parameters)
+      setErrorProps(this, parameters)
+    }
+  }
+  setErrorName(CustomErrorClass, name)
+  return CustomErrorClass
+}
+/* eslint-enable fp/no-this */
+
+const setErrorProps = function (error, parameters) {
+  const props = sanitizeProperties(parameters?.props)
   Object.keys(props).forEach(validateProperty)
   const expected = getExpected({ props })
   // eslint-disable-next-line fp/no-mutating-assign
@@ -72,9 +93,9 @@ const getExpected = function ({ props: { schema, expected } }) {
 }
 
 // A normal error
-export const TestApiError = errorCustomClass('TestApiError', { onCreate })
+export const TestApiError = errorCustomClass('TestApiError')
 // An error indicating a problem in the library or in a plugin.
 // Note that any non `TestApiError` error is considered a bug.
 // Using `BugError` allows being more explicit and assigning
 // `error.*` properties.
-export const BugError = errorCustomClass('BugError', { onCreate })
+export const BugError = errorCustomClass('BugError')
