@@ -2,8 +2,8 @@ import {
   ponyfillCause,
   ensureCorrectClass,
   setErrorName,
-  sanitizeProperties,
 } from 'error-class-utils'
+import setErrorProps from 'set-error-props'
 
 import {
   isSimpleSchema,
@@ -35,7 +35,7 @@ const errorCustomClass = function (name) {
       super(message, parameters)
       ensureCorrectClass(this, new.target)
       ponyfillCause(this, parameters)
-      setErrorProps(this, parameters)
+      setProps(this, parameters)
     }
   }
   setErrorName(CustomErrorClass, name)
@@ -43,12 +43,10 @@ const errorCustomClass = function (name) {
 }
 /* eslint-enable fp/no-this */
 
-const setErrorProps = function (error, parameters) {
-  const props = sanitizeProperties(parameters?.props)
+const setProps = function (error, { props = {} } = {}) {
   Object.keys(props).forEach(validateProperty)
   const expected = getExpected({ props })
-  // eslint-disable-next-line fp/no-mutating-assign
-  Object.assign(error, { ...props, ...expected })
+  setErrorProps(error, { ...props, ...expected })
 }
 
 // Enforce which properties can be attached to `error.*`
