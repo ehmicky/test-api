@@ -21,7 +21,7 @@ const runCli = async function () {
     const tasks = await run(config)
     return tasks
   } catch (error) {
-    handleCliError(error, { silent: isSilentError(error), short: true })
+    handleCliError(error, { silent: isSilentError(error), stack: false })
   }
 }
 
