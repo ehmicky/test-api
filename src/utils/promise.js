@@ -28,6 +28,5 @@ export const promiseAll = function (retVals) {
 }
 
 const isPromise = function (retVal) {
-  // eslint-disable-next-line promise/prefer-await-to-then
   return retVal && typeof retVal.then === 'function'
 }

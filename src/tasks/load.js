@@ -1,4 +1,4 @@
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 
 import fastGlob from 'fast-glob'
 import { load as loadYaml, JSON_SCHEMA } from 'js-yaml'

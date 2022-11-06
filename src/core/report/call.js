@@ -1,5 +1,5 @@
-import { stdout } from 'process'
-import { promisify } from 'util'
+import { stdout } from 'node:process'
+import { promisify } from 'node:util'
 
 import { result } from '../../utils/result.js'
 

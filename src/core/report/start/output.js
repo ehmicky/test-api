@@ -1,5 +1,5 @@
-import { createWriteStream } from 'fs'
-import { stdout } from 'process'
+import { createWriteStream } from 'node:fs'
+import { stdout } from 'node:process'
 
 import { TestApiError } from '../../../errors/error.js'
 

@@ -121,7 +121,6 @@ const evalSingleData = function ({ template, opts, data, propPath }) {
     const retVal = promiseThen(data, (dataA) =>
       getNestedProp({ data: dataA, template, opts, propPath }),
     )
-    // eslint-disable-next-line promise/prefer-await-to-then
     return retVal && typeof retVal.then === 'function'
       ? // eslint-disable-next-line promise/prefer-await-to-then, promise/prefer-await-to-callbacks
         retVal.catch((error) => templateHandler(error, { template }))
