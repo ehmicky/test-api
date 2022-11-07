@@ -1,6 +1,6 @@
-[![Node](https://img.shields.io/node/v/test-api.svg?logo=node.js&logoColor=66cc33)](https://www.npmjs.com/package/test-api)
-[![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-brightgreen.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
-[![Medium](https://img.shields.io/badge/%E2%80%8B-medium-brightgreen.svg?logo=medium)](https://medium.com/@ehmicky)
+[![Node](https://img.shields.io/badge/-Node.js-808080?logo=node.js&colorA=404040&logoColor=66cc33)](https://www.npmjs.com/package/test-api)
+[![Twitter](https://img.shields.io/badge/-Twitter-808080.svg?logo=twitter&colorA=404040)](https://twitter.com/intent/follow?screen_name=ehmicky)
+[![Medium](https://img.shields.io/badge/-Medium-808080.svg?logo=medium&colorA=404040)](https://medium.com/@ehmicky)
 
 Automatic API testing.
 
@@ -30,7 +30,8 @@ repository is not stable yet.
 npm install -D test-api
 ```
 
-This package is an ES module and must be loaded using
+This package works in Node.js >=14.18.0. It is an ES module and must be loaded
+using
 [an `import` or `import()` statement](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c),
 not `require()`.
 
