@@ -39,7 +39,7 @@
     "faker": "^5.5.3",
     "fast-glob": "^3.2.11",
     "filter-obj": "^5.1.0",
-    "got": "^12.3.1",
+    "got": "^12.5.3",
     "handle-cli-error": "^3.1.0",
     "is-mergeable-object": "^1.1.1",
     "js-yaml": "^4.0.0",
