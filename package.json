@@ -27,7 +27,7 @@
     "lib": "src"
   },
   "dependencies": {
-    "@apidevtools/swagger-parser": "^10.0.3",
+    "@apidevtools/swagger-parser": "^10.1.0",
     "ajv": "^6.12.6",
     "ajv-formats": "^2.1.1",
     "cli-truncate": "^3.0.0",
