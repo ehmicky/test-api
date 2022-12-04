@@ -1,4 +1,4 @@
-import got from 'got'
+import { got } from 'got'
 
 import { TestApiError } from '../../../../errors/error.js'
 import { removePrefixes } from '../../../../utils/prefix.js'
