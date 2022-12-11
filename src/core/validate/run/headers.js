@@ -20,8 +20,8 @@ const validateHeader = function ({ name, schema, headers }) {
   checkRequired({
     schema,
     value: header,
-    property: PROPERTY(name),
-    name: NAME(name),
+    property: getProperty(name),
+    name: getName(name),
   })
 
   if (header === undefined) {
@@ -32,8 +32,8 @@ const validateHeader = function ({ name, schema, headers }) {
   checkSchema({
     schema,
     value: header,
-    schemaProp: PROPERTY(name),
-    message: `${NAME(name)} is invalid`,
+    schemaProp: getProperty(name),
+    message: `${getName(name)} is invalid`,
   })
 }
 
@@ -47,5 +47,5 @@ const getResponseHeader = function ({ headers, name }) {
   return headers[nameB]
 }
 
-const PROPERTY = (name) => getPath(['task', 'validate', `headers.${name}`])
-const NAME = (name) => `response header '${name}'`
+const getProperty = (name) => getPath(['task', 'validate', `headers.${name}`])
+const getName = (name) => `response header '${name}'`
