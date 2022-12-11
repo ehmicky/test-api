@@ -40,7 +40,7 @@ const runRepeatedTask = ({
   datum,
   index,
 }) => {
-  const templateA = { $data: datum, $index: index, ...template }
+  const templateA = { $$data: datum, $$index: index, ...template }
   const taskA = { ...task, template: templateA }
   return runTask({ task: taskA, self: true })
 }

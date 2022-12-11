@@ -64,13 +64,13 @@ const evalConcat = ({ template: { tokens }, opts, path }) => {
   const maybePromises = tokens.map((token) =>
     evalConcatToken({ token, opts, path }),
   )
-  // There can be several `$name` inside a string, in which case they are
+  // There can be several `$$name` inside a string, in which case they are
   // evaluated in parallel
   return promiseAllThen(maybePromises, concatTokens)
 }
 
 const evalConcatToken = ({ token, token: { type, name }, opts, path }) => {
-  // Parts between `$name` have `type: 'raw'`
+  // Parts between `$$name` have `type: 'raw'`
   if (type === 'raw') {
     return name
   }
@@ -79,7 +79,7 @@ const evalConcatToken = ({ token, token: { type, name }, opts, path }) => {
 }
 
 // `tokens` are joined.
-// They will be implicitely transtyped to `String`. We do not use
+// They will be implicitly transtyped to `String`. We do not use
 // `JSON.stringify()` because we want to be format-agnostic.
 // `undefined` values will be omitted.
 const concatTokens = (tokens) => tokens.join('')
@@ -97,7 +97,7 @@ const evalSingle = ({ template, opts }) => {
 
   const { data, propPath } = getTopLevelProp({ template, opts: optsA })
 
-  // Unkwnown templates or templates with `undefined` values return `undefined`,
+  // Unknown templates or templates with `undefined` values return `undefined`,
   // instead of throwing an error. This allows using dynamic templates, where
   // some properties might be defined or not.
   if (data === undefined) {
@@ -108,7 +108,7 @@ const evalSingle = ({ template, opts }) => {
 }
 
 const evalSingleData = ({ template, opts, data, propPath }) => {
-  // `$name` can be an async function, fired right away
+  // `$$name` can be an async function, fired right away
   try {
     const retVal = promiseThen(data, (dataA) =>
       getNestedProp({ data: dataA, template, opts, propPath }),
@@ -179,22 +179,22 @@ const shouldFireFunction = ({ data, template: { type }, propPath }) =>
   // Do not fire when the function is also used as an object.
   // This is for example how Lodash main object works.
   Object.keys(data).length === 0 &&
-  // `{ $func: arg }` should be fired with the argument, not right away.
-  // But when using `{ $func.then.another.func: arg }`, the first `func`
+  // `{ $$func: arg }` should be fired with the argument, not right away.
+  // But when using `{ $$func.then.another.func: arg }`, the first `func`
   // should be fired right away, but not the last one.
   !(type === 'function' && propPath === undefined)
 
 // Retrieve template's nested value (i.e. property path)
 const getNestedProp = ({ data, template, opts: { recursive }, propPath }) => {
-  // A template `$name` can contain other templates, which are then processed
+  // A template `$$name` can contain other templates, which are then processed
   // recursively.
   // This can be used e.g. to create aliases.
-  // This is done only on `$name` but not `{ $name: arg }` return value
+  // This is done only on `$$name` but not `{ $$name: arg }` return value
   // because:
   //  - in functions, it is most likely not the desired intention of the user
   //  - it would require complex escaping (if user does not desire recursion)
-  //    E.g. `{ $identity: { $identity: $$name } }` ->
-  //    `{ $identity: $$name }` -> `$name`
+  //    E.g. `{ $$identity: { $$identity: $$name } }` ->
+  //    `{ $$identity: $$name }` -> `$$name`
   const dataA = recursive(data)
 
   return promiseThen(dataA, (dataB) =>
@@ -210,11 +210,11 @@ const evalNestedProp = ({ data, template: { type, arg }, propPath }) => {
     return dataA
   }
 
-  // Can use `{ $name: [...] }` to pass several arguments to the template
+  // Can use `{ $$name: [...] }` to pass several arguments to the template
   // function.
-  // E.g. `{ $myFunc: [1, 2] }` will fire `$myFunc(1, 2)`
+  // E.g. `{ $$myFunc: [1, 2] }` will fire `$$myFunc(1, 2)`
   const args = Array.isArray(arg) ? arg : [arg]
-  // Fire template when it's a function `{ $name: arg }`
+  // Fire template when it's a function `{ $$name: arg }`
   // To pass more arguments, e.g. options, template functions must be bound.
   // E.g. a library providing templates could provide a factory function.
   return dataA(...args)

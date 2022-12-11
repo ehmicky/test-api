@@ -16,7 +16,7 @@ export const parseTemplate = (data) => {
     return
   }
 
-  // `{ $name: arg }`
+  // `{ $$name: arg }`
   const arg = data[name]
   return { type: 'function', name, arg }
 }
@@ -30,7 +30,7 @@ const getTemplateName = (data) => {
   const keys = Object.keys(data)
 
   // Template functions can be passed arguments by using an object with a
-  // single property starting with `$`
+  // single property starting with `$$`
   // This allows objects with several properties not to need escaping
   if (keys.length !== 1) {
     return
@@ -53,13 +53,13 @@ const parseTemplateString = (data) => {
     return
   }
 
-  // Single `$name` without concatenation.
-  // As opposed to concatenated string, `$name` is not transtyped to string.
+  // Single `$$name` without concatenation.
+  // As opposed to concatenated string, `$$name` is not transtyped to string.
   if (tokens.length === 1) {
     return { type: 'value', name: data }
   }
 
-  // `$name` inside another string, i.e. concatenated
+  // `$$name` inside another string, i.e. concatenated
   const tokensA = tokens.map(parseToken)
   return { type: 'concat', tokens: tokensA }
 }

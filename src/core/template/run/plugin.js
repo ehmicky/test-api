@@ -69,7 +69,7 @@ const validateVarName = ({ name, plugin }) => {
 
   const property = getPath(['plugin', 'template', name])
   throw new BugError(
-    `'plugin.template' returned a template variable with an invalid name '${name}': it must be prefixed with $ and only contain letters, digits, underscores and dashes`,
+    `'plugin.template' returned a template variable with an invalid name '${name}': it must be prefixed with $$ and only contain letters, digits, underscores and dashes`,
     { props: { value: name, property, module: `plugin-${plugin.name}` } },
   )
 }
