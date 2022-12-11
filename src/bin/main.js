@@ -38,4 +38,4 @@ const checkUpdate = async function () {
   UpdateNotifier({ pkg: packageJson }).notify()
 }
 
-runCli()
+await runCli()
