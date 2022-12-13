@@ -2,23 +2,23 @@ import { checkSchema } from '../validation/check.js'
 
 // Validate plugin-specific configuration against a JSON schema specified in
 // `plugin.config`
-export const verifyConfig = function ({
+export const verifyConfig = ({
   plugin: { config: { general: schema } = {}, name },
   config: { [name]: value },
-}) {
+}) => {
   verifyPluginConfig({ schema, value, name, valueProp: 'config' })
 }
 
 // Validate plugin-specific task configuration against a JSON schema specified
 // in `plugin.task`
-export const verifyTask = function ({
+export const verifyTask = ({
   plugin: { config: { task: schema } = {}, name },
   task: { [name]: value },
-}) {
+}) => {
   verifyPluginConfig({ schema, value, name, valueProp: 'task' })
 }
 
-const verifyPluginConfig = function ({ schema, value, name, valueProp }) {
+const verifyPluginConfig = ({ schema, value, name, valueProp }) => {
   if (schema === undefined || value === undefined) {
     return
   }

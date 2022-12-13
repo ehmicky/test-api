@@ -2,7 +2,7 @@ import { TestApiError, BugError } from './errors/error.js'
 import { checkSchema } from './validation/check.js'
 
 // A module is either a plugin or a reporter
-export const getModule = async function (name, info) {
+export const getModule = async (name, info) => {
   // Can pass the module object directly
   if (typeof name !== 'string') {
     return name
@@ -18,7 +18,7 @@ export const getModule = async function (name, info) {
 // Load module
 // TODO: `import(`${modulePrefix}${name}`)` instead
 // Can only done once we moved core plugins/reporters to separate repositories
-const loadModule = async function ({ name, info, info: { corePath } }) {
+const loadModule = async ({ name, info, info: { corePath } }) => {
   try {
     // eslint-disable-next-line import/no-dynamic-require
     const moduleObj = await import(new URL(`${name}/main.js`, corePath))
@@ -28,10 +28,10 @@ const loadModule = async function ({ name, info, info: { corePath } }) {
   }
 }
 
-const loadModuleHandler = function (
+const loadModuleHandler = (
   { code, message },
   { name, info, info: { title } },
-) {
+) => {
   checkModuleNotFound({ code, name, info })
 
   const props = getProps({ info, name })
@@ -44,12 +44,12 @@ const loadModuleHandler = function (
 // This will also be triggered when loading a plugin that tries to import a
 // non-existing file. Unfortunately we cannot distinguish without parsing
 // `error.message` which is brittle.
-const checkModuleNotFound = function ({
+const checkModuleNotFound = ({
   code,
   name,
   info,
   info: { title, modulePrefix },
-}) {
+}) => {
   if (code !== 'MODULE_NOT_FOUND') {
     return
   }
@@ -62,12 +62,12 @@ const checkModuleNotFound = function ({
 }
 
 // Validate export value
-const validateModule = function ({
+const validateModule = ({
   moduleObj,
   moduleObj: { name },
   info,
   info: { title, schema },
-}) {
+}) => {
   const schemaA = addNameSchema({ schema })
   const props = getProps({ info, name })
   checkSchema({
@@ -83,9 +83,10 @@ const validateModule = function ({
 // We restrict module names to make sure they can appear in dot notations
 // in `error.property` without escaping.
 // And also to make sure they are simple to read and write.
-const addNameSchema = function ({ schema, schema: { properties } }) {
-  return { ...schema, properties: { ...properties, name: NAME_SCHEMA } }
-}
+const addNameSchema = ({ schema, schema: { properties } }) => ({
+  ...schema,
+  properties: { ...properties, name: NAME_SCHEMA },
+})
 
 const NAME_SCHEMA = {
   type: 'string',
@@ -93,11 +94,11 @@ const NAME_SCHEMA = {
 }
 
 // Retrieve error.* properties
-const getProps = function ({
+const getProps = ({
   info: { props: getErrorProps, title },
   name,
   addModule = true,
-}) {
+}) => {
   const props = getModuleProp({ title, name, addModule })
 
   if (getErrorProps === undefined) {
@@ -108,7 +109,7 @@ const getProps = function ({
   return { ...props, ...propsA }
 }
 
-const getModuleProp = function ({ title, name, addModule }) {
+const getModuleProp = ({ title, name, addModule }) => {
   if (!addModule) {
     return
   }

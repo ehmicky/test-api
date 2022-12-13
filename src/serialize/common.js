@@ -27,19 +27,16 @@ import { isObject } from '../utils/types.js'
 //  - but serialized to JSON in output for the reasons above
 
 // Check if valid JSON type
-export const isJsonType = function (value) {
-  return (
-    LITERAL_TYPES.has(typeof value) ||
-    value === null ||
-    Array.isArray(value) ||
-    isObject(value)
-  )
-}
+export const isJsonType = (value) =>
+  LITERAL_TYPES.has(typeof value) ||
+  value === null ||
+  Array.isArray(value) ||
+  isObject(value)
 
 const LITERAL_TYPES = new Set(['string', 'number', 'boolean'])
 
 // Error message
-export const getMessage = function ({ value, path }) {
+export const getMessage = ({ value, path }) => {
   const property = getPath(path)
   return `property '${property}' with value '${value}' is invalid: it can only be a JSON type, undefined or a function`
 }

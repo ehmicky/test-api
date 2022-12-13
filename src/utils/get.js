@@ -5,12 +5,12 @@ const { propertyIsEnumerable } = Object.prototype
 // Like Lodash.get() except takes into account objects whose properties
 // have dots
 // E.g. _.get({ a: { 'b.c': true } }, 'a.b.c') does not work
-export const get = function (value, path) {
+export const get = (value, path) => {
   const pathA = removeBrackets({ path })
   return getProperty(value, pathA)
 }
 
-const getProperty = function (value, path) {
+const getProperty = (value, path) => {
   // We can only follow `path` within objects and arrays
   if (!isComplex(value)) {
     return
@@ -37,12 +37,10 @@ const getProperty = function (value, path) {
   return getProperty(child, childPath)
 }
 
-const isComplex = function (value) {
-  return typeof value === 'object' && value !== null
-}
+const isComplex = (value) => typeof value === 'object' && value !== null
 
 // If several keys match, take the largest one
-const getLargestString = function (memo, string) {
+const getLargestString = (memo, string) => {
   if (string.length >= memo.length) {
     return string
   }
@@ -53,7 +51,7 @@ const getLargestString = function (memo, string) {
 // Similar to `get()` but using the longest path that does not
 // return `undefined`.
 // Also set the parent path as a top-level property.
-export const tryGet = function (value, path) {
+export const tryGet = (value, path) => {
   const pathA = splitPath({ path })
 
   // Find longest path that does not return `undefined`
@@ -76,18 +74,18 @@ export const tryGet = function (value, path) {
   return { wrongPath, value: valueB }
 }
 
-const splitPath = function ({ path }) {
+const splitPath = ({ path }) => {
   const pathA = removeBrackets({ path })
   const pathB = pathA.split('.')
   return pathB
 }
 
-const isWrongPath = function ({ path, value, index }) {
+const isWrongPath = ({ path, value, index }) => {
   const pathB = path.slice(0, index + 1).join('.')
   return get(value, pathB) === undefined
 }
 
-const getWrongPath = function ({ path, index }) {
+const getWrongPath = ({ path, index }) => {
   // When no value returned `undefined`
   if (index === -1) {
     return
@@ -96,7 +94,7 @@ const getWrongPath = function ({ path, index }) {
   return path.slice(0, index + 1).join('.')
 }
 
-const getParentPath = function ({ path, index }) {
+const getParentPath = ({ path, index }) => {
   if (index === -1) {
     return path.join('.')
   }
@@ -105,8 +103,7 @@ const getParentPath = function ({ path, index }) {
 }
 
 // Allow array bracket notations `[integer]` by replacing them to dots
-const removeBrackets = function ({ path }) {
-  return path.replace(BRACKETS_REGEXP, '.$1').replace(/^\./u, '')
-}
+const removeBrackets = ({ path }) =>
+  path.replace(BRACKETS_REGEXP, '.$1').replace(/^\./u, '')
 
 const BRACKETS_REGEXP = /\[([\d]+)\]/gu

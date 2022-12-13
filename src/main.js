@@ -23,7 +23,7 @@ import { removeOriginalTasks } from './tasks/original.js'
 //  - run each `plugin.end()`
 // Return tasks on success
 // If any task failed, throw an error instead
-export const run = async function (config = {}) {
+export const run = async (config = {}) => {
   try {
     const configA = loadConfig({ config })
 
@@ -39,7 +39,7 @@ export const run = async function (config = {}) {
 }
 
 // Fire all plugin handlers for all tasks
-const performRun = async function ({ config, tasks, plugins }) {
+const performRun = async ({ config, tasks, plugins }) => {
   try {
     const { tasks: tasksA, allTasks } = await loadTasks({
       config,
@@ -73,12 +73,12 @@ const performRun = async function ({ config, tasks, plugins }) {
 }
 
 // Fire all tasks in parallel
-const fireTasks = function ({ tasks, context, plugins }) {
+const fireTasks = ({ tasks, context, plugins }) => {
   const tasksA = tasks.map((task) => fireTask({ task, context, plugins }))
   return Promise.all(tasksA)
 }
 
-const fireTask = async function ({ task, context, plugins }) {
+const fireTask = async ({ task, context, plugins }) => {
   const taskA = await runTask({ task, context, plugins })
 
   const taskC = await completeTask({ task: taskA, context, plugins })
@@ -86,7 +86,7 @@ const fireTask = async function ({ task, context, plugins }) {
   return taskC
 }
 
-const finalizeTasks = async function ({ tasks, config, context, plugins }) {
+const finalizeTasks = async ({ tasks, config, context, plugins }) => {
   await endTasks({ tasks, config, context, plugins })
 
   const tasksA = removeOriginalTasks({ tasks })

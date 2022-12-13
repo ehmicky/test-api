@@ -5,11 +5,10 @@ import { isObject } from '../../../utils/types.js'
 import { checkIsSchema } from '../../../validation/meta.js'
 
 // Handler JSON schemas in `task.validate.headers|body`
-export const handleJsonSchemas = function ({ validate }) {
-  return lodash.mapValues(validate, handleJsonSchema)
-}
+export const handleJsonSchemas = ({ validate }) =>
+  lodash.mapValues(validate, handleJsonSchema)
 
-const handleJsonSchema = function (value, prop) {
+const handleJsonSchema = (value, prop) => {
   if (!hasJsonSchema({ prop })) {
     return value
   }
@@ -23,12 +22,11 @@ const handleJsonSchema = function (value, prop) {
   return value
 }
 
-const hasJsonSchema = function ({ prop }) {
-  return prop.startsWith('headers.') || prop === 'body'
-}
+const hasJsonSchema = ({ prop }) =>
+  prop.startsWith('headers.') || prop === 'body'
 
 // `task.validate.headers|body: non-object` is shortcut for `{ enum: [value] }`
-const applyShortcut = function ({ value }) {
+const applyShortcut = ({ value }) => {
   const type = guessType(value)
   return { ...type, enum: [value] }
 }
@@ -36,7 +34,7 @@ const applyShortcut = function ({ value }) {
 // When using the shortcut notation, we need to set the `type` to make sure it
 // matches the value (in case it is not set, or set to several types, or set to
 // a different type)
-const guessType = function (value) {
+const guessType = (value) => {
   if (value === undefined) {
     return
   }
@@ -57,7 +55,7 @@ const TYPES = Object.entries({
 })
 
 // Validate `task.validate.headers|body` are valid JSON schemas
-const validateJsonSchema = function ({ value, prop }) {
+const validateJsonSchema = ({ value, prop }) => {
   const valueProp = getPath(['task', 'validate', prop])
   checkIsSchema({ value, valueProp })
 }

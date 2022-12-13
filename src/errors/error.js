@@ -29,7 +29,7 @@ import { getWordsList } from '../utils/string.js'
 //  - `errors` `{array}`: all errors.
 //  - `tasks` `{array}`: all tasks.
 /* eslint-disable fp/no-this */
-const errorCustomClass = function (name) {
+const errorCustomClass = (name) => {
   const CustomErrorClass = class extends Error {
     constructor(message, parameters) {
       super(message, parameters)
@@ -43,14 +43,14 @@ const errorCustomClass = function (name) {
 }
 /* eslint-enable fp/no-this */
 
-const setProps = function (error, { props = {} } = {}) {
+const setProps = (error, { props = {} } = {}) => {
   Object.keys(props).forEach(validateProperty)
   const expected = getExpected({ props })
   setErrorProps(error, { ...props, ...expected })
 }
 
 // Enforce which properties can be attached to `error.*`
-const validateProperty = function (property) {
+const validateProperty = (property) => {
   if (VALID_PROPERTIES_SET.has(property)) {
     return
   }
@@ -77,7 +77,7 @@ const VALID_PROPERTIES = [...USER_VALID_PROPERTIES, ...CORE_VALID_PROPERTIES]
 const VALID_PROPERTIES_SET = new Set(VALID_PROPERTIES)
 
 // Tries to guess `error.expected` from simple `error.schema`
-const getExpected = function ({ props: { schema, expected } }) {
+const getExpected = ({ props: { schema, expected } }) => {
   if (expected !== undefined) {
     return { expected }
   }

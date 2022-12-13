@@ -17,7 +17,7 @@ import { validateInlineTasks } from './validate/inline.js'
 //    streaming-friendly.
 //  - it gives a stronger sense that tasks are run in parallel.
 //  - it allows `task.name` to be `undefined`.
-export const loadTasks = async function ({ tasks }) {
+export const loadTasks = async ({ tasks }) => {
   const fileTasks = await loadFileTasks({ tasks })
 
   const inlineTasks = loadInlineTasks({ tasks })
@@ -33,7 +33,7 @@ export const loadTasks = async function ({ tasks }) {
 }
 
 // Load tasks that are specified in files
-const loadFileTasks = async function ({ tasks }) {
+const loadFileTasks = async ({ tasks }) => {
   const tasksA = tasks.filter((task) => typeof task === 'string')
 
   // Can use globbing
@@ -47,7 +47,7 @@ const loadFileTasks = async function ({ tasks }) {
 }
 
 // Load and parse each task file in parallel
-const loadTaskFile = async function ({ path }) {
+const loadTaskFile = async ({ path }) => {
   const content = await readTaskFile(path)
   const tasks = parseTaskFile({ path, content })
 
@@ -57,7 +57,7 @@ const loadTaskFile = async function ({ path }) {
   return tasksA
 }
 
-const readTaskFile = async function (path) {
+const readTaskFile = async (path) => {
   try {
     return await readFile(path)
   } catch (error) {
@@ -68,7 +68,7 @@ const readTaskFile = async function (path) {
 }
 
 // YAML parsing
-const parseTaskFile = function ({ path, content }) {
+const parseTaskFile = ({ path, content }) => {
   try {
     return loadYaml(content, { ...YAML_OPTS, filename: path })
   } catch (error) {
@@ -81,13 +81,13 @@ const parseTaskFile = function ({ path, content }) {
 const YAML_OPTS = {
   schema: JSON_SCHEMA,
   json: true,
-  onWarning(error) {
+  onWarning: (error) => {
     throw error
   },
 }
 
 // Load tasks that are specified directly as objects
-const loadInlineTasks = function ({ tasks }) {
+const loadInlineTasks = ({ tasks }) => {
   const tasksA = tasks.filter((task) => typeof task !== 'string')
 
   validateInlineTasks({ tasks: tasksA })

@@ -23,7 +23,7 @@ import { getPluginsVars } from './plugin.js'
 //    many issues
 //  - templating is a user-facing feature. Plugin writers can import template
 //    functions directly and use their functions if needed.
-export const run = function (task, context) {
+export const run = (task, context) => {
   const { vars, pluginsVarsMap } = getVars({ task, context })
 
   const noEvalProps = includeKeys(task, NO_EVAL_PROPS)
@@ -39,7 +39,7 @@ const NO_EVAL_PROPS = ['originalTask', 'key', 'variables', 'template']
 
 // Retrieving variables cannot happen during a `start` handler because we might
 // need to pass `context._runTask()`, e.g. to `variables` `plugin.template()`
-const getVars = function ({ task: { template: taskTemplates }, context }) {
+const getVars = ({ task: { template: taskTemplates }, context }) => {
   const { pluginsVars, pluginsVarsMap } = getPluginsVars({ context })
 
   const vars = { ...pluginsVars, ...taskTemplates }
@@ -47,7 +47,7 @@ const getVars = function ({ task: { template: taskTemplates }, context }) {
   return { vars, pluginsVarsMap }
 }
 
-const evalTaskTemplate = function ({ task, vars, pluginsVarsMap }) {
+const evalTaskTemplate = ({ task, vars, pluginsVarsMap }) => {
   try {
     const retVal = evalTemplate(task, vars)
     return retVal && typeof retVal.then === 'function'
@@ -61,7 +61,7 @@ const evalTaskTemplate = function ({ task, vars, pluginsVarsMap }) {
 
 // Update `originalTask` so that templates are shown evaluated in both return
 // value and reporting
-const returnTask = function ({ task, noEvalProps }) {
+const returnTask = ({ task, noEvalProps }) => {
   const taskA = { ...task, ...noEvalProps }
 
   // No nested `originalTask` in final return value

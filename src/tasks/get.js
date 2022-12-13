@@ -6,7 +6,7 @@ import { loadTasks } from './load.js'
 import { validateTasksSyntax } from './validate/syntax.js'
 
 // Retrieve tasks as an array of normalized task objects
-export const getTasks = async function ({ config: { tasks } }) {
+export const getTasks = async ({ config: { tasks } }) => {
   const tasksA = await loadTasks({ tasks })
 
   validateTasksSyntax({ tasks: tasksA })
@@ -16,13 +16,12 @@ export const getTasks = async function ({ config: { tasks } }) {
 }
 
 // Validate tasks are JSON and turn `undefined` strings into actual `undefined`
-const parseTasks = function ({ tasks }) {
-  return tasks.map((task) =>
+const parseTasks = ({ tasks }) =>
+  tasks.map((task) =>
     parseInput(task, throwParseError.bind(undefined, task.key)),
   )
-}
 
-const throwParseError = function (key, { message, value, path }) {
+const throwParseError = (key, { message, value, path }) => {
   const property = getPath(['task', ...path])
   throw new TestApiError(`Task '${key}' ${message}`, {
     props: { task: key, value, property },

@@ -10,11 +10,11 @@ import { getAddedProps } from './added.js'
 //    any user input is also present unchanged in the output.
 //  - other properties that have been added by the task handler are returned too
 // Note that `task.done` is not kept
-export const getTaskReturn = function ({
+export const getTaskReturn = ({
   task,
   task: { key, scope, name, skipped, error, originalTask },
   plugins,
-}) {
+}) => {
   const pluginReturns = getPluginReturns({ plugins, task })
 
   // Enforce properties order: `key`, `skipped`, `error`, added `task.*`,
@@ -36,7 +36,7 @@ export const getTaskReturn = function ({
 }
 
 // Keep `originalTask.*` for properties in `plugin.config.task.*`
-const getPluginReturns = function ({ plugins, task }) {
+const getPluginReturns = ({ plugins, task }) => {
   const pluginReturns = plugins.map((plugin) =>
     getPluginReturn({ task, plugin }),
   )
@@ -44,7 +44,7 @@ const getPluginReturns = function ({ plugins, task }) {
   return pluginReturnsA
 }
 
-const getPluginReturn = function ({ task, plugin, plugin: { name } }) {
+const getPluginReturn = ({ task, plugin, plugin: { name } }) => {
   const returnValue = getReturnValue({ task, plugin })
 
   if (returnValue === undefined) {
@@ -54,12 +54,12 @@ const getPluginReturn = function ({ task, plugin, plugin: { name } }) {
   return { [name]: returnValue }
 }
 
-const getReturnValue = function ({
+const getReturnValue = ({
   task,
   task: { originalTask },
   plugin,
   plugin: { name },
-}) {
+}) => {
   const addedProps = getAddedProps({ task, plugin })
 
   const originalValue = originalTask[name]
@@ -75,6 +75,4 @@ const getReturnValue = function ({
   return { ...addedProps, ...originalValue }
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined

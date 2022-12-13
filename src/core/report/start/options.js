@@ -8,7 +8,7 @@ import { COMMON_OPTIONS_SCHEMA } from './common_options_schema.js'
 import { normalizeOutput } from './output.js'
 
 // Add `config.report.REPORTER.*` as `reporter.options`
-export const addOptions = async function ({ reporters, config, context }) {
+export const addOptions = async ({ reporters, config, context }) => {
   const promises = reporters.map((reporter) =>
     addReporterOptions({ reporter, config, context }),
   )
@@ -18,7 +18,7 @@ export const addOptions = async function ({ reporters, config, context }) {
   return reportersB
 }
 
-const addReporterOptions = async function ({ reporter, config, context }) {
+const addReporterOptions = async ({ reporter, config, context }) => {
   const options = getOptions({ reporter, config })
 
   validateOptions({ reporter, options })
@@ -36,10 +36,10 @@ const addReporterOptions = async function ({ reporter, config, context }) {
 }
 
 // Retrieve `config.report.REPORTER.*`
-const getOptions = function ({
+const getOptions = ({
   reporter: { name },
   config: { report = {}, report: { [name]: options = {} } = {} },
-}) {
+}) => {
   // Can use `config.report.level|output` to set those for any reporter
   const globalOptions = includeKeys(report, Object.keys(COMMON_OPTIONS_SCHEMA))
 
@@ -52,12 +52,10 @@ const getOptions = function ({
   return { ...globalOptions, ...optionsA }
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined
 
 // Validate `config.report.REPORTER.*` against `reporter.config`
-const validateOptions = function ({ reporter, reporter: { name }, options }) {
+const validateOptions = ({ reporter, reporter: { name }, options }) => {
   const schema = getOptionsSchema({ reporter })
 
   checkSchema({
@@ -69,14 +67,14 @@ const validateOptions = function ({ reporter, reporter: { name }, options }) {
   })
 }
 
-const getOptionsSchema = function ({ reporter: { config } }) {
+const getOptionsSchema = ({ reporter: { config } }) => {
   const properties = { ...COMMON_OPTIONS_SCHEMA, ...config }
   return { type: 'object', properties, additionalProperties: false }
 }
 
 // Normalize `config.report.REPORTER.level|output` and set to
 // `reporter.options.level|output`
-const normalizeOptions = async function ({ options, reporter }) {
+const normalizeOptions = async ({ options, reporter }) => {
   const level = normalizeLevel({ options, reporter })
 
   const output = await normalizeOutput({ options, reporter })
@@ -88,11 +86,11 @@ const normalizeOptions = async function ({ options, reporter }) {
 // This can only add new options not transform existing ones.
 // In particular, it cannot change `level|output` as `level` needs to be used
 // before this point (when checking whether level is `silent`)
-const transformOptions = function ({
+const transformOptions = ({
   reporter: { options: reporterOptions },
   options,
   context,
-}) {
+}) => {
   if (reporterOptions === undefined) {
     return options
   }

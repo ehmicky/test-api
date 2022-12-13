@@ -6,7 +6,7 @@ import { LINE, COLORS, MARKS } from '../constants.js'
 
 // Print a summary of each task: skipped tasks names, then passed tasks names,
 // then failed tasks names + error messages
-export const printTasksList = function ({ tasks, options }) {
+export const printTasksList = ({ tasks, options }) => {
   const tasksList = RESULT_TYPES
     // Filter according to `config.report.REPORTER.level`
     .filter((resultType) => !isSilentType({ resultType, options }))
@@ -26,14 +26,13 @@ export const printTasksList = function ({ tasks, options }) {
 // Order matters
 const RESULT_TYPES = ['skip', 'pass', 'fail']
 
-const printTasks = function ({ tasks, resultType }) {
-  return tasks
+const printTasks = ({ tasks, resultType }) =>
+  tasks
     .filter((task) => getResultType(task) === resultType)
     .map((task) => printTask({ task, resultType }))
     .join('\n')
-}
 
-const printTask = function ({ task, task: { key }, resultType }) {
+const printTask = ({ task, task: { key }, resultType }) => {
   const taskA = TASK_PRINTERS[resultType]({ task, key })
 
   const taskB = `${MARKS[resultType]}  ${taskA}`
@@ -41,22 +40,16 @@ const printTask = function ({ task, task: { key }, resultType }) {
   return taskC
 }
 
-const printTaskSkip = function ({ key }) {
-  return key
-}
+const printTaskSkip = ({ key }) => key
 
-const printTaskPass = function ({ key }) {
-  return key
-}
+const printTaskPass = ({ key }) => key
 
-const printTaskFail = function ({
+const printTaskFail = ({
   key,
   task: {
     error: { message },
   },
-}) {
-  return `${key}\n${gray(indent(message, 1))}`
-}
+}) => `${key}\n${gray(indent(message, 1))}`
 
 const TASK_PRINTERS = {
   skip: printTaskSkip,

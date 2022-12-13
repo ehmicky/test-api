@@ -17,14 +17,14 @@ import { defaultInstance } from './instance.js'
 //    the error
 //  - error.valuePath|schemaPath: path to error.value|schema.
 //    Can be prefixed by `arg.valueProp|schemaProp`
-const validateFromSchema = function ({
+const validateFromSchema = ({
   schema,
   value,
   valueProp,
   schemaProp,
   message,
   instance = defaultInstance,
-}) {
+}) => {
   const passed = instance.validate(schema, value)
 
   if (passed) {
@@ -44,14 +44,7 @@ const validateFromSchema = function ({
   return errorA
 }
 
-const getError = function ({
-  error,
-  schema,
-  value,
-  schemaProp,
-  valueProp,
-  message,
-}) {
+const getError = ({ error, schema, value, schemaProp, valueProp, message }) => {
   const messageA = getMessage({ error, message, valueProp })
 
   const errorPath = getErrorPath({ error })
@@ -73,7 +66,7 @@ const getError = function ({
   return errorB
 }
 
-const getMessage = function ({ error, message, valueProp }) {
+const getMessage = ({ error, message, valueProp }) => {
   const messagePrefix = getMessagePrefix({ message, valueProp })
   const errorMessage = Ajv.prototype
     .errorsText([error], { dataVar: '' })
@@ -83,7 +76,7 @@ const getMessage = function ({ error, message, valueProp }) {
 
 const FIRST_CHAR_REGEXP = /^[. ]/u
 
-const getMessagePrefix = function ({ message, valueProp }) {
+const getMessagePrefix = ({ message, valueProp }) => {
   if (message !== undefined) {
     return underscoreString.capitalize(message)
   }
@@ -98,13 +91,12 @@ const getMessagePrefix = function ({ message, valueProp }) {
 // `error.dataPath` is properly escaped, e.g. can be `.NAME`, `[INDEX]` or
 // `["NAME"]` for names that need to be escaped.
 // However it starts with a dot, which we strip.
-const getErrorPath = function ({ error: { dataPath } }) {
-  return dataPath.replace(FIRST_DOT_REGEXP, '')
-}
+const getErrorPath = ({ error: { dataPath } }) =>
+  dataPath.replace(FIRST_DOT_REGEXP, '')
 
 const FIRST_DOT_REGEXP = /^\./u
 
-const getValue = function ({ errorPath, value }) {
+const getValue = ({ errorPath, value }) => {
   if (errorPath === '') {
     return value
   }
@@ -113,28 +105,26 @@ const getValue = function ({ errorPath, value }) {
   return lodash.get(value, errorPath)
 }
 
-const getValuePath = function ({ errorPath, valueProp }) {
-  return concatProp(valueProp, errorPath)
-}
+const getValuePath = ({ errorPath, valueProp }) =>
+  concatProp(valueProp, errorPath)
 
-const getSchemaParts = function ({ error: { schemaPath } }) {
-  return jsonPointerToParts(schemaPath)
-}
+const getSchemaParts = ({ error: { schemaPath } }) =>
+  jsonPointerToParts(schemaPath)
 
-const getSchema = function ({ schemaParts, schema }) {
+const getSchema = ({ schemaParts, schema }) => {
   const key = schemaParts[schemaParts.length - 1]
   // eslint-disable-next-line you-dont-need-lodash-underscore/get
   const value = lodash.get(schema, schemaParts)
   return { [key]: value }
 }
 
-const getSchemaPath = function ({ schemaParts, schemaProp }) {
+const getSchemaPath = ({ schemaParts, schemaProp }) => {
   const schemaPath = getPath(schemaParts)
   const schemaPathA = concatProp(schemaProp, schemaPath)
   return schemaPathA
 }
 
-const concatProp = function (prop, path) {
+const concatProp = (prop, path) => {
   if (prop === undefined) {
     return path
   }
@@ -150,9 +140,7 @@ const concatProp = function (prop, path) {
   return `${prop}.${path}`
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined
 
 // Compilation is automatically memoized by `ajv` but not validation
 const mValidateFromSchema = moize(validateFromSchema, {

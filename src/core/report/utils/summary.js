@@ -1,7 +1,7 @@
 import { getResultType } from './result_type.js'
 
 // Retrieve `tasks` summarized numbers
-export const getSummary = function ({ tasks }) {
+export const getSummary = ({ tasks }) => {
   const total = tasks.length
 
   const resultTypes = tasks.map(getResultType)

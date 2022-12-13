@@ -1,7 +1,7 @@
 import { isObject } from '../../../../../utils/types.js'
 
 // Check input arguments
-export const checkArgument = function (value, type) {
+export const checkArgument = (value, type) => {
   const isValid = TYPES[type](value)
 
   if (isValid) {

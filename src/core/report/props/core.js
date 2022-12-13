@@ -1,14 +1,14 @@
 import { isSimpleSchema } from '../../../utils/simple_schema.js'
 
 // Add core `reportProps`
-export const addCoreReportProps = function ({ reportProps, task }) {
+export const addCoreReportProps = ({ reportProps, task }) => {
   const coreReportProps = getCoreReportProps(task)
   // Merged with lower priority, and appear at beginning
   return [coreReportProps, ...reportProps]
 }
 
 // Core `reportProps` always present on error
-const getCoreReportProps = function ({
+const getCoreReportProps = ({
   error: {
     expected,
     value,
@@ -17,7 +17,7 @@ const getCoreReportProps = function ({
     schema,
     module: moduleProp,
   } = {},
-}) {
+}) => {
   const values = getValues({ expected, value })
   const schemaA = getJsonSchema({ schema })
   const propertyA = getProperty({ property })
@@ -32,7 +32,7 @@ const getCoreReportProps = function ({
   }
 }
 
-const getValues = function ({ expected, value }) {
+const getValues = ({ expected, value }) => {
   if (expected === undefined) {
     return { value }
   }
@@ -40,7 +40,7 @@ const getValues = function ({ expected, value }) {
   return { 'actual value': value, 'expected value': expected }
 }
 
-const getJsonSchema = function ({ schema }) {
+const getJsonSchema = ({ schema }) => {
   // Do not print JSON schemas which are simplistic, as they do not provide
   // extra information over `Expected value`
   if (isSimpleSchema(schema)) {
@@ -50,7 +50,7 @@ const getJsonSchema = function ({ schema }) {
   return schema
 }
 
-const getProperty = function ({ property }) {
+const getProperty = ({ property }) => {
   if (property === undefined) {
     return
   }
@@ -61,7 +61,7 @@ const getProperty = function ({ property }) {
 const PROPERTY_REGEXP = /^task\./u
 
 // From `module: plugin|reporter-NAME` to `Plugin|Reporter: NAME`
-const getModule = function ({ moduleProp }) {
+const getModule = ({ moduleProp }) => {
   if (moduleProp === undefined) {
     return
   }

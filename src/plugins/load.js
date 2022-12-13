@@ -8,7 +8,7 @@ import { verifyConfig } from './verify.js'
 
 // Retrieve `config.plugins` then import all the plugins
 // Also validate their configuration
-export const loadPlugins = async function ({ config, config: { plugins } }) {
+export const loadPlugins = async ({ config, config: { plugins } }) => {
   const pluginsA = normalizePlugins({ plugins })
 
   const pluginsB = await Promise.all(
@@ -17,7 +17,7 @@ export const loadPlugins = async function ({ config, config: { plugins } }) {
   return pluginsB
 }
 
-const normalizePlugins = function ({ plugins }) {
+const normalizePlugins = ({ plugins }) => {
   // Specifing core plugins is a noop
   const pluginsA = lodash.difference(plugins, CORE_PLUGINS)
 
@@ -42,7 +42,7 @@ const CORE_PLUGINS = [
 // TODO: use a separate bundled package instead
 const DEFAULT_PLUGINS = ['spec', 'call', 'validate']
 
-const loadPlugin = async function ({ name, config }) {
+const loadPlugin = async ({ name, config }) => {
   const plugin = await getModule(name, MODULE_OPTS)
 
   validateJsonSchemas({ plugin })

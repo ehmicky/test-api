@@ -4,10 +4,10 @@ import { stdout } from 'node:process'
 import { TestApiError } from '../../../errors/error.js'
 
 // Where to output report according to `config.report.REPORTER.output`
-export const normalizeOutput = async function ({
+export const normalizeOutput = async ({
   options: { output },
   reporter: { name },
-}) {
+}) => {
   // When `config.report.REPORTER.output` is `undefined` (default), write to
   // `stdout`
   if (output === undefined) {
@@ -25,11 +25,10 @@ export const normalizeOutput = async function ({
   }
 }
 
-const getFileStream = function (output) {
+const getFileStream = (output) =>
   // eslint-disable-next-line promise/avoid-new
-  return new Promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     const stream = createWriteStream(output)
     stream.on('open', resolve.bind(undefined, stream))
     stream.on('error', reject)
   })
-}

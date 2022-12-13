@@ -1,7 +1,7 @@
 import { checkSchema } from '../validation/check.js'
 
 // Validate configuration
-export const validateConfig = function ({ config }) {
+export const validateConfig = ({ config }) => {
   checkSchema({
     schema: CONFIG_SCHEMA,
     value: config,

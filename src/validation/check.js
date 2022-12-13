@@ -10,7 +10,7 @@ import { validateFromSchema } from './validate.js'
 // `error.value|schema|property` set accordingly
 // As opposed to `validateFromSchema()` which is meant to be separated in its
 // own repository, this is meant only for this project.
-export const checkSchema = function ({ bug = false, value, ...opts }) {
+export const checkSchema = ({ bug = false, value, ...opts }) => {
   const valueA = removeUndefined({ value })
 
   const error = validateFromSchema({ ...opts, value: valueA })
@@ -35,11 +35,9 @@ export const checkSchema = function ({ bug = false, value, ...opts }) {
 //    this is problematic as `undefined` should behave as if the key was not
 //    defined.
 // I.e. we remove `undefined` values deeply
-const removeUndefined = function ({ value }) {
-  return crawl(value, removeUndefinedProp)
-}
+const removeUndefined = ({ value }) => crawl(value, removeUndefinedProp)
 
-const removeUndefinedProp = function (value) {
+const removeUndefinedProp = (value) => {
   if (!isObject(value)) {
     return value
   }
@@ -47,19 +45,17 @@ const removeUndefinedProp = function (value) {
   return excludeKeys(value, isUndefined)
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined
 
-const getErrorProps = function ({
+const getErrorProps = ({
   opts: { schemaProp, props },
   error: { value, schema, valuePath, schemaPath },
-}) {
+}) => {
   const property = getProperty({ schemaProp, valuePath, schemaPath })
   return { value, schema, ...property, ...props }
 }
 
-const getProperty = function ({ schemaProp, valuePath, schemaPath }) {
+const getProperty = ({ schemaProp, valuePath, schemaPath }) => {
   const property = schemaProp === undefined ? valuePath : schemaPath
 
   if (property === '') {

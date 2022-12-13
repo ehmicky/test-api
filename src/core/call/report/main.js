@@ -7,12 +7,7 @@ import { stringify } from '../../report/utils/stringify.js'
 
 import { getTitle } from './title.js'
 
-export const report = function ({
-  rawRequest,
-  rawResponse,
-  request,
-  response,
-} = {}) {
+export const report = ({ rawRequest, rawResponse, request, response } = {}) => {
   // We haven't reached `serialize` stage yet
   if (rawRequest === undefined) {
     return {}
@@ -32,11 +27,11 @@ export const report = function ({
 }
 
 // Print HTTP request in error messages
-const getRequest = function ({
+const getRequest = ({
   rawRequest,
   rawRequest: { method, url, path },
   request: { body = rawRequest.body } = {},
-}) {
+}) => {
   const urlA = printUrl({ method, url, path })
   const headersA = printHeaders(rawRequest)
   const bodyA = printBody({ body })
@@ -45,11 +40,11 @@ const getRequest = function ({
 }
 
 // Print HTTP response in error messages
-const getResponse = function ({
+const getResponse = ({
   rawResponse = {},
   rawResponse: { status } = {},
   response: { body = rawResponse.body } = {},
-}) {
+}) => {
   // We haven't reached `request` stage yet
   if (status === undefined) {
     return
@@ -62,20 +57,16 @@ const getResponse = function ({
   return `${statusA}\n\n${headersA}${bodyA}\n`
 }
 
-const printUrl = function ({ method, path, url = path }) {
+const printUrl = ({ method, path, url = path }) => {
   const methodA = printMethod({ method })
   return `${methodA} ${url}\n\n`
 }
 
-const printMethod = function ({ method }) {
-  return yellow(method.toUpperCase())
-}
+const printMethod = ({ method }) => yellow(method.toUpperCase())
 
-const printStatus = function ({ status }) {
-  return `${yellow('Status:')} ${status}`
-}
+const printStatus = ({ status }) => `${yellow('Status:')} ${status}`
 
-const printHeaders = function (object) {
+const printHeaders = (object) => {
   const headers = removePrefixes(object, 'headers')
   const headersA = Object.entries(headers).map(printHeader)
   const headersB = sortArray(headersA)
@@ -83,14 +74,14 @@ const printHeaders = function (object) {
   return headersC
 }
 
-const printHeader = function ([name, value]) {
+const printHeader = ([name, value]) => {
   // Both `request.headers.*` and `response.headers.*` are normalized
   // to lowercase
   const nameA = underscoreString.titleize(name)
   return `${yellow(`${nameA}:`)} ${value}`
 }
 
-const printBody = function ({ body }) {
+const printBody = ({ body }) => {
   if (isEmptyBody({ body })) {
     return ''
   }
@@ -100,6 +91,5 @@ const printBody = function ({ body }) {
   return bodyB
 }
 
-const isEmptyBody = function ({ body }) {
-  return body === undefined || (typeof body === 'string' && body.trim() === '')
-}
+const isEmptyBody = ({ body }) =>
+  body === undefined || (typeof body === 'string' && body.trim() === '')

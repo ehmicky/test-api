@@ -1,7 +1,7 @@
 // Similar to `await retVal` and `Promise.resolve(retVal).then()`
 // As opposed to them, this does not create a new promise callback if the
 // return value is synchronous, i.e. it avoids unnecessary new microtasks
-export const promiseThen = function (retVal, func) {
+export const promiseThen = (retVal, func) => {
   if (!isPromise(retVal)) {
     return func(retVal)
   }
@@ -14,12 +14,12 @@ export const promiseThen = function (retVal, func) {
 // `Promise.all([...retVals]).then()`
 // As opposed to them, this does not create a new promise callback if the
 // return value is synchronous, i.e. it avoids unnecessary new microtasks
-export const promiseAllThen = function (retVals, func) {
+export const promiseAllThen = (retVals, func) => {
   const retValsA = promiseAll(retVals)
   return promiseThen(retValsA, func)
 }
 
-export const promiseAll = function (retVals) {
+export const promiseAll = (retVals) => {
   if (!retVals.some(isPromise)) {
     return retVals
   }
@@ -27,6 +27,4 @@ export const promiseAll = function (retVals) {
   return Promise.all(retVals)
 }
 
-const isPromise = function (retVal) {
-  return retVal && typeof retVal.then === 'function'
-}
+const isPromise = (retVal) => retVal && typeof retVal.then === 'function'

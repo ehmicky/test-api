@@ -12,7 +12,7 @@ import { parseConfig } from './parse.js'
 import { defineCli } from './top.js'
 
 // Parse CLI arguments then run tasks
-const runCli = async function () {
+const runCli = async () => {
   try {
     await checkUpdate()
 
@@ -27,12 +27,11 @@ const runCli = async function () {
 
 // Do not print error message if the error happened during task running, as
 // it's already been reported using `report`
-const isSilentError = function (error) {
-  return error instanceof Error && error.tasks !== undefined
-}
+const isSilentError = (error) =>
+  error instanceof Error && error.tasks !== undefined
 
 // TODO: use static JSON imports once those are possible
-const checkUpdate = async function () {
+const checkUpdate = async () => {
   const cwd = dirname(fileURLToPath(import.meta.url))
   const { packageJson } = await readPackageUp({ cwd, normalize: false })
   updateNotifier({ pkg: packageJson }).notify()

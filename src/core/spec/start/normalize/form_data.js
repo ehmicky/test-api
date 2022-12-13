@@ -1,7 +1,7 @@
 // When using a `formData` parameter, make sure the `Content-Type` request
 // header includes `urlencoded` or `multipart/form-data`
 // When using a `body` parameter, do the opposite.
-export const filterFormDataMimes = function ({ mimes, params }) {
+export const filterFormDataMimes = ({ mimes, params }) => {
   if (hasFormDataParams({ params })) {
     return keepFormDataMimes({ mimes })
   }
@@ -9,11 +9,9 @@ export const filterFormDataMimes = function ({ mimes, params }) {
   return removeFormDataMimes({ mimes })
 }
 
-const hasFormDataParams = function ({ params }) {
-  return Object.keys(params).some(isFormData)
-}
+const hasFormDataParams = ({ params }) => Object.keys(params).some(isFormData)
 
-const keepFormDataMimes = function ({ mimes }) {
+const keepFormDataMimes = ({ mimes }) => {
   const mimesA = mimes.filter(isFormDataMime)
 
   // This means the spec `consumes` property does not allow `formData` MIMEs,
@@ -26,7 +24,7 @@ const keepFormDataMimes = function ({ mimes }) {
   return mimesA
 }
 
-const removeFormDataMimes = function ({ mimes }) {
+const removeFormDataMimes = ({ mimes }) => {
   const mimesA = mimes.filter((mime) => !isFormDataMime(mime))
 
   // This means the spec `consumes` property only allow `formData` MIMEs
@@ -39,21 +37,16 @@ const removeFormDataMimes = function ({ mimes }) {
   return mimesA
 }
 
-const isFormDataMime = function (mime) {
-  return FORM_DATA_MIMES.some((formDataMime) => mime.startsWith(formDataMime))
-}
+const isFormDataMime = (mime) =>
+  FORM_DATA_MIMES.some((formDataMime) => mime.startsWith(formDataMime))
 
 const FORM_DATA_MIMES = [
   'application/x-www-form-urlencoded',
   'multipart/form-data',
 ]
 
-export const isFormData = function (key) {
-  return FORM_DATA_REGEXP.test(key)
-}
+export const isFormData = (key) => FORM_DATA_REGEXP.test(key)
 
-export const removeFormDataPrefix = function (key) {
-  return key.replace(FORM_DATA_REGEXP, '')
-}
+export const removeFormDataPrefix = (key) => key.replace(FORM_DATA_REGEXP, '')
 
 const FORM_DATA_REGEXP = /^formData\./u

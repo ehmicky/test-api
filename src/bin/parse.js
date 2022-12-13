@@ -1,6 +1,6 @@
 import { excludeKeys } from 'filter-obj'
 
-export const parseConfig = function ({ yargs }) {
+export const parseConfig = ({ yargs }) => {
   const { _: tasks, ...config } = yargs.parse()
 
   const configA = excludeKeys(config, isInternalOpt)
@@ -11,13 +11,10 @@ export const parseConfig = function ({ yargs }) {
 }
 
 // Remove `yargs`-specific options, shortcuts and dash-cased
-const isInternalOpt = function (key, value) {
-  return (
-    value === undefined ||
-    INTERNAL_KEYS.has(key) ||
-    key.length === 1 ||
-    key.includes('-')
-  )
-}
+const isInternalOpt = (key, value) =>
+  value === undefined ||
+  INTERNAL_KEYS.has(key) ||
+  key.length === 1 ||
+  key.includes('-')
 
 const INTERNAL_KEYS = new Set(['help', 'version', '_', '$0'])

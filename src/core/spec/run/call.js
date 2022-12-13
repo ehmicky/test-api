@@ -10,7 +10,7 @@ import { getSpecialValues } from './special.js'
 const { $$random: randomHelper } = template
 
 // Add OpenAPI specification parameters to `task.call.*`
-export const addSpecToCall = function ({ call, operation: { params } }) {
+export const addSpecToCall = ({ call, operation: { params } }) => {
   // Make sure `task.call` remains `undefined` if it is and no parameter is
   // added
   if (Object.keys(params).length === 0) {

@@ -1,15 +1,13 @@
 import { promiseThen } from './promise.js'
 
 // Like Array.reduce(), but supports async
-export const reduceAsync = function (
+export const reduceAsync = (
   array,
   mapFunc,
   { prevVal, secondMapFunc, stopFunc },
-) {
-  return asyncReducer(prevVal, { array, mapFunc, secondMapFunc, stopFunc })
-}
+) => asyncReducer(prevVal, { array, mapFunc, secondMapFunc, stopFunc })
 
-const asyncReducer = function (prevVal, input) {
+const asyncReducer = (prevVal, input) => {
   const { array, mapFunc, stopFunc, index = 0 } = input
 
   if (index === array.length) {
@@ -26,7 +24,7 @@ const asyncReducer = function (prevVal, input) {
   return promiseThen(nextVal, applySecondMap.bind(undefined, prevVal, inputA))
 }
 
-const applySecondMap = function (prevVal, input, nextVal) {
+const applySecondMap = (prevVal, input, nextVal) => {
   if (input.secondMapFunc === undefined) {
     return asyncReducer(nextVal, input)
   }

@@ -5,7 +5,7 @@ import { crawl } from '../../../../utils/crawl.js'
 
 // OpenAPI schemas are not 100% valid JSON schemas v4, so we use a library to
 // convert them
-export const normalizeSchema = function ({ schema }) {
+export const normalizeSchema = ({ schema }) => {
   const schemaA = normalizeKeys({ schema })
 
   // At the moment, this function should not throw because we already validated
@@ -18,11 +18,10 @@ export const normalizeSchema = function ({ schema }) {
   return schemaC
 }
 
-const normalizeKeys = function ({ schema }) {
-  return crawl(schema, undefined, { evalKey: normalizeKey })
-}
+const normalizeKeys = ({ schema }) =>
+  crawl(schema, undefined, { evalKey: normalizeKey })
 
-const normalizeKey = function (key) {
+const normalizeKey = (key) => {
   if (KEYS[key] !== undefined) {
     return KEYS[key]
   }

@@ -3,10 +3,10 @@ import METHODS from 'methods'
 import { TestApiError } from '../../../../errors/error.js'
 
 // Validate `task.call.method` and add default value
-export const normalizeMethod = function ({
+export const normalizeMethod = ({
   call,
   call: { method = DEFAULT_METHOD },
-}) {
+}) => {
   validateMethod({ method })
 
   return { ...call, method }
@@ -14,7 +14,7 @@ export const normalizeMethod = function ({
 
 const DEFAULT_METHOD = 'GET'
 
-const validateMethod = function ({ method }) {
+const validateMethod = ({ method }) => {
   if (METHODS_SET.has(method.toLowerCase())) {
     return
   }

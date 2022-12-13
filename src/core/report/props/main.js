@@ -7,7 +7,7 @@ import { isObject } from '../../../utils/types.js'
 import { addCoreReportProps } from './core.js'
 
 // Get plugin-specific properties printed on reporting
-export const getReportProps = function ({ task, context }) {
+export const getReportProps = ({ task, context }) => {
   const { titles, reportProps } = callReportFuncs({ task, context })
 
   const reportPropsA = addCoreReportProps({ reportProps, task })
@@ -23,11 +23,7 @@ export const getReportProps = function ({ task, context }) {
 }
 
 // Find and call all `plugin.report()`
-const callReportFuncs = function ({
-  task,
-  context,
-  context: { _plugins: plugins },
-}) {
+const callReportFuncs = ({ task, context, context: { _plugins: plugins } }) => {
   // Reporting order will follow core plugins order, then user `config.plugins`
   // order
   const reportResult = plugins.map((plugin) =>
@@ -44,7 +40,7 @@ const callReportFuncs = function ({
 }
 
 // Call `plugin.report()`
-const callReportFunc = function ({ plugin: { report, name }, context, task }) {
+const callReportFunc = ({ plugin: { report, name }, context, task }) => {
   const taskValue = task[name]
 
   // If no `plugin.report()`, reports task as is
@@ -68,7 +64,7 @@ const callReportFunc = function ({ plugin: { report, name }, context, task }) {
   return { title, [name]: reportProps }
 }
 
-const getReportValue = function ({ report, context, taskValue }) {
+const getReportValue = ({ report, context, taskValue }) => {
   const contextA = omit.default(context, OMITTED_CONTEXT_PROPS)
   const reportValue = report(taskValue, contextA)
   return reportValue
@@ -76,10 +72,10 @@ const getReportValue = function ({ report, context, taskValue }) {
 
 const OMITTED_CONTEXT_PROPS = ['options', 'silent']
 
-const mergeReportValue = function ({
+const mergeReportValue = ({
   reportValue: { title, ...reportProps },
   taskValue,
-}) {
+}) => {
   // Merge `plugin.report()` to task.PLUGIN.*
   // It should have priority, but also be first in properties order
   const reportPropsA = { ...reportProps, ...taskValue, ...reportProps }
@@ -89,19 +85,12 @@ const mergeReportValue = function ({
   return { title, reportProps: reportPropsB }
 }
 
-const hasNoReportProps = function ({ reportProps, taskValue }) {
-  return Object.keys(reportProps).length === 0 && taskValue === undefined
-}
+const hasNoReportProps = ({ reportProps, taskValue }) =>
+  Object.keys(reportProps).length === 0 && taskValue === undefined
 
-const isDefinedTitle = function (title) {
-  return title !== undefined && title.trim() !== ''
-}
+const isDefinedTitle = (title) => title !== undefined && title.trim() !== ''
 
 // Do not print properties that are not present
-const removeEmptyProps = function (object) {
-  return excludeKeys(object, isUndefined)
-}
+const removeEmptyProps = (object) => excludeKeys(object, isUndefined)
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined

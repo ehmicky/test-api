@@ -3,10 +3,7 @@ import { getDirective } from './directive.js'
 import { getErrorProps } from './error_props.js'
 
 // TAP assert
-export const assert = function (
-  state,
-  { ok, name = '', directive = {}, error },
-) {
+export const assert = (state, { ok, name = '', directive = {}, error }) => {
   const category = getCategory({ ok, directive })
 
   const index = updateState({ state, category })
@@ -24,7 +21,7 @@ export const assert = function (
   )
 }
 
-const getCategory = function ({ ok, directive: { skip } }) {
+const getCategory = ({ ok, directive: { skip } }) => {
   if (skip !== undefined && skip !== false) {
     return 'skip'
   }
@@ -37,14 +34,14 @@ const getCategory = function ({ ok, directive: { skip } }) {
 }
 
 // Update index|tests|pass|skip|fail counters
-const updateState = function ({ state, category }) {
+const updateState = ({ state, category }) => {
   state[category] += 1
 
   state.index += 1
   return state.index
 }
 
-const getOk = function ({ ok }) {
+const getOk = ({ ok }) => {
   checkArgument(ok, 'boolean')
 
   if (ok) {
@@ -54,7 +51,7 @@ const getOk = function ({ ok }) {
   return 'not ok'
 }
 
-const getName = function ({ name }) {
+const getName = ({ name }) => {
   checkArgument(name, 'string')
 
   if (name === '') {

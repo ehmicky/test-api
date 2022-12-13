@@ -4,7 +4,7 @@ import { callReporters } from './call.js'
 import { filterTaskData } from './level/task_data.js'
 
 // Ends reporting
-export const end = async function (tasks, context) {
+export const end = async (tasks, context) => {
   const {
     startData: {
       report: { reporters },
@@ -19,6 +19,5 @@ export const end = async function (tasks, context) {
   await callReporters({ reporters, type: 'end' }, arg, context)
 }
 
-const getArg = function ({ tasks, plugins }, { options }) {
-  return tasks.map((task) => filterTaskData({ task, options, plugins }))
-}
+const getArg = ({ tasks, plugins }, { options }) =>
+  tasks.map((task) => filterTaskData({ task, options, plugins }))

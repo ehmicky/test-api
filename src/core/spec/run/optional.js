@@ -7,14 +7,14 @@ import omit from 'omit.js'
 //  - the parameter is also specified in `task.call.*`
 //    (including as `valid` or `invalid`)
 // This works both top-level and for nested properties
-export const removeOptionals = function ({ params, call }) {
+export const removeOptionals = ({ params, call }) => {
   const paramsA = removeTopLevel({ params, call })
   const paramsB = removeNested({ params: paramsA, call })
   return paramsB
 }
 
 // Spec parameters are marked as required by using `optional: false` (default)
-const removeTopLevel = function ({ params, call }) {
+const removeTopLevel = ({ params, call }) => {
   const paramsA = excludeKeys(params, (key, param) =>
     isSkippedOptional({ param, key, call }),
   )
@@ -22,27 +22,23 @@ const removeTopLevel = function ({ params, call }) {
   return paramsB
 }
 
-const isSkippedOptional = function ({ param: { optional }, key, call }) {
-  return optional && call[key] === undefined
-}
+const isSkippedOptional = ({ param: { optional }, key, call }) =>
+  optional && call[key] === undefined
 
 // Remove `optional` now that it's been used (it is not valid JSON schema)
-const removeOptionalProp = function (param) {
-  return omit.default(param, ['optional'])
-}
+const removeOptionalProp = (param) => omit.default(param, ['optional'])
 
 // Spec nested properties are marked as required by using JSON schema `required`
-const removeNested = function ({ params, call }) {
-  return lodash.mapValues(params, (schema, key) =>
+const removeNested = ({ params, call }) =>
+  lodash.mapValues(params, (schema, key) =>
     removeNonRequired({ schema, definedProps: call[key] }),
   )
-}
 
 // Remove properties that are neither required nor specified in `definedProps`
-const removeNonRequired = function ({
+const removeNonRequired = ({
   schema: { properties, required = [], ...schema },
   definedProps = {},
-}) {
+}) => {
   if (properties === undefined) {
     return schema
   }

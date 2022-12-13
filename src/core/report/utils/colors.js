@@ -28,7 +28,7 @@ export const gray = chalk.rgb(100, 100, 100)
 export const orange = chalk.rgb(250, 100, 50)
 
 // Utility function
-export const removeColors = function (value) {
+export const removeColors = (value) => {
   if (isObject(value)) {
     return lodash.mapValues(value, removeColors)
   }

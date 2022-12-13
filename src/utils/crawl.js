@@ -3,15 +3,10 @@ import { promiseThen, promiseAll, promiseAllThen } from './promise.js'
 // Crawl and replace an object.
 // We use `promise[All][Then]()` utilities to avoid creating microtasks when
 // `evalNode|evalKey` is synchronous.
-export const crawl = function (
-  value,
-  evalNode,
-  { evalKey, topDown = false } = {},
-) {
-  return crawlNode(value, [], { evalNode, evalKey, topDown })
-}
+export const crawl = (value, evalNode, { evalKey, topDown = false } = {}) =>
+  crawlNode(value, [], { evalNode, evalKey, topDown })
 
-const crawlNode = function (value, path, opts) {
+const crawlNode = (value, path, opts) => {
   if (opts.topDown) {
     const valueA = evalNodeValue({ value, path, opts })
     return promiseThen(valueA, (valueB) => crawlChildren(valueB, path, opts))
@@ -24,7 +19,7 @@ const crawlNode = function (value, path, opts) {
 }
 
 // Siblings evaluation is done in parallel for best performance.
-const crawlChildren = function (value, path, opts) {
+const crawlChildren = (value, path, opts) => {
   if (Array.isArray(value)) {
     const children = value.map((child, index) =>
       crawlNode(child, [...path, index], opts),
@@ -42,7 +37,7 @@ const crawlChildren = function (value, path, opts) {
   return value
 }
 
-const crawlProperty = function ({ key, child, path, opts }) {
+const crawlProperty = ({ key, child, path, opts }) => {
   const keyMaybePromise = evalNodeKey({ key, path, opts })
   const valueMaybePromise = crawlNode(child, [...path, key], opts)
   const promises = [keyMaybePromise, valueMaybePromise]
@@ -51,7 +46,7 @@ const crawlProperty = function ({ key, child, path, opts }) {
   )
 }
 
-const getProperty = function ({ key, value }) {
+const getProperty = ({ key, value }) => {
   if (key === undefined) {
     return
   }
@@ -59,12 +54,10 @@ const getProperty = function ({ key, value }) {
   return { [String(key)]: value }
 }
 
-const mergeProperties = function (children) {
-  return Object.assign({}, ...children)
-}
+const mergeProperties = (children) => Object.assign({}, ...children)
 
 // Allow modifying any type values with `evalNode`
-const evalNodeValue = function ({ value, path, opts: { evalNode } }) {
+const evalNodeValue = ({ value, path, opts: { evalNode } }) => {
   if (evalNode === undefined) {
     return value
   }
@@ -73,7 +66,7 @@ const evalNodeValue = function ({ value, path, opts: { evalNode } }) {
 }
 
 // Allow modifying property keys with `opts.evalKey`
-const evalNodeKey = function ({ key, path, opts: { evalKey } }) {
+const evalNodeKey = ({ key, path, opts: { evalKey } }) => {
   if (evalKey === undefined) {
     return key
   }

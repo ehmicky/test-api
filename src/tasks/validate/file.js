@@ -2,7 +2,7 @@ import { TestApiError } from '../../errors/error.js'
 import { isObject } from '../../utils/types.js'
 
 // Validate content of tasks specified in files
-export const validateFileTasks = function ({ tasks, path }) {
+export const validateFileTasks = ({ tasks, path }) => {
   if (!Array.isArray(tasks)) {
     throw new TestApiError(
       `Task file '${path}' should be an array of objects not a ${typeof tasks}`,
@@ -14,7 +14,7 @@ export const validateFileTasks = function ({ tasks, path }) {
   })
 }
 
-const validateFileTask = function ({ task, path }) {
+const validateFileTask = ({ task, path }) => {
   if (isObject(task)) {
     return
   }

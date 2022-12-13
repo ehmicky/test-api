@@ -5,7 +5,7 @@ import { isObject } from '../utils/types.js'
 //  - `$$name` into `{ type: 'value', name: '$$name' }`
 //  - `{ $$name: arg }` into `{ type: 'function', name: '$$name', arg }`
 //  - `$$name $$nameB` into `{ type: 'concat', tokens }`
-export const parseTemplate = function (data) {
+export const parseTemplate = (data) => {
   if (typeof data === 'string') {
     return parseTemplateString(data)
   }
@@ -16,12 +16,12 @@ export const parseTemplate = function (data) {
     return
   }
 
-  // `{ $$name: arg }`
+  // `{ $name: arg }`
   const arg = data[name]
   return { type: 'function', name, arg }
 }
 
-const getTemplateName = function (data) {
+const getTemplateName = (data) => {
   // No templating
   if (!isObject(data)) {
     return
@@ -30,7 +30,7 @@ const getTemplateName = function (data) {
   const keys = Object.keys(data)
 
   // Template functions can be passed arguments by using an object with a
-  // single property starting with `$$`
+  // single property starting with `$`
   // This allows objects with several properties not to need escaping
   if (keys.length !== 1) {
     return
@@ -45,7 +45,7 @@ const getTemplateName = function (data) {
   return name
 }
 
-const parseTemplateString = function (data) {
+const parseTemplateString = (data) => {
   const tokens = searchRegExp(TEMPLATE_REGEXP_GLOBAL, data)
 
   // No matches
@@ -53,41 +53,37 @@ const parseTemplateString = function (data) {
     return
   }
 
-  // Single `$$name` without concatenation.
-  // As opposed to concatenated string, `$$name` is not transtyped to string.
+  // Single `$name` without concatenation.
+  // As opposed to concatenated string, `$name` is not transtyped to string.
   if (tokens.length === 1) {
     return { type: 'value', name: data }
   }
 
-  // `$$name` inside another string, i.e. concatenated
+  // `$name` inside another string, i.e. concatenated
   const tokensA = tokens.map(parseToken)
   return { type: 'concat', tokens: tokensA }
 }
 
-const parseToken = function (name) {
+const parseToken = (name) => {
   const type = TEMPLATE_REGEXP.test(name) ? 'value' : 'raw'
   return { type, name }
 }
 
 // Check whether `data` is `$$name` or `{ $$name: arg }`
-export const isTemplate = function (data) {
+export const isTemplate = (data) => {
   const template = parseTemplate(data)
   return template !== undefined && !isEscape({ template })
 }
 
 // Check if it is `$$name` (but not `$$$name`)
-export const isTemplateName = function ({ name }) {
-  return TEMPLATE_NAME_REGEXP.test(name) && !isEscapeName({ name })
-}
+export const isTemplateName = ({ name }) =>
+  TEMPLATE_NAME_REGEXP.test(name) && !isEscapeName({ name })
 
 // To escape an object that could be taken for a template (but is not), one can
 // add an extra `$`, i.e. `{ $$$name: arg }` becomes `{ $$name: arg }`
 // and `$$$name` becomes `$$name`
 // This works with multiple `$` as well
-export const parseEscape = function ({
-  template,
-  template: { type, name, arg },
-}) {
+export const parseEscape = ({ template, template: { type, name, arg } }) => {
   if (!isEscape({ template })) {
     return
   }
@@ -101,7 +97,7 @@ export const parseEscape = function ({
   return nameA
 }
 
-const isEscape = function ({ template: { type, name, tokens } }) {
+const isEscape = ({ template: { type, name, tokens } }) => {
   if (type === 'concat') {
     return tokens.some((template) => isEscape({ template }))
   }
@@ -109,9 +105,8 @@ const isEscape = function ({ template: { type, name, tokens } }) {
   return isEscapeName({ name })
 }
 
-const isEscapeName = function ({ name }) {
-  return name.startsWith(`${TEMPLATE_ESCAPE}${TEMPLATE_PREFIX}`)
-}
+const isEscapeName = ({ name }) =>
+  name.startsWith(`${TEMPLATE_ESCAPE}${TEMPLATE_PREFIX}`)
 
 // Matches `$$name` where `name` can only include `A-Za-z0-9_-` and also
 // dot/bracket notations `.[]`

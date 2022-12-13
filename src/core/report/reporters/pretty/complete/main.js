@@ -6,10 +6,10 @@ import { getHeader } from './header.js'
 import { printReportProps } from './report_props.js'
 
 // Print task errors and update spinner
-export const complete = function (
+export const complete = (
   task,
   { options: { spinner }, silent, ...context },
-) {
+) => {
   if (silent) {
     return ''
   }
@@ -21,7 +21,7 @@ export const complete = function (
 }
 
 // Retrieve task's message to print
-const getMessage = function ({ task, context }) {
+const getMessage = ({ task, context }) => {
   const resultType = getResultType(task)
 
   const { titles, reportProps } = getReportProps({ task, context })

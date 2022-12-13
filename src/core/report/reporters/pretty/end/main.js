@@ -6,14 +6,14 @@ import { printTasksList } from './list.js'
 import { printSummary } from './summary.js'
 
 // Clears spinner and print summarized tasks list and final counters message
-export const end = function (tasks, { options, options: { spinner } }) {
+export const end = (tasks, { options, options: { spinner } }) => {
   stopSpinner(spinner)
 
   const endMessage = getEndMessage({ tasks, options })
   return endMessage
 }
 
-const getEndMessage = function ({ tasks, options }) {
+const getEndMessage = ({ tasks, options }) => {
   const tasksList = printTasksList({ tasks, options })
   const summaryString = printSummary({ tasks })
 

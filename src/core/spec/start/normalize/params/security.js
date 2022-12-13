@@ -7,10 +7,10 @@ import { IN_TO_LOCATION } from './in_to_location.js'
 
 // Normalize OpenAPI security request parameters into specification-agnostic
 // format
-export const getSecParams = function ({
+export const getSecParams = ({
   spec: { securityDefinitions, security: apiSecurity = [] },
   operation: { security = apiSecurity },
-}) {
+}) => {
   const secRefs = getSecRefs({ security })
   const secParams = secRefs.map(([secName, scopes]) =>
     getSecParam({ secName, scopes, securityDefinitions }),
@@ -19,27 +19,27 @@ export const getSecParams = function ({
   return secParamsA
 }
 
-const getSecRefs = function ({ security }) {
+const getSecRefs = ({ security }) => {
   const securityA = security.flatMap(Object.entries)
   const securityB = lodash.uniqBy(securityA, JSON.stringify)
   return securityB
 }
 
 // Retrieve among the `securityDefinitions`
-const getSecParam = function ({ secName, scopes, securityDefinitions }) {
+const getSecParam = ({ secName, scopes, securityDefinitions }) => {
   const securityDef = securityDefinitions[secName]
   const securityDefA = normalizeSecurityDef({ securityDef, secName, scopes })
   return securityDefA
 }
 
 // Normalize security to the same format as other parameters
-const normalizeSecurityDef = function ({ securityDef, secName, scopes }) {
+const normalizeSecurityDef = ({ securityDef, secName, scopes }) => {
   const handler = getSecParamHandler({ securityDef, secName })
   const secParam = handler({ ...securityDef, scopes })
   return secParam
 }
 
-const getSecParamHandler = function ({ securityDef: { type }, secName }) {
+const getSecParamHandler = ({ securityDef: { type }, secName }) => {
   const handler = SECURITY_DEFS[type]
 
   if (handler !== undefined) {
@@ -52,7 +52,7 @@ const getSecParamHandler = function ({ securityDef: { type }, secName }) {
 }
 
 // `apiKey` security definitions -> `headers|query` request parameter
-const getDefApiKey = function ({ name, in: paramIn }) {
+const getDefApiKey = ({ name, in: paramIn }) => {
   const location = IN_TO_LOCATION[paramIn]
   const key = locationToKey({ name, location })
 

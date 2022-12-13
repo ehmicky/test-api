@@ -3,7 +3,7 @@ import { getSummary } from '../../../utils/summary.js'
 import { NAMES } from '../constants.js'
 
 // Print final reporting message with counter of passed|failed|skipped tasks
-export const printSummary = function ({ tasks }) {
+export const printSummary = ({ tasks }) => {
   const { skip, pass, fail } = getSummary({ tasks })
   // Order matters
   const summary = { skip, pass, fail }
@@ -18,13 +18,12 @@ export const printSummary = function ({ tasks }) {
 }
 
 // Do not show `Skipped` if none skipped
-const shouldPrint = function ([name, count]) {
-  return SHOULD_PRINT_SET.has(name) || (name === 'skip' && count !== 0)
-}
+const shouldPrint = ([name, count]) =>
+  SHOULD_PRINT_SET.has(name) || (name === 'skip' && count !== 0)
 
 const SHOULD_PRINT_SET = new Set(['pass', 'fail'])
 
-const printEntry = function ({ name, count, padLength }) {
+const printEntry = ({ name, count, padLength }) => {
   const nameA = NAMES[name]
   const countA = String(count).padStart(padLength)
   return `${yellow.bold(nameA)}${countA}`

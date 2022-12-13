@@ -8,28 +8,26 @@ const { byteLength } = Buffer
 // to `rawRequest`
 // Unfortunately the library does not allow accessing them, so we need to repeat
 // its logic here and recalculate them.
-export const addFetchRequestHeaders = function ({ call }) {
+export const addFetchRequestHeaders = ({ call }) => {
   const headers = getFetchRequestHeaders({ call })
   const headersA = lodash.mapKeys(headers, (value, name) => `headers.${name}`)
   return { ...call, ...headersA }
 }
 
-const getFetchRequestHeaders = function ({
+const getFetchRequestHeaders = ({
   call: {
     'headers.accept': accept = DEFAULT_ACCEPT,
     'headers.accept-encoding': acceptEncoding = DEFAULT_ACCEPT_ENCODING,
     'headers.connection': connection = DEFAULT_CONNECTION,
   },
-}) {
-  return { accept, 'accept-encoding': acceptEncoding, connection }
-}
+}) => ({ accept, 'accept-encoding': acceptEncoding, connection })
 
 const DEFAULT_ACCEPT = '*/*'
 const DEFAULT_ACCEPT_ENCODING = 'gzip,deflate'
 const DEFAULT_CONNECTION = 'close'
 
 // Same for `Content-Length` (must be done after body has been serialized)
-export const addContentLength = function ({ request, rawRequest }) {
+export const addContentLength = ({ request, rawRequest }) => {
   const contentLength = getContentLength({ rawRequest })
 
   if (contentLength === undefined) {
@@ -44,7 +42,7 @@ export const addContentLength = function ({ request, rawRequest }) {
   return { request: requestA, rawRequest: rawRequestA }
 }
 
-const getContentLength = function ({ rawRequest: { method, body } }) {
+const getContentLength = ({ rawRequest: { method, body } }) => {
   if (body !== undefined && body !== null) {
     return byteLength(body)
   }

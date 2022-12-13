@@ -4,14 +4,14 @@ import { promisify } from 'node:util'
 import { result } from '../../utils/result.js'
 
 // Call reporters' functions then write return value to output
-export const callReporters = async function ({ reporters, type }, ...args) {
+export const callReporters = async ({ reporters, type }, ...args) => {
   const promises = reporters.map((reporter) =>
     callReporter({ reporter, type }, ...args),
   )
   await Promise.all(promises)
 }
 
-const callReporter = async function (
+const callReporter = async (
   {
     reporter,
     reporter: {
@@ -21,7 +21,7 @@ const callReporter = async function (
     type,
   },
   ...args
-) {
+) => {
   if (reporter[type] === undefined) {
     return
   }
@@ -39,7 +39,7 @@ const callReporter = async function (
   }
 }
 
-const getArgs = function ({ args, options }) {
+const getArgs = ({ args, options }) => {
   const [argA, context] = args.map((arg) => result(arg, { options }))
   const argsA = [argA, { ...context, options }].filter(
     (argB) => argB !== undefined,
@@ -47,7 +47,7 @@ const getArgs = function ({ args, options }) {
   return argsA
 }
 
-const endReporting = async function ({ output }) {
+const endReporting = async ({ output }) => {
   // Give enough time for `output` stream to be flushed
   // TODO: replace with `timers/promises` `setTimeout()` after dropping support
   // for Node <15.0.0

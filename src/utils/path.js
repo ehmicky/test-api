@@ -1,9 +1,7 @@
 // Concatenate parts into a single JavaScript part, e.g. `object.name[index]`
-export const getPath = function (parts) {
-  return parts.map(getPart).join('')
-}
+export const getPath = (parts) => parts.map(getPart).join('')
 
-const getPart = function (part, index) {
+const getPart = (part, index) => {
   // Array index, i.e. object[INTEGER]
   if (Number.isInteger(part)) {
     return `[${part}]`

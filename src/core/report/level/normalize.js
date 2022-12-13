@@ -3,7 +3,7 @@
 // `types` decides whether to show errors, successes, skipped tasks
 // `taskData` decided whether to include task.PLUGIN.*
 //    - `added` means only the added props (i.e. not in `task.config.task.*`)
-export const normalizeLevel = function ({ options, reporter }) {
+export const normalizeLevel = ({ options, reporter }) => {
   const levelA = options.level || reporter.level || DEFAULT_LEVEL
   const levelB = LEVELS[levelA]
   return levelB

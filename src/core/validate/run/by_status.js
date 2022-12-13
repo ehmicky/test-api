@@ -7,7 +7,7 @@ import { STATUS_REGEXP, parseStatus } from './status/parse.js'
 
 // `validate.STATUS.*` is like `validate.*` but as map according to status code.
 // STATUS can use ranges and comma-separated lists like `validate.status`
-export const addByStatus = function ({ validate, response }) {
+export const addByStatus = ({ validate, response }) => {
   const byStatus = includeKeys(validate, isByStatus)
   const validateA = excludeKeys(validate, isByStatus)
 
@@ -23,11 +23,9 @@ export const addByStatus = function ({ validate, response }) {
   return merge(...byStatusA, validateA)
 }
 
-const isByStatus = function (name) {
-  return STATUS_REGEXP.test(name)
-}
+const isByStatus = (name) => STATUS_REGEXP.test(name)
 
-const matchesResponse = function ({ status, response }) {
+const matchesResponse = ({ status, response }) => {
   const property = getPath(['task', 'validate', status])
   const statuses = parseStatus({ status, property })
 

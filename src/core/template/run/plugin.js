@@ -5,27 +5,20 @@ import { getPath } from '../../../utils/path.js'
 import { wrapTemplateVars } from './check.js'
 
 // Retrieve all `plugin.template`
-export const getPluginsVars = function ({
-  context,
-  context: { _plugins: plugins },
-}) {
+export const getPluginsVars = ({ context, context: { _plugins: plugins } }) => {
   const pluginsVarsMap = getPluginsVarsMap({ context, plugins })
   const pluginsVars = mergePluginsVars({ plugins, pluginsVarsMap })
   return { pluginsVars, pluginsVarsMap }
 }
 
-const getPluginsVarsMap = function ({ context, plugins }) {
+const getPluginsVarsMap = ({ context, plugins }) => {
   const pluginsVarsMap = plugins.map((plugin) =>
     getPluginVars({ plugin, context }),
   )
   return Object.assign({}, ...pluginsVarsMap)
 }
 
-const getPluginVars = function ({
-  plugin,
-  plugin: { name, template },
-  context,
-}) {
+const getPluginVars = ({ plugin, plugin: { name, template }, context }) => {
   if (template === undefined) {
     return
   }
@@ -39,7 +32,7 @@ const getPluginVars = function ({
   return { [name]: varsA }
 }
 
-const getVars = function ({ plugin, plugin: { template }, context }) {
+const getVars = ({ plugin, plugin: { template }, context }) => {
   if (typeof template !== 'function') {
     return template
   }
@@ -52,7 +45,7 @@ const getVars = function ({ plugin, plugin: { template }, context }) {
 }
 
 // Add `error.message|module` when `plugin.template` throws
-const getVarsHandler = function (error, { plugin: { name } }) {
+const getVarsHandler = (error, { plugin: { name } }) => {
   error.message = `Error while retrieving 'plugin.template': ${error.message}`
 
   if (error.module === undefined) {
@@ -63,20 +56,20 @@ const getVarsHandler = function (error, { plugin: { name } }) {
 }
 
 // Validate `plugin.template` return value
-const validateVarNames = function ({ vars, plugin }) {
+const validateVarNames = ({ vars, plugin }) => {
   Object.keys(vars).forEach((name) => {
     validateVarName({ name, plugin })
   })
 }
 
-const validateVarName = function ({ name, plugin }) {
+const validateVarName = ({ name, plugin }) => {
   if (isTemplateName({ name })) {
     return
   }
 
   const property = getPath(['plugin', 'template', name])
   throw new BugError(
-    `'plugin.template' returned a template variable with an invalid name '${name}': it must be prefixed with $$ and only contain letters, digits, underscores and dashes`,
+    `'plugin.template' returned a template variable with an invalid name '${name}': it must be prefixed with $ and only contain letters, digits, underscores and dashes`,
     { props: { value: name, property, module: `plugin-${plugin.name}` } },
   )
 }
@@ -87,7 +80,7 @@ const validateVarName = function ({ name, plugin }) {
 // Like this, adding core template variables is non-breaking.
 // Also this allows overriding / monkey-patching core (which can be
 // either good or bad).
-const mergePluginsVars = function ({ plugins, pluginsVarsMap }) {
+const mergePluginsVars = ({ plugins, pluginsVarsMap }) => {
   // eslint-disable-next-line fp/no-mutating-methods
   const pluginsVars = plugins
     .filter(({ name }) => name !== 'template')

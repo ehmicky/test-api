@@ -6,7 +6,7 @@ import { normalizeSpec } from './normalize/main.js'
 // Parse, validate and normalize OpenAPI specifications (including JSON
 // references) from each `task.spec.definition`, which can be a URL, a file
 // path or directly a JavaScript object
-export const start = async function (startData, { _allTasks: allTasks }) {
+export const start = async (startData, { _allTasks: allTasks }) => {
   const tasksGroups = groupTasks({ allTasks })
 
   // Make sure we run all of them in parallel.
@@ -19,14 +19,14 @@ export const start = async function (startData, { _allTasks: allTasks }) {
 
 // If several tasks share the same OpenAPI specification, which is very likely,
 // we only load it once for all of them
-const groupTasks = function ({ allTasks }) {
+const groupTasks = ({ allTasks }) => {
   const tasksGroups = lodash.groupBy(allTasks, stringifyDefinition)
   const tasksGroupsA = Object.values(tasksGroups)
   return tasksGroupsA
 }
 
 // Load and normalize an OpenAPI specification
-const loadSpec = async function (tasks) {
+const loadSpec = async (tasks) => {
   // All tasks have same OpenAPI specification here, so just pick the first one
   const definition = getDefinition(tasks[0])
 
@@ -43,11 +43,9 @@ const loadSpec = async function (tasks) {
   return specStartDataA
 }
 
-const stringifyDefinition = function (task) {
+const stringifyDefinition = (task) => {
   const definition = getDefinition(task)
   return JSON.stringify(definition)
 }
 
-const getDefinition = function ({ spec: { definition } = {} }) {
-  return definition
-}
+const getDefinition = ({ spec: { definition } = {} }) => definition

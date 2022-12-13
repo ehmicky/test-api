@@ -5,15 +5,15 @@ import { readPackageUp } from 'read-pkg-up'
 
 // Add `User-Agent` request header
 // Can be overriden
-export const normalizeUserAgent = async function ({
+export const normalizeUserAgent = async ({
   call,
   call: { 'headers.user-agent': userAgent },
-}) {
+}) => {
   const userAgentA = await getUserAgent({ userAgent })
   return { ...call, 'headers.user-agent': userAgentA }
 }
 
-const getUserAgent = async function ({ userAgent }) {
+const getUserAgent = async ({ userAgent }) => {
   if (userAgent !== undefined) {
     return userAgent
   }

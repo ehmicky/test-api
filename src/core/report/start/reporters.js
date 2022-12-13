@@ -7,7 +7,7 @@ import { COMMON_OPTIONS_SCHEMA } from './common_options_schema.js'
 import { REPORTER_SCHEMA } from './reporter_schema.js'
 
 // Get `startData.report.reporters`
-export const getReporters = async function ({ config }) {
+export const getReporters = async ({ config }) => {
   const names = getNames({ config })
 
   const reporters = await Promise.all(
@@ -17,7 +17,7 @@ export const getReporters = async function ({ config }) {
 }
 
 // Reporters are specified by using their name in `config.report.REPORTER`
-const getNames = function ({ config: { report = {} } }) {
+const getNames = ({ config: { report = {} } }) => {
   const reportA = excludeKeys(report, isUndefined)
   const names = Object.keys(reportA)
   const namesA = lodash.difference(names, Object.keys(COMMON_OPTIONS_SCHEMA))
@@ -30,9 +30,7 @@ const getNames = function ({ config: { report = {} } }) {
   return namesA
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
+const isUndefined = (key, value) => value === undefined
 
 const DEFAULT_REPORTERS = ['pretty']
 

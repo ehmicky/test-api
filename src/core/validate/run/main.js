@@ -6,7 +6,7 @@ import { normalizeValidate } from './normalize.js'
 import { validateStatus } from './status/main.js'
 
 // Validate response against `task.validate.*` JSON schemas
-export const run = function ({ validate = {}, call, call: { response } = {} }) {
+export const run = ({ validate = {}, call, call: { response } = {} }) => {
   if (call === undefined) {
     return
   }

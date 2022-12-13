@@ -1,7 +1,7 @@
 import { removeColors } from './colors.js'
 
 // If reported value is too big, we truncate it
-export const truncate = function (string) {
+export const truncate = (string) => {
   if (string.length <= MAX_LENGTH) {
     return string
   }
@@ -11,7 +11,7 @@ export const truncate = function (string) {
   return stringB
 }
 
-const addEllipsis = function (string) {
+const addEllipsis = (string) => {
   const stringA = string.slice(0, MAX_LENGTH)
   const bytesLeft = string.length - MAX_LENGTH
   const bytesLeftStr = `\n... ${bytesLeft} more bytes`
@@ -26,7 +26,7 @@ const MAX_LENGTH = 1e4
 //  - they might colorize the "more bytes" string
 // There are libraries like `slice-ansi` that do that but they are really
 // slow. Current solution is quite fast.
-const removeAnsi = function (string) {
+const removeAnsi = (string) => {
   const stringStart = string.slice(0, ALMOST_MAX_LENGTH)
   const stringEnd = string.slice(ALMOST_MAX_LENGTH)
   const stringEndA = removeColors(stringEnd)

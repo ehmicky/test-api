@@ -10,31 +10,28 @@ const JSON_SCHEMA_SCHEMA = 'ajv/lib/refs/json-schema-draft-04.json'
 const requireJson = createRequire(import.meta.url)
 
 // Like `checkSchema()` but validating that the value is a JSON schema v4
-export const checkIsSchema = function (opts) {
+export const checkIsSchema = (opts) => {
   const message = getSchemaMessage(opts)
 
   checkSchema({ schema: jsonSchemaSchema, message, ...opts })
 }
 
-const getSchemaMessage = function ({ valueProp }) {
+const getSchemaMessage = ({ valueProp }) => {
   const name = valueProp === undefined ? 'schema' : `'${valueProp}'`
   return `${name} is not a valid JSON schema version 4`
 }
 
-const getJsonSchemaSchema = function () {
-  return SCHEMA_FIXES.reduce(
+const getJsonSchemaSchema = () =>
+  SCHEMA_FIXES.reduce(
     (schema, fix) => fix(schema),
     requireJson(JSON_SCHEMA_SCHEMA),
   )
-}
 
-const removeId = function (schema) {
-  return omit.default(schema, ['id', '$schema'])
-}
+const removeId = (schema) => omit.default(schema, ['id', '$schema'])
 
 // `exclusiveMinimum` boolean is not valid in the JSON schema version
 // used by `ajv`
-const fixMultipleOf = function (schema) {
+const fixMultipleOf = (schema) => {
   const multipleOf = { type: 'number', exclusiveMinimum: 0 }
 
   return {
@@ -44,20 +41,18 @@ const fixMultipleOf = function (schema) {
 }
 
 // `format` is not present in JSON schema v4 meta-schema but is actually allowed
-const fixFormat = function (schema) {
+const fixFormat = (schema) => {
   const format = { type: 'string' }
   return { ...schema, properties: { ...schema.properties, format } }
 }
 
 // `x-*` custom properties are not present in JSON schema v4 meta-schema but are
 // actually allowed
-const fixCustomProperties = function (schema) {
-  return {
-    ...schema,
-    patternProperties: { '^x-*': {} },
-    additionalProperties: false,
-  }
-}
+const fixCustomProperties = (schema) => ({
+  ...schema,
+  patternProperties: { '^x-*': {} },
+  additionalProperties: false,
+})
 
 const SCHEMA_FIXES = [removeId, fixMultipleOf, fixFormat, fixCustomProperties]
 

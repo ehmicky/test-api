@@ -5,7 +5,7 @@ import { callComplete } from './call.js'
 // Reporting for each task.
 // We ensure reporting output has same order as tasks definition.
 // We do so by buffering each task until its reporting time comes.
-export const complete = async function (task, context) {
+export const complete = async (task, context) => {
   const {
     startData: {
       report,
@@ -43,7 +43,7 @@ export const complete = async function (task, context) {
   await completeTasks({ count, keys, tasks, reporters, plugins, context })
 }
 
-const getCount = function ({ keys, tasks }) {
+const getCount = ({ keys, tasks }) => {
   const count = keys.findIndex((key) => tasks[key] === undefined)
 
   if (count === -1) {
@@ -53,25 +53,25 @@ const getCount = function ({ keys, tasks }) {
   return count
 }
 
-const completeTasks = async function ({
+const completeTasks = async ({
   count,
   keys,
   tasks,
   reporters,
   plugins,
   context,
-}) {
+}) => {
   const keysA = keys.slice(0, count)
   await completeTask({ keys: keysA, tasks, reporters, plugins, context })
 }
 
-const completeTask = async function ({
+const completeTask = async ({
   keys: [key, ...keys],
   tasks,
   reporters,
   plugins,
   context,
-}) {
+}) => {
   if (key === undefined) {
     return
   }

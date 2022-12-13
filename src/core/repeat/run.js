@@ -1,10 +1,10 @@
 // Repeat each task `config|task.repeat` times.
 // It will be reported only as a single task.
 // Run all tasks in parallel.
-export const run = async function (
+export const run = async (
   task,
   { _nestedPath: nestedPath, _runTask: runTask },
-) {
+) => {
   if (nestedPath !== undefined) {
     return
   }
@@ -27,24 +27,20 @@ export const run = async function (
 }
 
 // Retrieve input `$$data` of each iteration
-const getData = function ({
+const getData = ({
   task: { repeat: { times = DEFAULT_TIMES, data = DEFAULT_DATA } = {} },
-}) {
-  // Stranded order, e.g. `data: [1, 2, 3]` and `times: 2` results in
-  // `[1, 2, 3, 1, 2, 3]` not `[1, 1, 2, 2, 3, 3]`
-  return Array.from({ length: times }, () => data).flat()
-}
+}) => Array.from({ length: times }, () => data).flat()
 
 const DEFAULT_TIMES = 1
 const DEFAULT_DATA = [undefined]
 
-const runRepeatedTask = function ({
+const runRepeatedTask = ({
   task: { template, ...task },
   runTask,
   datum,
   index,
-}) {
-  const templateA = { $$data: datum, $$index: index, ...template }
+}) => {
+  const templateA = { $data: datum, $index: index, ...template }
   const taskA = { ...task, template: templateA }
   return runTask({ task: taskA, self: true })
 }

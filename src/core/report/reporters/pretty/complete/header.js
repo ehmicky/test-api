@@ -14,12 +14,7 @@ import { MARKS, COLORS } from '../constants.js'
 //  - a symbol indicating whether the task passed, failed or was skipped
 //  - the task key
 //  - the `titles` (as returned by `plugin.report()`)
-export const getHeader = function ({
-  task,
-  task: { isNested },
-  titles,
-  resultType,
-}) {
+export const getHeader = ({ task, task: { isNested }, titles, resultType }) => {
   const subKeys = getSubKeys({ titles })
 
   if (isNested) {
@@ -30,13 +25,13 @@ export const getHeader = function ({
 }
 
 // Show all `titles` from `plugin.report()`
-const getSubKeys = function ({ titles }) {
+const getSubKeys = ({ titles }) => {
   const titlesA = titles.join('\n')
   const subKey = getSubKey(titlesA)
   return subKey
 }
 
-const getSubKey = function (string) {
+const getSubKey = (string) => {
   const stringA = string.trim()
 
   if (stringA === '') {
@@ -47,7 +42,7 @@ const getSubKey = function (string) {
 }
 
 // Header for nested tasks
-const getNestedHeader = function ({ task: { key }, subKeys }) {
+const getNestedHeader = ({ task: { key }, subKeys }) => {
   const content = `${indent(`Nested task: ${key}`)}${subKeys}`
 
   const contentA = fitContent({ content })
@@ -56,7 +51,7 @@ const getNestedHeader = function ({ task: { key }, subKeys }) {
   return header
 }
 
-const getFullHeader = function ({ task: { key }, subKeys, resultType }) {
+const getFullHeader = ({ task: { key }, subKeys, resultType }) => {
   const content = ` ${MARKS[resultType]}  ${key}${subKeys}`
 
   const contentA = fitContent({ content })
@@ -69,11 +64,9 @@ const getFullHeader = function ({ task: { key }, subKeys, resultType }) {
 // If the line is too long, truncate it
 // If the line is too short, pad it so that `chalk.inverse()` covers the whole
 // line
-const fitContent = function ({ content }) {
-  return content.split('\n').map(fitLine).join('\n')
-}
+const fitContent = ({ content }) => content.split('\n').map(fitLine).join('\n')
 
-const fitLine = function (string) {
+const fitLine = (string) => {
   const stringA = cliTruncate(string, LINE_SIZE - 1, {
     preferTruncationOnSpace: true,
   })

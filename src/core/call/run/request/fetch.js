@@ -5,10 +5,10 @@ import { removePrefixes } from '../../../../utils/prefix.js'
 
 import { getAgent } from './agent.js'
 
-export const fireRequest = async function ({
+export const fireRequest = async ({
   rawRequest,
   rawRequest: { method, url, body, timeout, https },
-}) {
+}) => {
   const headers = removePrefixes(rawRequest, 'headers')
   const agent = getAgent({ https, url })
 
@@ -39,7 +39,7 @@ export const fireRequest = async function ({
 //  - this implies original case is lost
 //  - it is automatically done by both the Fetch standard and Node.js
 //    core `http` module
-const getResponseHeaders = function (headers) {
+const getResponseHeaders = (headers) => {
   const headersA = Object.entries(headers)
   const headersB = headersA.map(([name, value]) => ({
     [`headers.${name}`]: Array.isArray(value) ? value.join('\n') : value,
@@ -48,7 +48,7 @@ const getResponseHeaders = function (headers) {
   return headersC
 }
 
-const handleRequestError = function ({ name, message }, { url, timeout }) {
+const handleRequestError = ({ name, message }, { url, timeout }) => {
   if (name === 'TimeoutError') {
     throw new TestApiError(`The request took more than ${timeout} milliseconds`)
   }

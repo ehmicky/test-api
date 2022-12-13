@@ -9,7 +9,7 @@ import { testRegExp } from '../../utils/regexp.js'
 // Also merge `config.merge` to all tasks: it is like the `merge` task `*`
 // except it is set on `config` instead of as a task, making it possible for
 // the user to specify on CLI.
-export const load = function (tasks, { config: { merge: mergeConfig } }) {
+export const load = (tasks, { config: { merge: mergeConfig } }) => {
   const { mergeTasks, nonMergeTasks } = splitTasks({ tasks })
   const tasksA = nonMergeTasks.map((task) =>
     mergeTask({ task, mergeTasks, mergeConfig }),
@@ -17,17 +17,15 @@ export const load = function (tasks, { config: { merge: mergeConfig } }) {
   return tasksA
 }
 
-const splitTasks = function ({ tasks }) {
+const splitTasks = ({ tasks }) => {
   const mergeTasks = tasks.filter(isMergeTask)
   const nonMergeTasks = tasks.filter((task) => !isMergeTask(task))
   return { mergeTasks, nonMergeTasks }
 }
 
-const isMergeTask = function ({ merge }) {
-  return merge !== undefined
-}
+const isMergeTask = ({ merge }) => merge !== undefined
 
-const mergeTask = function ({ task, mergeTasks, mergeConfig = {} }) {
+const mergeTask = ({ task, mergeTasks, mergeConfig = {} }) => {
   const mergeTasksA = findMergeTasks({ task, mergeTasks })
 
   if (mergeTasksA.length === 0) {
@@ -37,15 +35,14 @@ const mergeTask = function ({ task, mergeTasks, mergeConfig = {} }) {
   return mergeWithTemplates(mergeConfig, ...mergeTasksA, task)
 }
 
-const findMergeTasks = function ({ task: { key, scope }, mergeTasks }) {
+const findMergeTasks = ({ task: { key, scope }, mergeTasks }) =>
   // eslint-disable-next-line fp/no-mutating-methods
-  return mergeTasks
+  mergeTasks
     .filter(({ merge }) => testMergeRegExp(merge, key))
     .sort((taskA, taskB) => compareMergeTasks({ taskA, taskB, scope }))
     .map((task) => omit.default(task, NOT_MERGED_ATTRIBUTES))
-}
 
-const testMergeRegExp = function (merge, key) {
+const testMergeRegExp = (merge, key) => {
   try {
     return testRegExp(merge, key)
   } catch (error) {
@@ -64,11 +61,11 @@ const testMergeRegExp = function (merge, key) {
 // Note that we do not use `config.tasks` order as globbing expansion order is
 // not stable.
 // eslint-disable-next-line max-statements, complexity
-const compareMergeTasks = function ({
+const compareMergeTasks = ({
   taskA: { scope: scopeA },
   taskB: { scope: scopeB },
   scope,
-}) {
+}) => {
   // Inside the same scope, we use object keys order, i.e. `merge` tasks
   // declared last have priority.
   // Object keys order is not very reliable, so we must make sure `tasks` does

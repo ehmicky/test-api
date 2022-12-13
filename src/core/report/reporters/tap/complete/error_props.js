@@ -4,7 +4,7 @@ import underscoreString from 'underscore.string'
 import { removeColors } from '../../../utils/colors.js'
 
 // Retrieve TAP error properties
-export const getErrorProps = function ({ ok, reportProps }) {
+export const getErrorProps = ({ ok, reportProps }) => {
   if (ok) {
     return
   }
@@ -45,17 +45,15 @@ export const getErrorProps = function ({ ok, reportProps }) {
 //    according to TAP
 //  - remove ANSI color sequences
 //  - rename keys to underscore style
-const normalizeReportProps = function ({ reportProps }) {
+const normalizeReportProps = ({ reportProps }) => {
   const reportPropsA = lodash.mapValues(reportProps, normalizeReportPropValue)
   const reportPropsB = lodash.mapKeys(reportPropsA, normalizeReportPropKey)
   return reportPropsB
 }
 
-const normalizeReportPropValue = function (value) {
-  return removeColors(value)
-}
+const normalizeReportPropValue = (value) => removeColors(value)
 
-const normalizeReportPropKey = function (value, name) {
+const normalizeReportPropKey = (value, name) => {
   const tapName = TAP_NAMES[name]
 
   if (tapName !== undefined) {

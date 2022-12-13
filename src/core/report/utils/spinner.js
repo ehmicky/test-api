@@ -2,7 +2,7 @@ import ora from 'ora'
 
 // CLI spinner showing `INDEX/TOTAL` next to it (like a progress bar)
 // Start the spinner
-export const startSpinner = function ({ index = -1, total }) {
+export const startSpinner = ({ index = -1, total }) => {
   const instance = ora(ORA_OPTS)
 
   const state = { index, total, instance }
@@ -15,7 +15,7 @@ export const startSpinner = function ({ index = -1, total }) {
 }
 
 // Increment CLI spinner index
-export const incrementSpinner = function (state) {
+export const incrementSpinner = (state) => {
   // We need to mutate state because the spinner is shared by parallel tasks
   state.index += 1
 
@@ -26,12 +26,12 @@ export const incrementSpinner = function (state) {
 
 // Temporarily hide the spinner, so that some output can be done without the
 // spinner persisting in terminal
-export const clearSpinner = function ({ instance }) {
+export const clearSpinner = ({ instance }) => {
   instance.clear()
 }
 
 // Remove the CLI spinner
-export const stopSpinner = function ({ instance }) {
+export const stopSpinner = ({ instance }) => {
   instance.stop()
 }
 

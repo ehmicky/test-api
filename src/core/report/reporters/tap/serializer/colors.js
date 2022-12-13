@@ -7,17 +7,16 @@ import { isObject } from '../../../../../utils/types.js'
 // `opts.colors: false` can be used to disable it
 // `opts.colors: object` can be used to theme
 // By default, it guesses (e.g. no colors if output is redirected)
-export const getColors = function (colors) {
+export const getColors = (colors) => {
   const chalk = colorsOption({ colors })
   const theme = getTheme({ chalk, colors })
   return theme
 }
 
-const getTheme = function ({ chalk, colors }) {
-  return lodash.mapValues(DEFAULT_THEME, (defaultColor, key) =>
+const getTheme = ({ chalk, colors }) =>
+  lodash.mapValues(DEFAULT_THEME, (defaultColor, key) =>
     getThemeColor({ defaultColor, colors, key, chalk }),
   )
-}
 
 const DEFAULT_THEME = {
   pass: 'green',
@@ -29,7 +28,7 @@ const DEFAULT_THEME = {
   final: 'yellow',
 }
 
-const getThemeColor = function ({ defaultColor, colors, key, chalk }) {
+const getThemeColor = ({ defaultColor, colors, key, chalk }) => {
   const color = getColor({ defaultColor, colors, key })
 
   if (typeof color === 'function') {
@@ -40,7 +39,7 @@ const getThemeColor = function ({ defaultColor, colors, key, chalk }) {
   return lodash.get(chalk, color)
 }
 
-const getColor = function ({ defaultColor, colors, key }) {
+const getColor = ({ defaultColor, colors, key }) => {
   if (!isObject(colors) || colors[key] === undefined) {
     return defaultColor
   }

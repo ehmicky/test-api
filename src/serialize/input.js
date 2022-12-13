@@ -8,15 +8,14 @@ import {
 } from './common.js'
 
 // Applied on input config and tasks
-export const parseInput = function (taskOrConfig, throwError) {
-  return crawl(
+export const parseInput = (taskOrConfig, throwError) =>
+  crawl(
     taskOrConfig,
     (value, path) => parseInputValue({ value, path, throwError }),
     { topDown: true },
   )
-}
 
-const parseInputValue = function ({ value, path, throwError }) {
+const parseInputValue = ({ value, path, throwError }) => {
   if (value === UNDEFINED) {
     return
   }
@@ -33,6 +32,5 @@ const parseInputValue = function ({ value, path, throwError }) {
   throwError({ message, value, path })
 }
 
-const isAllowed = function (value) {
-  return isJsonType(value) || value === undefined || typeof value === 'function'
-}
+const isAllowed = (value) =>
+  isJsonType(value) || value === undefined || typeof value === 'function'

@@ -4,7 +4,7 @@ import { getWordsList } from '../../../../utils/string.js'
 import { replaceByRanges } from './range.js'
 
 // Normalize status for error reporting
-export const normalizeStatuses = function (statuses) {
+export const normalizeStatuses = (statuses) => {
   const statusesA = replaceByRanges({ statuses })
 
   const statusesB = sortArray(statusesA)
@@ -20,7 +20,7 @@ export const normalizeStatuses = function (statuses) {
 }
 
 // Try to error report statuses as integers
-const numerizeStatus = function (status) {
+const numerizeStatus = (status) => {
   const statusA = Number(status)
 
   if (!Number.isInteger(statusA)) {

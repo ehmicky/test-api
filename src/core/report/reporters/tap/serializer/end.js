@@ -1,13 +1,7 @@
 import { getPlanString } from './plan.js'
 
 // Final TAP comments, indicating number of tests|pass|fail|skip
-export const end = function ({
-  pass,
-  fail,
-  skip,
-  count: initialCount,
-  colors,
-}) {
+export const end = ({ pass, fail, skip, count: initialCount, colors }) => {
   const count = pass + fail + skip
 
   const planString = getPlan({ colors, initialCount, count })
@@ -22,7 +16,7 @@ export const end = function ({
 }
 
 // Add final plan if not initially specified
-const getPlan = function ({ colors, initialCount, count }) {
+const getPlan = ({ colors, initialCount, count }) => {
   if (initialCount !== undefined) {
     return []
   }
@@ -31,7 +25,7 @@ const getPlan = function ({ colors, initialCount, count }) {
   return [colors.plan(planString)]
 }
 
-const getEndCommentString = function ({ pass, fail, skip, count }) {
+const getEndCommentString = ({ pass, fail, skip, count }) => {
   const endOk = getEndOk({ fail })
 
   return `# tests: ${count}
@@ -41,7 +35,7 @@ const getEndCommentString = function ({ pass, fail, skip, count }) {
 }
 
 // Add # ok final comment if no test failed
-const getEndOk = function ({ fail }) {
+const getEndOk = ({ fail }) => {
   if (fail !== 0) {
     return ''
   }

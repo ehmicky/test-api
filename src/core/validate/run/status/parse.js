@@ -8,7 +8,7 @@ import { parseRanges, replaceByRanges } from './range.js'
 import { VALID_STATUSES } from './valid.js'
 
 // Parse `validate.status` into an array of possible statuses
-export const parseStatus = function ({ status, property }) {
+export const parseStatus = ({ status, property }) => {
   // `validate.status` can be an integer because it's simpler when writing in
   // YAML (does not require quotes)
   const statusA = String(status)
@@ -25,7 +25,7 @@ export const parseStatus = function ({ status, property }) {
   return statusesB
 }
 
-const checkValidStatuses = function ({ statuses, property }) {
+const checkValidStatuses = ({ statuses, property }) => {
   const invalidStatuses = lodash.difference(statuses, VALID_STATUSES)
 
   if (invalidStatuses.length === 0) {
@@ -41,7 +41,7 @@ const checkValidStatuses = function ({ statuses, property }) {
 }
 
 // Inverse of `parseStatus`
-export const serializeStatus = function ({ statuses }) {
+export const serializeStatus = ({ statuses }) => {
   const statusesA = replaceByRanges({ statuses })
   const statusesB = sortArray(statusesA)
   const statusKey = statusesB.join(' ')

@@ -1,7 +1,7 @@
 import { runHandlers } from '../plugins/handlers.js'
 
 // Run each `plugin.complete()`
-export const completeTask = async function ({ task, context, plugins }) {
+export const completeTask = async ({ task, context, plugins }) => {
   try {
     // `task` cannot be modified
     await runHandlers({ type: 'complete', plugins, input: task, context })

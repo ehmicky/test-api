@@ -2,11 +2,11 @@ import { TestApiError } from '../../errors/error.js'
 import { isObject } from '../../utils/types.js'
 
 // Validate content of tasks specified inline
-export const validateInlineTasks = function ({ tasks }) {
+export const validateInlineTasks = ({ tasks }) => {
   tasks.forEach(validateInlineTask)
 }
 
-const validateInlineTask = function (task) {
+const validateInlineTask = (task) => {
   if (isObject(task)) {
     return
   }

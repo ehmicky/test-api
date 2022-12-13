@@ -2,11 +2,11 @@ import { isObject } from '../../../../utils/types.js'
 
 // `Content-Type` should be empty if no request body is going to be sent.
 // Also add a default one.
-export const normalizeContentType = function ({
+export const normalizeContentType = ({
   call,
   call: { body },
   call: { 'headers.content-type': contentTypeParam, ...noBodyCall },
-}) {
+}) => {
   // If there is no request body, there is no `Content-Type` header
   if (body === undefined) {
     return noBodyCall
@@ -22,7 +22,7 @@ export const normalizeContentType = function ({
 }
 
 // Default `Content-Type` request header if none was specified
-const getDefaultContentType = function ({ body }) {
+const getDefaultContentType = ({ body }) => {
   if (isObject(body) || Array.isArray(body)) {
     return DEFAULT_OBJ_MIME
   }

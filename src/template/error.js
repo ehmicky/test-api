@@ -3,7 +3,7 @@ import omit from 'omit.js'
 import { getPath } from '../utils/path.js'
 
 // Exceptions thrown during template evaluation
-export const templateHandler = function (error, { template, data, path }) {
+export const templateHandler = (error, { template, data, path }) => {
   appendMessage({ error, template })
 
   setErrorProps({ error, data, path })
@@ -11,13 +11,13 @@ export const templateHandler = function (error, { template, data, path }) {
   throw error
 }
 
-const appendMessage = function ({ error, template: { name } }) {
+const appendMessage = ({ error, template: { name } }) => {
   const message = getMessage({ error })
   error.message = `${TEMPLATE_ERROR_MESSAGE} '${name}': ${message}`
 }
 
 // Avoid adding it several times on recursion
-const getMessage = function ({ error: { message } }) {
+const getMessage = ({ error: { message } }) => {
   if (!message.startsWith(TEMPLATE_ERROR_MESSAGE)) {
     return message
   }
@@ -33,7 +33,7 @@ const TEMPLATE_ERROR_MESSAGE = 'Error when evaluating template'
 //  - `property`: path to template variable
 //  - `value`: `{$$FUNC: arg}` or `$$NAME`
 // In case of recursive template, the top-level node should prevail.
-const setErrorProps = function ({ error, data, path }) {
+const setErrorProps = ({ error, data, path }) => {
   const property = getPath(path)
 
   // We move template error attributes from `error.*` to `error.value.*`

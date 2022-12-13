@@ -5,7 +5,7 @@ import { checkSchema } from '../../../validation/check.js'
 import { checkRequired } from './required.js'
 
 // Validates response headers
-export const validateHeaders = function ({ validate, response }) {
+export const validateHeaders = ({ validate, response }) => {
   const validatedHeaders = removePrefixes(validate, 'headers')
   const headers = removePrefixes(response, 'headers')
 
@@ -14,7 +14,7 @@ export const validateHeaders = function ({ validate, response }) {
   })
 }
 
-const validateHeader = function ({ name, schema, headers }) {
+const validateHeader = ({ name, schema, headers }) => {
   const header = getResponseHeader({ headers, name })
 
   checkRequired({
@@ -37,7 +37,7 @@ const validateHeader = function ({ name, schema, headers }) {
   })
 }
 
-const getResponseHeader = function ({ headers, name }) {
+const getResponseHeader = ({ headers, name }) => {
   const nameB = Object.keys(headers).find((nameA) => nameA === name)
 
   if (nameB === undefined) {

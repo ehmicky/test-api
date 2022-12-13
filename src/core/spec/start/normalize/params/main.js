@@ -7,14 +7,14 @@ import { normalizeParams } from './normalize.js'
 import { getSecParams } from './security.js'
 
 // Normalize OpenAPI request parameters into specification-agnostic format
-export const getParams = function ({
+export const getParams = ({
   spec,
   method,
   path,
   pathDef: { parameters: pathDefParams = [] },
   operation,
   operation: { parameters: params = [] },
-}) {
+}) => {
   const paramsA = [...pathDefParams, ...params]
 
   const paramsB = normalizeParams({ params: paramsA })

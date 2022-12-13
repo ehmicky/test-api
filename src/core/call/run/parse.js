@@ -5,10 +5,10 @@ import { parseFlat } from '../../../utils/flat.js'
 import { findBodyHandler } from '../body.js'
 
 // Parse response
-export const parse = function ({
+export const parse = ({
   call,
   call: { rawResponse: { status, body, ...headers } = {} } = {},
-}) {
+}) => {
   if (call === undefined) {
     return
   }
@@ -21,11 +21,9 @@ export const parse = function ({
 }
 
 // Parses a response's headers
-const parseHeaders = function ({ headers }) {
-  return lodash.mapValues(headers, parseHeader)
-}
+const parseHeaders = ({ headers }) => lodash.mapValues(headers, parseHeader)
 
-const parseHeader = function (header) {
+const parseHeader = (header) => {
   const headerA = header.trim()
   // Headers that look like numbers, booleans or `null` will never be parsed as
   // a string, but as those types instead
@@ -34,7 +32,7 @@ const parseHeader = function (header) {
 }
 
 // Parses a response's body according to its `Content-Type`
-const parseBody = function ({ body, headers }) {
+const parseBody = ({ body, headers }) => {
   const bodyA = trimBody({ body })
 
   if (bodyA === undefined) {
@@ -61,7 +59,7 @@ const parseBody = function ({ body, headers }) {
   }
 }
 
-const trimBody = function ({ body }) {
+const trimBody = ({ body }) => {
   const bodyA = body.trim()
 
   // Convert body to `undefined` when empty
