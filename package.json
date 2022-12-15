@@ -25,7 +25,6 @@
   },
   "author": "ehmicky <ehmicky@gmail.com> (https://github.com/ehmicky)",
   "directories": {
-    "test": "test",
     "lib": "src"
   },
   "dependencies": {
