@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^2.0.60",
-    "execa": "^7.1.0",
+    "execa": "^7.1.1",
     "get-bin-path": "^8.0.0",
     "unixify": "^1.0.0"
   },
