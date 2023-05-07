@@ -54,7 +54,7 @@
     "ora": "^6.1.2",
     "path-to-regexp": "^6.2.1",
     "read-pkg-up": "^9.1.0",
-    "set-error-props": "^4.0.0",
+    "set-error-props": "^5.0.0",
     "sort-on": "^5.2.0",
     "statuses": "^2.0.1",
     "strip-ansi": "^7.0.1",
