@@ -1,5 +1,5 @@
 import { stdout } from 'node:process'
-import { promisify } from 'node:util'
+import { setImmediate } from 'node:timers/promises'
 
 import { result } from '../../utils/result.js'
 
@@ -49,9 +49,7 @@ const getArgs = ({ args, options }) => {
 
 const endReporting = async ({ output }) => {
   // Give enough time for `output` stream to be flushed
-  // TODO: replace with `timers/promises` `setTimeout()` after dropping support
-  // for Node <15.0.0
-  await promisify(setTimeout)()
+  await setImmediate()
 
   if (output === stdout) {
     return
