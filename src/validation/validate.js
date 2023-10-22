@@ -112,7 +112,7 @@ const getSchemaParts = ({ error: { schemaPath } }) =>
   jsonPointerToParts(schemaPath)
 
 const getSchema = ({ schemaParts, schema }) => {
-  const key = schemaParts[schemaParts.length - 1]
+  const key = schemaParts.at(-1)
   // eslint-disable-next-line you-dont-need-lodash-underscore/get
   const value = lodash.get(schema, schemaParts)
   return { [key]: value }

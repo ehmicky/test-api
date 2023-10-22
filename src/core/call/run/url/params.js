@@ -19,7 +19,7 @@ export const addUrlParams = (url, rawRequest) => {
 
 // Parse URL `:NAME` variables tokens
 const parseUrl = (url) => {
-  const urlA = url.replace(URL_COLON_REGEXP, '\\$&')
+  const urlA = url.replaceAll(URL_COLON_REGEXP, '\\$&')
   const tokens = parse(urlA)
   return tokens
 }

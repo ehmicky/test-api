@@ -17,7 +17,7 @@ const shouldIndent = (string) => string.includes('\n')
 export const indent = (string, extraIndent = 0) => {
   const size = INDENT_SIZE + extraIndent
   const indentString = ' '.repeat(size)
-  return indentString + String(string).replace(/\n/gu, `\n${indentString}`)
+  return indentString + String(string).replaceAll('\n', `\n${indentString}`)
 }
 
 const INDENT_SIZE = 2

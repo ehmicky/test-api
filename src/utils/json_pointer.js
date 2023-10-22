@@ -35,8 +35,8 @@ const START_HASH_REGEXP = /^#/u
 // Remove JSON pointer's escaping of / and ~
 const unescapeJsonPointer = (jsonPointer) =>
   jsonPointer
-    .replace(ESCAPED_TILDE_REGEXP, '~')
-    .replace(ESCAPED_SLASH_REGEXP, '/')
+    .replaceAll(ESCAPED_TILDE_REGEXP, '~')
+    .replaceAll(ESCAPED_SLASH_REGEXP, '/')
 
 const ESCAPED_TILDE_REGEXP = /~0/gu
 const ESCAPED_SLASH_REGEXP = /~1/gu

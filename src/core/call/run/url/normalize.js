@@ -21,4 +21,4 @@ export const normalizeUrl = (originalUrl) => {
 // This is the same situation for origins, except RFC 3986 forbids slashes, but
 // we allow it since `task.call.server` can contain the base path.
 const escapeUrl = (url) =>
-  encodeURI(url).replace(/#/gu, '%23').replace(/\?/gu, '%3F')
+  encodeURI(url).replaceAll('#', '%23').replaceAll('?', '%3F')

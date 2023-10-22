@@ -104,6 +104,6 @@ const getParentPath = ({ path, index }) => {
 
 // Allow array bracket notations `[integer]` by replacing them to dots
 const removeBrackets = ({ path }) =>
-  path.replace(BRACKETS_REGEXP, '.$1').replace(/^\./u, '')
+  path.replaceAll(BRACKETS_REGEXP, '.$1').replace(/^\./u, '')
 
 const BRACKETS_REGEXP = /\[([\d]+)\]/gu

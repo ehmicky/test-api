@@ -7,7 +7,7 @@ export const numberToCardinal = (integer) => {
   }
 
   const integerA = String(integer)
-  const lastDigit = integerA[integerA.length - 1]
+  const lastDigit = integerA.at(-1)
   const cardinal = CARDINALS[lastDigit] || DEFAULT_CARDINAL
   return `${integerA}${cardinal}`
 }

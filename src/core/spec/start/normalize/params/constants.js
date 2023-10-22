@@ -41,7 +41,7 @@ const getPathParam = ({ path }) => {
 // `/path/:variable`
 // Note that according to OpenAPI spec, path variables are always required.
 const getExpressPath = ({ path }) =>
-  path.replace(URL_PARAM_REGEXP, (match, name) =>
+  path.replaceAll(URL_PARAM_REGEXP, (match, name) =>
     getExpressVariable({ name, path }),
   )
 
