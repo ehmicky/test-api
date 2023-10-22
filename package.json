@@ -60,7 +60,6 @@
     "set-error-props": "^5.0.0",
     "sort-on": "^6.0.0",
     "statuses": "^2.0.1",
-    "strip-ansi": "^7.1.0",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.6",
     "update-notifier": "^7.0.0",
