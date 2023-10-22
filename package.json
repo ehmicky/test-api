@@ -35,7 +35,7 @@
     "ajv": "^6.12.6",
     "ajv-formats": "^2.1.1",
     "cli-truncate": "^3.0.0",
-    "colors-option": "^5.0.0",
+    "colors-option": "^6.0.0",
     "deepmerge": "^4.3.1",
     "dot-prop": "^8.0.1",
     "emphasize": "^5.0.0",
