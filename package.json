@@ -42,7 +42,7 @@
     "error-class-utils": "^4.0.0",
     "faker": "^5.5.3",
     "fast-glob": "^3.3.1",
-    "filter-obj": "^5.1.0",
+    "filter-obj": "^6.1.0",
     "got": "^13.0.0",
     "handle-cli-error": "^5.0.0",
     "is-mergeable-object": "^1.1.1",
