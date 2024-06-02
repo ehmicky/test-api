@@ -1,4 +1,4 @@
-[![Node](https://img.shields.io/badge/-Node.js-808080?logo=node.js&colorA=404040&logoColor=66cc33)](https://www.npmjs.com/package/test-api)
+[![Node](https://img.shields.io/badge/-Node.js-808080?logo=node.js&colorA=404040&logoColor=66cc33)](https://www.npmjs.com/package)
 [![Mastodon](https://img.shields.io/badge/-Mastodon-808080.svg?logo=mastodon&colorA=404040&logoColor=9590F9)](https://fosstodon.org/@ehmicky)
 [![Medium](https://img.shields.io/badge/-Medium-808080.svg?logo=medium&colorA=404040)](https://medium.com/@ehmicky)
 
@@ -400,7 +400,7 @@ The following template variables are always available:
 - `$$random`: generate fake data using a
   [JSON schema version 4](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject)
 - `$$faker`: generate fake data using
-  [Faker.js](https://github.com/marak/Faker.js/)
+  [Faker.js](https://github.com/tzuryby/Faker.js)
 
 ```yml
 - name: exampleTask
