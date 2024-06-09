@@ -37,7 +37,7 @@
     "cli-truncate": "^4.0.0",
     "colors-option": "^6.0.0",
     "deepmerge": "^4.3.1",
-    "dot-prop": "^8.0.1",
+    "dot-prop": "^9.0.0",
     "emphasize": "^5.0.0",
     "error-class-utils": "^4.0.0",
     "faker": "^5.5.3",
