@@ -55,7 +55,7 @@
     "omit.js": "^2.0.2",
     "openapi-schema-to-json-schema": "^2.2.0",
     "ora": "^8.0.1",
-    "path-to-regexp": "^6.2.1",
+    "path-to-regexp": "^6.2.2",
     "read-pkg-up": "^10.1.0",
     "set-error-props": "^6.0.0",
     "sort-on": "^6.0.0",
