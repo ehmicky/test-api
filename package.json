@@ -54,7 +54,7 @@
     "node-notifier": "^8.0.0",
     "omit.js": "^2.0.2",
     "openapi-schema-to-json-schema": "^2.2.0",
-    "ora": "^7.0.1",
+    "ora": "^8.0.1",
     "path-to-regexp": "^6.2.1",
     "read-pkg-up": "^10.1.0",
     "set-error-props": "^6.0.0",
