@@ -1,4 +1,4 @@
-import { parse, tokensToFunction } from 'path-to-regexp'
+import { parse, compile } from 'path-to-regexp'
 
 import { TestApiError } from '../../../../errors/error.js'
 import { getPath } from '../../../../utils/path.js'
@@ -6,22 +6,21 @@ import { removePrefixes } from '../../../../utils/prefix.js'
 
 // Replace `url` request parameters to the request URL.
 // Can replace in both `task.call.server` and `task.call.path`
-// Uses same syntax as Express paths, e.g. `:NAME`, `:NAME*`, `:NAME+`
+// Uses `path-to-regexp` syntax, e.g. `:NAME`, `{:NAME}*`, `{:NAME}+`
 // or `(RegExp)`
 // The library calls `encodeURIComponent()` on each URL variable
 export const addUrlParams = (url, rawRequest) => {
   const urlParams = removePrefixes(rawRequest, 'url')
 
-  const tokens = parseUrl(url)
-  const urlA = serializeUrl(tokens, urlParams)
+  const parseResult = parseUrl(url)
+  const urlA = serializeUrl(parseResult, urlParams)
   return urlA
 }
 
 // Parse URL `:NAME` variables tokens
 const parseUrl = (url) => {
   const urlA = url.replaceAll(URL_COLON_REGEXP, '\\$&')
-  const tokens = parse(urlA)
-  return tokens
+  return parse(urlA)
 }
 
 // `path-to-regexp` would otherwise consider colons `:PORT` and `http://` to
@@ -32,20 +31,17 @@ const URL_COLON_REGEXP = /:(\d|\/)/gu
 // We run `tokensToFunction` on each `token` instead of once on all of them
 // so the error handler knows which `token` failed without parsing the
 // error message
-const serializeUrl = (tokens, urlParams) =>
-  tokens.map((token) => serializeToken(token, urlParams)).join('')
-
-const serializeToken = (token, urlParams) => {
+const serializeUrl = (parseResult, urlParams) => {
   try {
-    return tokensToFunction([token])(urlParams, { encode: encodeURIComponent })
+    return compile(parseResult)(urlParams)
   } catch (error) {
-    throwError(`is invalid: ${error.message}`, token)
+    throwError(error)
   }
 }
 
-const throwError = (message, { name }) => {
-  const property = getPath(['task', 'call', `url.${name}`])
-  throw new TestApiError(`The URL parameter '${name}' ${message}`, {
+const throwError = (error) => {
+  const property = getPath(['task', 'call'])
+  throw new TestApiError(`The URL parameters are invalid: ${error.message}`, {
     props: { property },
   })
 }

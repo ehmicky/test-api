@@ -61,6 +61,6 @@ const getExpressVariable = ({ name, path }) => {
 }
 
 // Valid path variable name according to `path-to-regexp` library.
-// We are sligtly more restrictive as we disallow starting with a digit,
-// to distinguish from URL port.
+// We are more restrictive as we only allow ASCII and we disallow starting with
+// a digit, to distinguish from URL port.
 const VALID_EXPRESS_PATH_NAME = /^[a-zA-Z_]\w*$/u
