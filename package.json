@@ -58,7 +58,7 @@
     "path-to-regexp": "^7.1.0",
     "read-package-up": "^11.0.0",
     "set-error-props": "^6.0.0",
-    "sort-on": "^6.0.0",
+    "sort-on": "^6.1.0",
     "statuses": "^2.0.1",
     "type-is": "^1.6.18",
     "underscore.string": "^3.3.6",
