@@ -2,8 +2,8 @@ import { relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import test from 'ava'
-import spawn from 'nano-spawn'
 import { getBinPath } from 'get-bin-path'
+import spawn from 'nano-spawn'
 import unixify from 'unixify'
 
 const TASKS_FILE = fileURLToPath(new URL('tasks.yml', import.meta.url))
