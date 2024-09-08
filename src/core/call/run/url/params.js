@@ -6,8 +6,7 @@ import { removePrefixes } from '../../../../utils/prefix.js'
 
 // Replace `url` request parameters to the request URL.
 // Can replace in both `task.call.server` and `task.call.path`
-// Uses `path-to-regexp` syntax, e.g. `:NAME`, `{:NAME}*`, `{:NAME}+`
-// or `(RegExp)`
+// Uses `path-to-regexp` syntax, e.g. `:NAME` or `{:NAME}`
 // The library calls `encodeURIComponent()` on each URL variable
 export const addUrlParams = (url, rawRequest) => {
   const urlParams = removePrefixes(rawRequest, 'url')
