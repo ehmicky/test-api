@@ -225,7 +225,6 @@ const getProp = ({ data, propPath }) => {
     return data
   }
 
-  // eslint-disable-next-line you-dont-need-lodash-underscore/get
   return lodash.get(data, propPath)
 }
 /* eslint-enable max-lines */

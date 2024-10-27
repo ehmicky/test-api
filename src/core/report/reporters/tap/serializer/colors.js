@@ -35,7 +35,6 @@ const getThemeColor = ({ defaultColor, colors, key, chalk }) => {
     return color
   }
 
-  // eslint-disable-next-line you-dont-need-lodash-underscore/get
   return lodash.get(chalk, color)
 }
 

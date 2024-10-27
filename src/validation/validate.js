@@ -101,7 +101,6 @@ const getValue = ({ errorPath, value }) => {
     return value
   }
 
-  // eslint-disable-next-line you-dont-need-lodash-underscore/get
   return lodash.get(value, errorPath)
 }
 
@@ -113,7 +112,6 @@ const getSchemaParts = ({ error: { schemaPath } }) =>
 
 const getSchema = ({ schemaParts, schema }) => {
   const key = schemaParts.at(-1)
-  // eslint-disable-next-line you-dont-need-lodash-underscore/get
   const value = lodash.get(schema, schemaParts)
   return { [key]: value }
 }
