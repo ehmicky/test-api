@@ -36,7 +36,6 @@ const mergeTask = ({ task, mergeTasks, mergeConfig = {} }) => {
 }
 
 const findMergeTasks = ({ task: { key, scope }, mergeTasks }) =>
-  // eslint-disable-next-line fp/no-mutating-methods
   mergeTasks
     .filter(({ merge }) => testMergeRegExp(merge, key))
     .sort((taskA, taskB) => compareMergeTasks({ taskA, taskB, scope }))
@@ -60,7 +59,7 @@ const testMergeRegExp = (merge, key) => {
 // priority.
 // Note that we do not use `config.tasks` order as globbing expansion order is
 // not stable.
-// eslint-disable-next-line max-statements, complexity
+// eslint-disable-next-line max-statements
 const compareMergeTasks = ({
   taskA: { scope: scopeA },
   taskB: { scope: scopeB },

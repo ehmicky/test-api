@@ -2,7 +2,7 @@ import { excludeKeys } from 'filter-obj'
 
 // Retrieve the properties from `task.PLUGIN.*` that have been added by this
 // plugin, i.e. not in `originalTask.*`
-// eslint-disable-next-line max-statements, complexity
+// eslint-disable-next-line max-statements
 export const getAddedProps = ({
   task,
   plugin: { name, config: { task: taskConfig } = {} },

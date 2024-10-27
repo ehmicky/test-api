@@ -28,7 +28,7 @@ export const serializeOutput = ({ task, plugins }) => {
   return taskB
 }
 
-// eslint-disable-next-line complexity, max-statements
+// eslint-disable-next-line max-statements
 const serializeOutputValue = ({ value, path, state }) => {
   if (value === undefined) {
     return UNDEFINED
