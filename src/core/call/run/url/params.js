@@ -1,4 +1,4 @@
-import { parse, compile } from 'path-to-regexp'
+import { compile, parse } from 'path-to-regexp'
 
 import { TestApiError } from '../../../../errors/error.js'
 import { getPath } from '../../../../utils/path.js'

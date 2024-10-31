@@ -1,4 +1,4 @@
-import { gray, red, green } from '../../utils/colors.js'
+import { gray, green, red } from '../../utils/colors.js'
 import { HORIZONTAL_LINE } from '../../utils/line.js'
 
 export const MARKS = {

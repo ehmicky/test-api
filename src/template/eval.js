@@ -2,10 +2,10 @@
 import lodash from 'lodash'
 
 import { crawl } from '../utils/crawl.js'
-import { promiseThen, promiseAllThen } from '../utils/promise.js'
+import { promiseAllThen, promiseThen } from '../utils/promise.js'
 
 import { templateHandler } from './error.js'
-import { parseTemplate, parseEscape } from './parse.js'
+import { parseEscape, parseTemplate } from './parse.js'
 import { checkRecursion } from './recursion.js'
 
 // This is a data templating system.

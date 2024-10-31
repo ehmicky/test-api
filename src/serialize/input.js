@@ -1,10 +1,10 @@
 import { crawl } from '../utils/crawl.js'
 
 import {
-  isJsonType,
-  getMessage,
-  UNDEFINED,
   ESCAPED_UNDEFINED,
+  getMessage,
+  isJsonType,
+  UNDEFINED,
 } from './common.js'
 
 // Applied on input config and tasks

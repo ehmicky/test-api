@@ -1,13 +1,13 @@
 import {
-  ponyfillCause,
   ensureCorrectClass,
+  ponyfillCause,
   setErrorName,
 } from 'error-class-utils'
 import setErrorProps from 'set-error-props'
 
 import {
-  isSimpleSchema,
   getSimpleSchemaConstant,
+  isSimpleSchema,
 } from '../utils/simple_schema.js'
 import { getWordsList } from '../utils/string.js'
 

@@ -1,12 +1,12 @@
 import { readFile } from 'node:fs/promises'
 
 import fastGlob from 'fast-glob'
-import { load as loadYaml, JSON_SCHEMA } from 'js-yaml'
+import { JSON_SCHEMA, load as loadYaml } from 'js-yaml'
 import sortOn from 'sort-on'
 
 import { TestApiError } from '../errors/error.js'
 
-import { addScopes, addKey, validateScopes } from './scope.js'
+import { addKey, addScopes, validateScopes } from './scope.js'
 import { validateFileTasks } from './validate/file.js'
 import { validateInlineTasks } from './validate/inline.js'
 

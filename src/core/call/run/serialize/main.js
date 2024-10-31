@@ -6,7 +6,7 @@ import { keyToLocation } from '../../../../utils/location.js'
 import { findBodyHandler } from '../../body.js'
 
 import { normalizeContentType } from './content_type.js'
-import { addFetchRequestHeaders, addContentLength } from './extra_headers.js'
+import { addContentLength, addFetchRequestHeaders } from './extra_headers.js'
 import { normalizeMethod } from './method.js'
 import { normalizeUserAgent } from './user_agent.js'
 

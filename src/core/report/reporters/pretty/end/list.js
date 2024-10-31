@@ -2,7 +2,7 @@ import { isSilentType } from '../../../level/silent.js'
 import { gray } from '../../../utils/colors.js'
 import { indent } from '../../../utils/indent.js'
 import { getResultType } from '../../../utils/result_type.js'
-import { LINE, COLORS, MARKS } from '../constants.js'
+import { COLORS, LINE, MARKS } from '../constants.js'
 
 // Print a summary of each task: skipped tasks names, then passed tasks names,
 // then failed tasks names + error messages

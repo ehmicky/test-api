@@ -1,4 +1,4 @@
-import { TestApiError, BugError } from './errors/error.js'
+import { BugError, TestApiError } from './errors/error.js'
 import { checkSchema } from './validation/check.js'
 
 // A module is either a plugin or a reporter

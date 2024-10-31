@@ -1,7 +1,7 @@
 import underscoreString from 'underscore.string'
 
 import { isObject } from '../../../../../utils/types.js'
-import { yellow, orange } from '../../../utils/colors.js'
+import { orange, yellow } from '../../../utils/colors.js'
 import { indent, indentValue } from '../../../utils/indent.js'
 import { stringify } from '../../../utils/stringify.js'
 

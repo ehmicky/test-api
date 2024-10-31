@@ -2,10 +2,10 @@ import { convertPlainObject } from '../errors/convert.js'
 import { crawl } from '../utils/crawl.js'
 
 import {
-  isJsonType,
-  getMessage,
-  UNDEFINED,
   ESCAPED_UNDEFINED,
+  getMessage,
+  isJsonType,
+  UNDEFINED,
 } from './common.js'
 import { addSerializeFail } from './fail.js'
 

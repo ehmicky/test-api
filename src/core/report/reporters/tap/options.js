@@ -1,4 +1,4 @@
-import { green, red, gray, yellow } from '../../utils/colors.js'
+import { gray, green, red, yellow } from '../../utils/colors.js'
 
 import { init } from './serializer/main.js'
 

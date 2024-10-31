@@ -1,14 +1,14 @@
 import cliTruncate from 'cli-truncate'
 
-import { red, inverse } from '../../../utils/colors.js'
+import { inverse, red } from '../../../utils/colors.js'
 import { indent } from '../../../utils/indent.js'
 import {
   FULL_LOWER_LINE,
   FULL_UPPER_LINE,
-  LINE_SIZE,
   HORIZONTAL_LINE,
+  LINE_SIZE,
 } from '../../../utils/line.js'
-import { MARKS, COLORS } from '../constants.js'
+import { COLORS, MARKS } from '../constants.js'
 
 // Header of the the message, with:
 //  - a symbol indicating whether the task passed, failed or was skipped

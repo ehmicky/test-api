@@ -1,6 +1,6 @@
 import { excludeKeys } from 'filter-obj'
 
-import { TestApiError, BugError } from '../errors/error.js'
+import { BugError, TestApiError } from '../errors/error.js'
 import { crawl } from '../utils/crawl.js'
 import { isObject } from '../utils/types.js'
 
