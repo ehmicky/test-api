@@ -81,6 +81,7 @@ const validateVarName = ({ name, plugin }) => {
 // Also this allows overriding / monkey-patching core (which can be
 // either good or bad).
 const mergePluginsVars = ({ plugins, pluginsVarsMap }) => {
+  // eslint-disable-next-line fp/no-mutating-methods
   const pluginsVars = plugins
     .filter(({ name }) => name !== 'template')
     .map(({ name }) => pluginsVarsMap[name])

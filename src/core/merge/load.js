@@ -36,6 +36,7 @@ const mergeTask = ({ task, mergeTasks, mergeConfig = {} }) => {
 }
 
 const findMergeTasks = ({ task: { key, scope }, mergeTasks }) =>
+  // eslint-disable-next-line fp/no-mutating-methods
   mergeTasks
     .filter(({ merge }) => testMergeRegExp(merge, key))
     .sort((taskA, taskB) => compareMergeTasks({ taskA, taskB, scope }))
